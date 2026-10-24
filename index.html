@@ -591,14 +591,14 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <div id="itStatements"></div>
 </details>
 
-<div class="card" id="slipCard">
-<h2>Pay slip (same layout as the iOSMS pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাস বেছে 'Generate Pay Slip' চাপলে নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়করসহ পে-স্লিপ তৈরি হবে। Employee ID, PAN, ব্যাংক অ্যাকাউন্ট নম্বর ও IFS কোড আগে লিখে নিন। প্রিন্ট বা PDF করতে নিচের Print বোতাম চাপুন।</div></span></h2>
+<details class="card ix-opt" id="slipCard">
+<summary><h2>Pay slip (optional) (same layout as the iOSMS pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাস বেছে 'Generate Pay Slip' চাপলে নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়করসহ পে-স্লিপ তৈরি হবে। Employee ID, PAN, ব্যাংক অ্যাকাউন্ট নম্বর ও IFS কোড আগে লিখে নিন। প্রিন্ট বা PDF করতে নিচের Print বোতাম চাপুন।</div></span></h2></summary>
 <div class="muted">Press <b>Generate Pay Slip</b>. Before the slip is made, the tool puts the <b>basic, DA, HRA, MA, Professional Tax, Income-tax (average monthly TDS) and GPF</b> for the selected month by the West Bengal rule in force in that month (PT slabs change from 01-10-2026; DA/HRA/MA use the rates entered above). Fill Employee ID, PAN, Bank A/c no. and IFS code in the box above. You can edit any figure and press the button again.</div>
 <label class="inline-check" style="margin-top:8px"><input type="checkbox" id="slipKeep"> Use exactly the figures I typed above (do not apply the rule to PT / Income-tax)</label>
 <div class="btn-group"><button type="button" class="big" onclick="slipGenerate()">Generate Pay Slip</button><button type="button" onclick="slipAutoFill(true,true);slipMsg('Figures re-filled by rule for '+V('slipMonth')+'.')">Re-fill all by rule</button><button type="button" class="btn-print" id="slipPrintBtn" onclick="slipPrint()" disabled>Print / Save pay slip as PDF</button></div>
 <div id="slipMsg" class="muted"></div>
 <div id="slipPreview"></div>
-</div>
+</details>
 
 <details class="card ix-opt" id="leaveArea">
 <summary><h2>Leave Account (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রথমে 'Generate rows up to' তারিখ দিয়ে 'Auto-generate' চাপুন, বদলি হয়ে থাকলে নতুন স্কুলে যোগদানের তারিখ যোগ করুন। তারপর নেওয়া ছুটি (ML, HPL, Commuted, LWP) তারিখ বা দিনসংখ্যা দিয়ে যোগ করুন। হিসাব মিললে 'Print Leave A/c' চাপুন। লাল ব্যালান্স মানে ছুটি পাওনার বেশি নেওয়া হয়েছে। এটি ঐচ্ছিক।</div></span></h2></summary>
