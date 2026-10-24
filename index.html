@@ -40,8 +40,9 @@ table.mini td.r,td.r{text-align:right}
 #admLoginCard{display:none;border:2px solid var(--pri)}#admLoginCard.on{display:block}
 table.steps td{vertical-align:top;font-size:.84rem}table.steps td.n{width:34px;text-align:center;font-weight:800;color:var(--pri);background:#eef2ff}table.steps td.s{width:34%;font-weight:600}table.steps td.i{color:#334155}table.steps td.i{position:relative}table.steps .bnh{display:inline-block;margin-top:5px;padding:1px 8px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.74rem;font-weight:700;cursor:help}table.steps .bn{display:none;position:absolute;left:8px;right:8px;top:100%;z-index:50;margin-top:2px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2)}.gh{position:relative;display:inline-block;margin-left:8px;vertical-align:middle;font-weight:400}
 .gh .bnh{display:inline-block;padding:1px 8px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.74rem;font-weight:700;cursor:help}
-.gh .bn{display:none;position:absolute;left:0;top:100%;z-index:60;width:min(520px,86vw);margin-top:3px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;font-size:.84rem;font-weight:400;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2);text-align:left}
+.gh .bn{display:none;white-space:normal;position:absolute;left:0;top:100%;z-index:60;width:min(520px,86vw);margin-top:3px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;font-size:.84rem;font-weight:400;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2);text-align:left}
 .gh:hover .bn,.gh.bnopen .bn{display:block}
+label .gh{margin-left:6px}label .gh .bn{width:min(340px,80vw);text-transform:none}
 @media print{.gh{display:none!important}}
 table.steps tr:hover .bn,table.steps tr.bnopen .bn{display:block}
 textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
@@ -450,41 +451,41 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 <div class="muted">Rule values are pre-filled with the rates last published (ROPA-2019); they are editable. Enter the figures from <b>your latest pay slip</b> and each line is compared with the rule and with your pay table.</div>
 <h3>Rates (edit if government changes them)</h3>
 <div class="grid-inputs">
-<div class="form-group"><label>DA % (before change date)</label><input type="number" id="daOld" value="18" step="0.01"></div>
-<div class="form-group"><label>DA change date</label><input type="date" id="daChange" value="2026-10-01"></div>
-<div class="form-group"><label>DA % (from change date)</label><input type="number" id="daNew" value="38" step="0.01"></div>
-<div class="form-group"><label>HRA % of basic</label><input type="number" id="hraPct" value="12" step="0.01"></div>
-<div class="form-group"><label>HRA maximum (Rs.)</label><input type="number" id="hraCap" value="12000"></div>
-<div class="form-group"><label>Medical Allowance (Rs./month)</label><input type="number" id="maAmt" value="500"></div>
+<div class="form-group"><label>DA % (before change date)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পরিবর্তনের তারিখের আগে DA কত শতাংশ ছিল (এখন ১৮)। সরকার বদলালে এখানে সংশোধন করুন।</div></span></label><input type="number" id="daOld" value="18" step="0.01"></div>
+<div class="form-group"><label>DA change date<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যে তারিখ থেকে নতুন DA হার চালু হবে।</div></span></label><input type="date" id="daChange" value="2026-10-01"></div>
+<div class="form-group"><label>DA % (from change date)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ঐ তারিখ থেকে DA কত শতাংশ।</div></span></label><input type="number" id="daNew" value="38" step="0.01"></div>
+<div class="form-group"><label>HRA % of basic<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> HRA বেসিকের কত শতাংশ (এখন ১২%)।</div></span></label><input type="number" id="hraPct" value="12" step="0.01"></div>
+<div class="form-group"><label>HRA maximum (Rs.)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> HRA এর সর্বোচ্চ মাসিক সীমা টাকায় (এখন ১২,০০০)।</div></span></label><input type="number" id="hraCap" value="12000"></div>
+<div class="form-group"><label>Medical Allowance (Rs./month)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাসিক চিকিৎসা ভাতা টাকায় (এখন ৫০০)।</div></span></label><input type="number" id="maAmt" value="500"></div>
 <div class="form-group"><label>&nbsp;</label><label class="inline-check"><input type="checkbox" id="wbhsOpt"> I am covered by WBHS 2008 (MA not payable)</label></div>
-<div class="form-group"><label>GPF / PF % of basic you opted (optional)</label><input type="number" id="gpfPct" value="0" step="0.01"></div>
+<div class="form-group"><label>GPF / PF % of basic you opted (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনি বেসিকের যত শতাংশ GPF দিতে বেছেছেন তা লিখলে পে-স্লিপের GPF যাচাই হবে ও নিজে থেকে বসবে। না জানালে ০ রাখুন।</div></span></label><input type="number" id="gpfPct" value="0" step="0.01"></div>
 </div>
 <div class="muted">Professional Tax (WB, monthly on gross) <b>from 01-10-2026</b> (Notif. 1407-F.T. dt. 18-08-2026): up to 20,000 nil &middot; 20,001-30,000 Rs.100 &middot; 30,001-50,000 Rs.140 &middot; 50,001-1,00,000 Rs.170 &middot; above 1,00,000 Rs.208. Months before Oct-2026 use the old slabs (nil / 110 / 130 / 150 / 200).</div>
 <h3>Your pay slip (one month)</h3>
 <div class="grid-inputs">
-<div class="form-group"><label>Pay slip month</label><input type="month" id="slipMonth"></div>
-<div class="form-group"><label>Basic pay</label><input type="number" id="slipBasic"></div>
-<div class="form-group"><label>DA</label><input type="number" id="slipDA"></div>
-<div class="form-group"><label>HRA</label><input type="number" id="slipHRA"></div>
-<div class="form-group"><label>Medical allowance</label><input type="number" id="slipMA"></div>
-<div class="form-group"><label>Other allowance (if any)</label><input type="number" id="slipOther"></div>
-<div class="form-group"><label>GPF / PF deduction</label><input type="number" id="slipGPF"></div>
-<div class="form-group"><label>Professional Tax</label><input type="number" id="slipPT"></div>
-<div class="form-group"><label>Income-tax (TDS)</label><input type="number" id="slipIT"></div>
-<div class="form-group"><label>Other deductions</label><input type="number" id="slipOD"></div>
-<div class="form-group"><label>PF loan recovery</label><input type="number" id="slipPFL"></div>
-<div class="form-group"><label>Over-drawn recovery</label><input type="number" id="slipOVD"></div>
-<div class="form-group"><label>Employee ID (for pay slip)</label><input type="text" id="slipEmpId"></div>
-<div class="form-group"><label>PAN</label><input type="text" id="slipPan" maxlength="10" style="text-transform:uppercase"></div>
-<div class="form-group"><label>Bank A/c no.</label><input type="text" id="slipAcNo" inputmode="numeric"></div>
-<div class="form-group"><label>IFS code</label><input type="text" id="slipIfsc" maxlength="11" style="text-transform:uppercase"></div>
+<div class="form-group"><label>Pay slip month<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যে মাসের পে-স্লিপ বানাবেন সেই মাসটি বেছে নিন। মাস বদলালে ঐ মাসের নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়কর নিজে থেকে বসে যাবে।</div></span></label><input type="month" id="slipMonth"></div>
+<div class="form-group"><label>Basic pay<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ঐ মাসের মূল বেতন (Basic Pay)। পে-টেবিল থেকে নিজে থেকেই আসে; পে-স্লিপের অঙ্কের সঙ্গে না মিললে এখানে নিজে লিখে সংশোধন করুন।</div></span></label><input type="number" id="slipBasic"></div>
+<div class="form-group"><label>DA<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মহার্ঘ ভাতা (Dearness Allowance)। বেসিকের উপর ঐ মাসের DA % অনুযায়ী টাকার অঙ্ক। পে-স্লিপে যা আছে তাই লিখুন।</div></span></label><input type="number" id="slipDA"></div>
+<div class="form-group"><label>HRA<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বাড়ি ভাড়া ভাতা (HRA)। বেসিকের ১২%, সর্বোচ্চ ১২,০০০ টাকা। পে-স্লিপের অঙ্ক লিখুন।</div></span></label><input type="number" id="slipHRA"></div>
+<div class="form-group"><label>Medical allowance<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> চিকিৎসা ভাতা (Medical Allowance), মাসে ৫০০ টাকা। আপনি WBHS 2008 এর আওতায় থাকলে এটি প্রযোজ্য নয়, তখন ০ দিন।</div></span></label><input type="number" id="slipMA"></div>
+<div class="form-group"><label>Other allowance (if any)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> উপরের চারটি ছাড়া অন্য কোনো ভাতা পে-স্লিপে থাকলে (যেমন বকেয়া/বিশেষ ভাতা) তার মাসিক অঙ্ক লিখুন। না থাকলে ফাঁকা রাখুন।</div></span></label><input type="number" id="slipOther"></div>
+<div class="form-group"><label>GPF / PF deduction<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> জিপিএফ/পিএফ বাবদ মাসে যে টাকা কাটা হয়। পে-স্লিপে 'GPF' এর পাশের অঙ্ক লিখুন। না কাটলে ফাঁকা রাখুন।</div></span></label><input type="number" id="slipGPF"></div>
+<div class="form-group"><label>Professional Tax<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পেশা কর (Professional Tax)। মোট বেতন (gross) অনুযায়ী পশ্চিমবঙ্গের স্ল্যাবে কাটা হয়; ০১-১০-২০২৬ থেকে ১,০০,০০০ এর বেশি হলে ২০৮ টাকা। নিজে থেকে বসে, পে-স্লিপে অন্য থাকলে সংশোধন করুন।</div></span></label><input type="number" id="slipPT"></div>
+<div class="form-group"><label>Income-tax (TDS)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাসে যে আয়কর (TDS) কাটা হচ্ছে। সারা বছরের আনুমানিক কর ÷ মাসের সংখ্যা ধরে নিজে থেকে বসে। আপনার DDO/ট্রেজারির অঙ্কই চূড়ান্ত।</div></span></label><input type="number" id="slipIT"></div>
+<div class="form-group"><label>Other deductions<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> অন্য যেকোনো কর্তন (যেমন সমিতি, বীমা, ঋণের কিস্তি) থাকলে মোট অঙ্ক লিখুন। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipOD"></div>
+<div class="form-group"><label>PF loan recovery<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পিএফ ঋণ বাবদ মাসিক কিস্তি কাটা হলে সেই অঙ্ক। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipPFL"></div>
+<div class="form-group"><label>Over-drawn recovery<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আগে বেশি বেতন পেয়ে থাকলে (Over-drawn) তা আদায়ের জন্য মাসিক কর্তন। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipOVD"></div>
+<div class="form-group"><label>Employee ID (for pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার কর্মী আইডি (Employee ID), পুরনো পে-স্লিপ বা iOSMS এ যা আছে হুবহু লিখুন। এটি পে-স্লিপের উপরে ছাপা হবে।</div></span></label><input type="text" id="slipEmpId"></div>
+<div class="form-group"><label>PAN<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার ১০ অক্ষরের PAN (যেমন ABCDE1234F), বড় হাতের অক্ষরে। পে-স্লিপে ছাপা হবে।</div></span></label><input type="text" id="slipPan" maxlength="10" style="text-transform:uppercase"></div>
+<div class="form-group"><label>Bank A/c no.<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বেতন যে ব্যাংক অ্যাকাউন্টে ঢোকে তার নম্বর, শুধু সংখ্যা। পাসবই দেখে লিখুন।</div></span></label><input type="text" id="slipAcNo" inputmode="numeric"></div>
+<div class="form-group"><label>IFS code<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ব্যাংক শাখার ১১ অক্ষরের IFS কোড (পাসবইয়ে/চেকবইয়ে থাকে), যেমন SBIN0001234।</div></span></label><input type="text" id="slipIfsc" maxlength="11" style="text-transform:uppercase"></div>
 </div>
 <h3>Income-tax details</h3>
 <div class="grid-inputs">
-<div class="form-group"><label>Regime</label><select id="taxRegime"><option value="new">New regime</option><option value="old">Old regime</option></select></div>
-<div class="form-group"><label>Other annual income (Rs.)</label><input type="number" id="othInc" value="0"></div>
-<div class="form-group"><label>Old regime: 80C etc. besides GPF (Rs./yr)</label><input type="number" id="c80" value="0"></div>
-<div class="form-group"><label>Old regime: other deductions (Rs./yr)</label><input type="number" id="dOth" value="0"></div>
+<div class="form-group"><label>Regime<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আয়কর ব্যবস্থা বাছুন। 'New regime' (নতুন) হলে বেশির ভাগ ছাড় নেই কিন্তু হার কম; 'Old regime' (পুরনো) হলে ৮০সি ইত্যাদি ছাড় পাওয়া যায়। কোনটিতে কর কম তা নিচের ফলে দেখাবে।</div></span></label><select id="taxRegime"><option value="new">New regime</option><option value="old">Old regime</option></select></div>
+<div class="form-group"><label>Other annual income (Rs.)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বেতন ছাড়া বছরে অন্য আয় (সুদ, ভাড়া, টিউশন ইত্যাদি) থাকলে মোট টাকা লিখুন। না থাকলে ০।</div></span></label><input type="number" id="othInc" value="0"></div>
+<div class="form-group"><label>Old regime: 80C etc. besides GPF (Rs./yr)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> শুধু পুরনো ব্যবস্থায় প্রযোজ্য: GPF ছাড়া বছরে ৮০সি এর বিনিয়োগ (LIC, PPF, NSC, সন্তানের টিউশন ফি ইত্যাদি)। সর্বোচ্চ ১,৫০,০০০ এর মধ্যে ধরা হয়।</div></span></label><input type="number" id="c80" value="0"></div>
+<div class="form-group"><label>Old regime: other deductions (Rs./yr)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> শুধু পুরনো ব্যবস্থায় প্রযোজ্য: ৮০সি ছাড়া অন্য ছাড় (যেমন ৮০ডি স্বাস্থ্যবীমা, গৃহঋণের সুদ) বছরে মোট কত।</div></span></label><input type="number" id="dOth" value="0"></div>
 </div>
 <div class="card" id="salResultCard" style="margin:10px 0 0"><div id="salResult"></div></div>
 </div>
@@ -3316,6 +3317,7 @@ window.addEventListener('DOMContentLoaded', function () {
         else { toggleRopa90Section(); toggleRopa09Section(); togglePromotionSection(); }
     } catch (e) { }
     calculateDOR(); renderLwp(); togglePromotionSection(); lvRefresh(); admShow(admOK);
+    document.addEventListener('mouseover', e => { const gh = e.target.closest && e.target.closest('.gh'); if (!gh) return; const b = gh.querySelector('.bn'); requestAnimationFrame(() => { b.style.left = '0'; b.style.right = 'auto'; if (b.getBoundingClientRect().right > window.innerWidth - 8) { b.style.left = 'auto'; b.style.right = '0'; } }); });
     document.addEventListener('click', e => { const gh = e.target.closest && e.target.closest('.gh'); document.querySelectorAll('.gh.bnopen').forEach(x => { if (x !== gh) x.classList.remove('bnopen'); }); if (gh && e.target.closest('.bnh')) gh.classList.toggle('bnopen'); const r = e.target.closest && e.target.closest('table.steps tr'); document.querySelectorAll('table.steps tr.bnopen').forEach(x => { if (x !== r) x.classList.remove('bnopen'); }); if (r && e.target.closest('.bnh')) r.classList.toggle('bnopen'); });
     window.addEventListener('hashchange', () => admShow(admOK));
     document.addEventListener('change', e => {
