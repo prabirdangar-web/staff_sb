@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>TFHS Staff Pay Table</title>
+<title>Staff Pay Table Generator</title>
 <style>
 :root{color-scheme:light;--ink:#0f172a;--mut:#64748b;--bg:#f1f5f9;--card:#fff;--line:#cbd5e1;--pri:#1e3a8a;--acc:#0f766e}
 *{box-sizing:border-box}
@@ -88,6 +88,33 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
  #itaxSheet .ix-title{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 #slipSheet,#leaveSheet{display:none}
+@media screen{
+/* ===== COMPACT VIEW ===== */
+body{font-size:13px;line-height:1.35}
+.wrap{padding:6px 8px 40px}
+header.top{padding:8px 12px}header.top h1{font-size:1rem}header.top p{font-size:.72rem}
+.card{padding:8px 10px;margin:8px 0;border-radius:8px}
+h2{font-size:.95rem;margin:0 0 5px}h3{font-size:.82rem;margin:8px 0 4px}
+.grid-inputs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin:4px 0}
+.form-group label,.fl{font-size:.68rem;margin-bottom:2px}
+input[type=text],input[type=number],input[type=date],input[type=month],input[type=tel],input[type=password],select,textarea{padding:4px 6px;font-size:.8rem}
+button{padding:4px 9px;font-size:.8rem}.btn-generate,.big{padding:6px 12px}
+.btn-group{gap:5px;margin:6px 0}
+.output-box,.warn,.err,.okbox{padding:5px 8px;font-size:.76rem;margin:5px 0}
+.muted{font-size:.72rem}
+table{font-size:.74rem}th,td{padding:3px 4px}
+.cur-big{font-size:1.4rem}.cur-grid{gap:5px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.cur-grid div{padding:4px 6px}
+.chk{font-size:.78rem;padding:1px 0}
+.note-grid{font-size:.76rem;gap:6px}
+#itaxCard .grid-inputs{grid-template-columns:repeat(3,minmax(0,1fr))}
+#itaxCard .form-group label{font-size:.65rem}
+#itaxCard summary,.ix-sub>summary{cursor:pointer;font-size:.85rem;color:var(--pri)}
+.ix-sub{margin:6px 0;border:1px solid #e2e8f0;border-radius:6px;padding:4px 8px}
+.ix-sub>summary{font-weight:700}
+.ix-results{gap:8px;margin-top:10px}.ix-box{padding:8px;min-width:200px}.ix-rr{font-size:.78rem;margin-bottom:2px}
+.ix-stmt{margin-top:10px}table.ix-tbl td{padding:2px 6px}
+}
+
 #slipPreview{overflow-x:auto;background:#e2e8f0;padding:10px;border-radius:8px;margin-top:10px}
 #slipPreview:empty{display:none}
 .slip{font-family:Arial,Helvetica,sans-serif;color:#000;background:#fff;width:720px;margin:0 auto;padding:30px 28px 26px;box-sizing:border-box;font-size:12px;line-height:1.35}
@@ -148,7 +175,7 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 }
 </style>
 
-<header class="top"><h1>Pay Table Generator &mdash; Staff Self-Service</h1><p>Taldangra Fulmati High School &middot; Enter your own details, generate your ROPA-90/98/09/19 pay tables, verify them, and submit.</p></header>
+<header class="top"><h1>Pay Table Generator &mdash; Staff Self-Service</h1><p>Enter your school and service details, generate your ROPA-90/98/09/19 pay tables, verify them, and submit.</p></header>
 <div class="wrap">
 <div class="card" style="background:#fffbeb">
 <b>How to use:</b><span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ১) সার্ভিস বুক দেখে নিজের তথ্য ভরুন → ২) 'Generate Pay Tables' চাপুন → ৩) বর্তমান বেতন ও প্রতিটি সারি মিলিয়ে দেখুন → ৪) চাইলে পে-স্লিপের অঙ্ক দিয়ে DA/HRA/MA/PT/PF/আয়কর যাচাই করুন → ৫) ঘোষণায় টিক দিয়ে Submit করুন। আপনার দেওয়া তথ্য এই ফোন/কম্পিউটারে সংরক্ষিত থাকে, তাই পরে এসে সংশোধন করতে পারবেন। প্রতিটি ধাপের পাশে 'ⓘ বাংলা' চিহ্নে মাউস আনলে (ফোনে ট্যাপ করলে) বাংলা নির্দেশনা দেখা যাবে।</div></span>  (1) fill your details from your service book &rarr; (2) press <b>Generate Pay Tables</b> &rarr; (3) check your current pay and every row of the tables &rarr; (4) optionally enter your latest pay-slip figures to verify DA / HRA / MA / P.Tax / PF / I-tax &rarr; (5) tick the declaration and <b>Submit</b>. Your entries are kept on this phone/computer, so you can come back and correct them.
@@ -156,14 +183,30 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 <div class="warn" style="margin:0 0 10px">Online preview: you can try everything here (tables, current pay, salary check). <b>Submit, Download and Print do not work inside this preview</b>; they work when the file is hosted on your own site (e.g. GitHub Pages) or opened from the file.</div><div id="errBox" class="err" style="display:none"></div>
 
 <div id="formArea">
+<div class="card" id="schoolCard">
+<h2>School details<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বর্তমান স্কুলের নাম ও ঠিকানা লিখুন। আগে অন্য স্কুলে চাকরি করে থাকলে নিচে 'Previous school' যোগ করুন। এগুলি পে-টেবিল, লিভ অ্যাকাউন্ট ও পে-স্লিপের মাথায় ছাপা হবে।</div></span></h2>
+<div class="grid-inputs">
+<div class="form-group"><label>Name of the School (current) *</label><input type="text" id="schoolName" placeholder="Full name of your school"></div>
+<div class="form-group"><label>Address of the School</label><input type="text" id="schoolAddr" placeholder="PO, PS, District, PIN"></div>
+<div class="form-group"><label>UDISE code (optional)</label><input type="text" id="schoolUdise"></div>
+<div class="form-group"><label>School type line (optional, for pay slip)</label><input type="text" id="schoolType" placeholder="e.g. CO-EDUCATIONAL * HIGHER SECONDARY"></div>
+</div>
+<h3>Previous school(s) (if you served elsewhere before)</h3>
+<div class="grid-inputs">
+<div class="form-group"><label>Previous school name</label><input type="text" id="pvName"></div>
+<div class="form-group"><label>Address</label><input type="text" id="pvAddr"></div>
+<div class="form-group"><label>From</label><input type="date" id="pvFrom"></div>
+<div class="form-group"><label>To</label><input type="date" id="pvTo"></div>
+<div class="form-group"><label>&nbsp;</label><button type="button" onclick="addPrev()">+ Add previous school</button></div>
+</div>
+<div id="pvList" class="muted"></div>
+</div>
+
 <div class="card">
 <h2>Step 1 &mdash; Your service details<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সার্ভিস বুক দেখে আপনার নাম, পদবী, জন্মতারিখ এবং প্রথম চাকরিতে যোগদানের তারিখ (Date of Joining) ঠিকভাবে লিখুন। জন্মতারিখ দিলে অবসরের তারিখ (বয়স ৬০) নিজে থেকে বসে যাবে। চাকরিরত অবস্থায় মৃত্যু বা পদত্যাগ হলে নিচের লাল ঘরে সেই ধরন ও তারিখ দিন, নইলে 'N.A.' রাখুন। মোবাইল নম্বর শুধু রেফারেন্সের জন্য।</div></span></h2>
     <h3 id="tab-staff">1. Your Details</h3>
     <div class="grid-inputs">
-        <div class="form-group">
-            <label>Name of the School</label>
-            <input type="text" id="schoolName" value="TALDANGRA FULMATI HIGH SCHOOL [H.S.]">
-        </div>
+        
         <div class="form-group">
             <label>Name of the Staff</label>
             <input type="text" id="staffName" value="" placeholder="Full name as in service book">
@@ -462,7 +505,7 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 </div>
 
 <div id="results" style="display:none">
-<div class="card printonly" style="text-align:center"><b id="sbSchoolName"></b><br><b>PAY FIXATION STATEMENT</b><br><span id="sbStaffName"></span>, <span id="sbDesignation"></span><br>DOB: <span id="sbDob"></span> &middot; DOJ: <span id="sbDoj"></span> &middot; DOR: <span id="sbDor"></span></div>
+<div class="card printonly" style="text-align:center"><b id="sbSchoolName"></b><br><span id="sbSchoolExtra"></span><b>PAY FIXATION STATEMENT</b><br><span id="sbStaffName"></span>, <span id="sbDesignation"></span><br>DOB: <span id="sbDob"></span> &middot; DOJ: <span id="sbDoj"></span> &middot; DOR: <span id="sbDor"></span></div>
 <div class="card"><h2>Your current pay<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> 'As on date' এ যে তারিখ দেবেন সেই দিনে আপনার বেসিক পে কত, কোন লেভেল/সেল, কবে থেকে ও পরের বেতন বৃদ্ধি কবে — তা এখানে দেখা যাবে। সার্ভিস বুকের বর্তমান বেতনের সঙ্গে মিলিয়ে নিন।</div></span></h2>
 <div class="grid-inputs" style="max-width:260px"><div class="form-group"><label>As on date</label><input type="date" id="asOfDate" form="none"></div></div>
 <div id="currentCard"></div></div>
@@ -525,8 +568,7 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 
 <details class="card" id="itaxCard">
 <summary><b>Income Tax Statement (optional) &mdash; New &amp; Old regime with Capital Gains</b></summary>
-<div class="muted" style="margin-top:6px">Optional. Salary is taken from your generated pay tables (Mar&ndash;Feb salary cycle, same as the school Income Tax calculator) using the DA / HRA / MA rates entered above; you can overwrite any figure. Enter your deductions and capital gains, and the tax under both regimes is compared and a printable statement with declaration is produced.</div>
-<h3>Financial year &amp; income</h3>
+<div class="muted">Optional. Salary comes from your pay table (Mar&ndash;Feb). Edit any figure, then press Calculate.</div>
 <div class="grid-inputs">
 <div class="form-group"><label>Financial Year</label><select id="itFY" onchange="itFill()"><option value="2026-27">FY 2026-27 (AY 2027-28)</option><option value="2025-26">FY 2025-26 (AY 2026-27)</option></select></div>
 <div class="form-group"><label>Gross Salary / Pension (Rs.) <span class="muted" id="itFillNote"></span></label><input type="number" id="itGross" placeholder="Press 'Fill from pay table'"></div>
@@ -534,9 +576,8 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 <div class="form-group"><label>Professional Tax (Rs.)</label><input type="number" id="itPT" readonly><label class="inline-check" style="margin-top:3px"><input type="checkbox" id="itPTAuto" checked onchange="itPTMode()"> Auto (WB slab on monthly gross)</label></div>
 <div class="form-group"><label>PAN (blank = use PAN of pay slip box)</label><input type="text" id="itPan" maxlength="10" style="text-transform:uppercase"></div>
 </div>
-<h3>Chapter VI-A deductions (Old regime only)</h3>
-<div class="grid-inputs" id="itDedGrid"></div>
-<h3>Capital gains &amp; loss adjustment</h3>
+<details class="ix-sub"><summary>Chapter VI-A deductions (Old regime only)</summary><div class="grid-inputs" id="itDedGrid"></div></details>
+<h3>Capital gains</h3>
 <div class="grid-inputs">
 <div class="form-group"><label>STCG u/s 111A (Rs.)</label><input type="number" id="itSTCG" placeholder="Leave blank if nil"></div>
 <div class="form-group"><label>Short-term loss STCL (Rs.)</label><input type="number" id="itSTCL" placeholder="Leave blank if nil"></div>
@@ -608,7 +649,7 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
 <div class="grid-inputs"><div class="form-group"><label>Submission web-app URL (/exec)</label><input type="text" id="admUrl" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="form-group"><label>Admin key</label><input type="password" id="admKey"></div><div class="form-group"><label>&nbsp;</label><button type="button" onclick="admFetch()">Fetch submissions</button></div></div>
 <div id="admList" class="muted"></div>
 <h3>One-time setup (Google Apps Script)</h3>
-<table class="steps"><thead><tr><th>#</th><th>Step</th><th>What to do (instruction) / কী করবেন</th></tr></thead><tbody><tr><td class="n">1</td><td class="s">Create a Google Sheet &rarr; Extensions &rarr; Apps Script &rarr; paste the code below.</td><td class="i">Open sheets.google.com with the school's Google account and make a blank sheet (name it e.g. <i>TFHS Pay Submissions</i>). Click <b>Extensions &rarr; Apps Script</b>. Delete any code already in the editor, press <b>Copy code</b> below and paste it, then click the Save (disk) icon.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সরকারি/স্কুলের Google অ্যাকাউন্ট দিয়ে sheets.google.com খুলে একটি ফাঁকা Google Sheet তৈরি করুন (নাম দিন যেমন <i>TFHS Pay Submissions</i>)। উপরের মেনু থেকে <b>Extensions &rarr; Apps Script</b> চাপুন। এডিটরে আগে থেকে কোনো কোড থাকলে মুছে দিন, নিচের <b>Copy code</b> বোতাম চেপে কোড কপি করে সেখানে পেস্ট করুন, তারপর Save (ডিস্ক) আইকনে ক্লিক করুন।</div></td></tr><tr><td class="n">2</td><td class="s">Project Settings &rarr; Script properties &rarr; add <code>ADMIN_KEY</code> with your secret key.</td><td class="i">In Apps Script click the gear icon (<b>Project Settings</b>), scroll to <b>Script properties</b> &rarr; <b>Add script property</b>. Property = <code>ADMIN_KEY</code>, Value = a secret password only the office knows. This same key is what you type in <b>Admin login</b> on this page. Click Save.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Apps Script-এ বাঁদিকের গিয়ার আইকনে (<b>Project Settings</b>) ক্লিক করুন, নিচে নেমে <b>Script properties</b> &rarr; <b>Add script property</b> চাপুন। Property-র ঘরে লিখুন <code>ADMIN_KEY</code> এবং Value-র ঘরে একটি গোপন পাসওয়ার্ড দিন যা শুধু অফিস জানবে। এই পাসওয়ার্ডটিই এই পেজে <b>Admin login</b>-এ দিতে হবে। তারপর Save করুন।</div></td></tr><tr><td class="n">3</td><td class="s">Deploy &rarr; New deployment &rarr; Web app &rarr; Execute as <i>Me</i>, access <i>Anyone</i> &rarr; copy the /exec URL.</td><td class="i">Click <b>Deploy &rarr; New deployment</b>, choose type <b>Web app</b>. Set <i>Execute as</i> = <b>Me</b> and <i>Who has access</i> = <b>Anyone</b>. Click Deploy, allow the permissions asked, then copy the <b>Web app URL</b> ending in <code>/exec</code>. After any later code change use <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> <b>Deploy &rarr; New deployment</b> চাপুন, ধরন বেছে নিন <b>Web app</b>। <i>Execute as</i> = <b>Me</b> এবং <i>Who has access</i> = <b>Anyone</b> দিন। Deploy চাপুন, চাওয়া অনুমতিগুলি (Allow) দিন, তারপর <code>/exec</code> দিয়ে শেষ হওয়া <b>Web app URL</b> কপি করুন। পরে কোড বদলালে <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b> করতে হবে।</div></td></tr><tr><td class="n">4</td><td class="s">Paste the URL above (and into <code>SUBMIT_URL</code> in this file so staff need not enter it), then share this page with staff.</td><td class="i">Paste the /exec URL in the URL box above. Also paste it into <code>const SUBMIT_URL = '...'</code> in this HTML file (search for SUBMIT_URL) and re-upload the file to your site, so staff never need to type it. Then share the page link with staff. Staff submissions will appear in the Google Sheet and here after <b>Fetch submissions</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> কপি করা /exec URL উপরের URL-এর ঘরে পেস্ট করুন। এছাড়া এই HTML ফাইলের মধ্যে <code>const SUBMIT_URL = '...'</code> লাইনটি (SUBMIT_URL লিখে সার্চ করুন) খুঁজে সেখানেও URL বসান এবং ফাইলটি আপনার সাইটে আবার আপলোড করুন, যাতে শিক্ষক-কর্মীদের URL লিখতে না হয়। তারপর পেজের লিংক সবাইকে পাঠান। জমা দেওয়া তথ্য Google Sheet-এ এবং এখানে <b>Fetch submissions</b> চাপলে দেখা যাবে।</div></td></tr><tr><td class="n">5</td><td class="s">Review submissions (daily use)</td><td class="i">Log in as Admin &rarr; press <b>Fetch submissions</b> &rarr; use <b>Load &amp; review</b> to open a staff member's data and tables, <b>JSON</b> to download it, and <b>Mark imported</b> once it is entered in the main dashboard / service book.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Admin হিসেবে লগইন করুন &rarr; <b>Fetch submissions</b> চাপুন &rarr; কারও তথ্য ও টেবিল দেখতে <b>Load &amp; review</b>, ডাউনলোড করতে <b>JSON</b>, এবং মূল ড্যাশবোর্ড/সার্ভিস বুকে এন্ট্রি হয়ে গেলে <b>Mark imported</b> চাপুন।</div></td></tr></tbody></table>
+<table class="steps"><thead><tr><th>#</th><th>Step</th><th>What to do (instruction) / কী করবেন</th></tr></thead><tbody><tr><td class="n">1</td><td class="s">Create a Google Sheet &rarr; Extensions &rarr; Apps Script &rarr; paste the code below.</td><td class="i">Open sheets.google.com with the school's Google account and make a blank sheet (name it e.g. <i>Staff Pay Submissions</i>). Click <b>Extensions &rarr; Apps Script</b>. Delete any code already in the editor, press <b>Copy code</b> below and paste it, then click the Save (disk) icon.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সরকারি/স্কুলের Google অ্যাকাউন্ট দিয়ে sheets.google.com খুলে একটি ফাঁকা Google Sheet তৈরি করুন (নাম দিন যেমন <i>Staff Pay Submissions</i>)। উপরের মেনু থেকে <b>Extensions &rarr; Apps Script</b> চাপুন। এডিটরে আগে থেকে কোনো কোড থাকলে মুছে দিন, নিচের <b>Copy code</b> বোতাম চেপে কোড কপি করে সেখানে পেস্ট করুন, তারপর Save (ডিস্ক) আইকনে ক্লিক করুন।</div></td></tr><tr><td class="n">2</td><td class="s">Project Settings &rarr; Script properties &rarr; add <code>ADMIN_KEY</code> with your secret key.</td><td class="i">In Apps Script click the gear icon (<b>Project Settings</b>), scroll to <b>Script properties</b> &rarr; <b>Add script property</b>. Property = <code>ADMIN_KEY</code>, Value = a secret password only the office knows. This same key is what you type in <b>Admin login</b> on this page. Click Save.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Apps Script-এ বাঁদিকের গিয়ার আইকনে (<b>Project Settings</b>) ক্লিক করুন, নিচে নেমে <b>Script properties</b> &rarr; <b>Add script property</b> চাপুন। Property-র ঘরে লিখুন <code>ADMIN_KEY</code> এবং Value-র ঘরে একটি গোপন পাসওয়ার্ড দিন যা শুধু অফিস জানবে। এই পাসওয়ার্ডটিই এই পেজে <b>Admin login</b>-এ দিতে হবে। তারপর Save করুন।</div></td></tr><tr><td class="n">3</td><td class="s">Deploy &rarr; New deployment &rarr; Web app &rarr; Execute as <i>Me</i>, access <i>Anyone</i> &rarr; copy the /exec URL.</td><td class="i">Click <b>Deploy &rarr; New deployment</b>, choose type <b>Web app</b>. Set <i>Execute as</i> = <b>Me</b> and <i>Who has access</i> = <b>Anyone</b>. Click Deploy, allow the permissions asked, then copy the <b>Web app URL</b> ending in <code>/exec</code>. After any later code change use <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> <b>Deploy &rarr; New deployment</b> চাপুন, ধরন বেছে নিন <b>Web app</b>। <i>Execute as</i> = <b>Me</b> এবং <i>Who has access</i> = <b>Anyone</b> দিন। Deploy চাপুন, চাওয়া অনুমতিগুলি (Allow) দিন, তারপর <code>/exec</code> দিয়ে শেষ হওয়া <b>Web app URL</b> কপি করুন। পরে কোড বদলালে <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b> করতে হবে।</div></td></tr><tr><td class="n">4</td><td class="s">Paste the URL above (and into <code>SUBMIT_URL</code> in this file so staff need not enter it), then share this page with staff.</td><td class="i">Paste the /exec URL in the URL box above. Also paste it into <code>const SUBMIT_URL = '...'</code> in this HTML file (search for SUBMIT_URL) and re-upload the file to your site, so staff never need to type it. Then share the page link with staff. Staff submissions will appear in the Google Sheet and here after <b>Fetch submissions</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> কপি করা /exec URL উপরের URL-এর ঘরে পেস্ট করুন। এছাড়া এই HTML ফাইলের মধ্যে <code>const SUBMIT_URL = '...'</code> লাইনটি (SUBMIT_URL লিখে সার্চ করুন) খুঁজে সেখানেও URL বসান এবং ফাইলটি আপনার সাইটে আবার আপলোড করুন, যাতে শিক্ষক-কর্মীদের URL লিখতে না হয়। তারপর পেজের লিংক সবাইকে পাঠান। জমা দেওয়া তথ্য Google Sheet-এ এবং এখানে <b>Fetch submissions</b> চাপলে দেখা যাবে।</div></td></tr><tr><td class="n">5</td><td class="s">Review submissions (daily use)</td><td class="i">Log in as Admin &rarr; press <b>Fetch submissions</b> &rarr; use <b>Load &amp; review</b> to open a staff member's data and tables, <b>JSON</b> to download it, and <b>Mark imported</b> once it is entered in the main dashboard / service book.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Admin হিসেবে লগইন করুন &rarr; <b>Fetch submissions</b> চাপুন &rarr; কারও তথ্য ও টেবিল দেখতে <b>Load &amp; review</b>, ডাউনলোড করতে <b>JSON</b>, এবং মূল ড্যাশবোর্ড/সার্ভিস বুকে এন্ট্রি হয়ে গেলে <b>Mark imported</b> চাপুন।</div></td></tr></tbody></table>
 <textarea class="code" id="gasCode" readonly onclick="this.select()">var SHEET='Submissions';
 function sh_(){var ss=SpreadsheetApp.getActiveSpreadsheet(),s=ss.getSheetByName(SHEET);if(!s){s=ss.insertSheet(SHEET);s.appendRow(['Ref','Name','Designation','Submitted','Status','Basic','Payload']);}return s;}
 function out_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);}
@@ -2754,7 +2795,7 @@ function casBuildModeOfFixation19Box(doj) {
    STAFF SELF-SERVICE LAYER  (sits on top of the ROPA engine copied unchanged
    from the main dashboard: ROPA-1990 / 1998 / 2009 / 2019 timelines)
    ===================================================================== */
-const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzQwOdkuoGhzh2VGyzOBItf1qQQempZ7JBX_ZoxPx5Qv9oftLD3u_Algl3J0jlsesw0DQ/exec';            // <-- paste your Google Apps Script web-app URL (ends /exec) here, or set it in "Admin" at the bottom
+const SUBMIT_URL = '';            // <-- paste your Google Apps Script web-app URL (ends /exec) here, or set it in "Admin" at the bottom
 const masterMlEntries = [];       // LWP (with effect) entries - read by the engine through getLwpEffectEntries()
 function daysBetween(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000) + 1; }
 function annotateAllTablesWithLeave() { }
@@ -2818,7 +2859,7 @@ function collectState() {
     const fields = {};
     document.querySelectorAll('#formArea input[id], #formArea select[id], #formArea textarea[id], #itaxCard input[id], #itaxCard select[id], #salArea input[id], #salArea select[id], #leaveArea input[id], #leaveArea select[id]').forEach(el => { fields[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
     const promoEvents = Array.from(document.querySelectorAll('#promoExtraRows .promo-extra-row')).map(r => ({ kind: r.querySelector('.pe-type').value, date: r.querySelector('.pe-date').value, gp: r.querySelector('.pe-gp').value, desig: r.querySelector('.pe-desig').value }));
-    return { version: 5, savedAt: new Date().toISOString(), staffName: V('staffName'), fields: fields, promoEvents: promoEvents, periods: JSON.parse(JSON.stringify(lvPeriods)), masterMlEntries: JSON.parse(JSON.stringify(masterMlEntries)), transferEvents: JSON.parse(JSON.stringify(lvTransfers)), casPriorSchools: [] };
+    return { version: 5, savedAt: new Date().toISOString(), staffName: V('staffName'), fields: fields, promoEvents: promoEvents, periods: JSON.parse(JSON.stringify(lvPeriods)), masterMlEntries: JSON.parse(JSON.stringify(masterMlEntries)), transferEvents: JSON.parse(JSON.stringify(lvTransfers)), casPriorSchools: (typeof prevSchools !== 'undefined' ? prevSchools : []) };
 }
 function applyState(st) {
     if (!st) return;
@@ -2837,6 +2878,7 @@ function autosave() { try { localStorage.setItem(STATE_KEY, JSON.stringify(colle
 /* ---------- generate pay tables ---------- */
 function genTables() {
     const err = [];
+    if (!V('schoolName')) err.push('Enter the name of the school (School details, at the top).');
     if (!V('staffName')) err.push('Enter the name of the staff.');
     if (!V('dob')) err.push('Enter Date of Birth.');
     if (!V('doj')) err.push('Enter Date of Joining (1st service).');
@@ -2998,7 +3040,7 @@ function getUrl() { return SUBMIT_URL || localStorage.getItem('TFHS_PAY_SUBMIT_U
 function refNo() {
     const key = 'TFHS_PAY_REF_' + V('staffName').toUpperCase().replace(/\s+/g, ' ');
     let r = localStorage.getItem(key);
-    if (!r) { r = 'TFHS-' + iso(new Date()).replace(/-/g, '').slice(2) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); localStorage.setItem(key, r); }
+    if (!r) { r = 'PAY-' + iso(new Date()).replace(/-/g, '').slice(2) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase(); localStorage.setItem(key, r); }
     return r;
 }
 function buildPayload() {
@@ -3006,7 +3048,7 @@ function buildPayload() {
     const c = window.CUR || {};
     const p = {
         kind: 'TFHS_STAFF_PAY_SUBMISSION', schema: 1, refNo: refNo(), submittedAt: new Date().toISOString(), mobile: V('mobileNo'),
-        staff: { name: V('staffName'), designation: V('designation'), school: V('schoolName'), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', status: V('empStatus') },
+        staff: { name: V('staffName'), designation: V('designation'), school: V('schoolName'), schoolAddr: V('schoolAddr'), udise: V('schoolUdise'), prevSchools: (typeof prevSchools !== 'undefined' ? prevSchools : []), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', status: V('empStatus') },
         current: c,
         pension: { name: V('staffName'), designation: V('designation'), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', lastBasicPay: c.basic || 0, da: window.SAL ? window.SAL.rule.da : 0, daPercent: window.SAL ? window.SAL.rule.pct : 0, hra: window.SAL ? window.SAL.rule.hra : 0, medicalAllowance: window.SAL ? window.SAL.rule.ma : 0 },
         salaryCheck: window.SAL || null, itax: window.ITX || null,
@@ -3020,7 +3062,7 @@ function buildPayload() {
     return p;
 }
 function download(name, text) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' })); a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
-function downloadMine() { if (!window.CUR) { showErr(['Generate the pay tables first.']); return; } const p = buildPayload(); download('TFHS_PAY_' + V('staffName').replace(/[^a-z0-9]+/gi, '_') + '.json', JSON.stringify(p, null, 2)); }
+function downloadMine() { if (!window.CUR) { showErr(['Generate the pay tables first.']); return; } const p = buildPayload(); download('PAY_' + V('staffName').replace(/[^a-z0-9]+/gi, '_') + '.json', JSON.stringify(p, null, 2)); }
 function updateSubmitBtn() { $('submitBtn').disabled = !($('chkAll').checked && window.CUR); }
 async function submitPay() {
     const st = $('submitStatus');
@@ -3069,8 +3111,8 @@ async function admFetch() {
     } catch (e) { box.innerHTML = '<div class="err">Fetch failed: ' + esc(e.message) + '</div>'; }
 }
 function admLoad(i) { if (!admOK) return; const p = admRows[i] && admRows[i].payload; if (!p) return; applyState(p.dashboard); genTables(); $('results').scrollIntoView({ behavior: 'smooth' }); }
-function admDl(i) { if (!admOK) return; download('TFHS_PAY_' + admRows[i].ref + '.json', JSON.stringify(admRows[i].payload, null, 2)); }
-function admDlAll() { if (!admOK) return; download('TFHS_PAY_ALL_' + iso(new Date()) + '.json', JSON.stringify(admRows.map(x => x.payload), null, 2)); }
+function admDl(i) { if (!admOK) return; download('PAY_' + admRows[i].ref + '.json', JSON.stringify(admRows[i].payload, null, 2)); }
+function admDlAll() { if (!admOK) return; download('PAY_ALL_' + iso(new Date()) + '.json', JSON.stringify(admRows.map(x => x.payload), null, 2)); }
 async function admMark(i) { if (!admOK) return; const url = V('admUrl'), key = V('admKey'); try { await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=mark&ref=' + encodeURIComponent(admRows[i].ref) + '&key=' + encodeURIComponent(key)); admFetch(); } catch (e) { } }
 function copyGas() { const t = $('gasCode'); t.select(); try { document.execCommand('copy'); } catch (e) { } }
 
@@ -3276,7 +3318,7 @@ function lvPrint() {
     if (!lvPeriods.length) { lvStatus('Generate the period-of-duty rows first, then print.', true); return; }
     lvRefresh();
     const der = lvDerive(), T = lvTotals();
-    $('leaveSheet').innerHTML = '<div class="lvs">' + esc(V('schoolName')) + '</div><h2>LEAVE ACCOUNT (REGISTER)</h2><table class="lvm"><tr><td><b>Name:</b> ' + esc(V('staffName')) + '</td><td><b>Designation:</b> ' + esc(V('designation')) + '</td><td><b>DOJ:</b> ' + lvFmt(V('doj')) + '</td><td><b>DOR:</b> ' + lvFmt(V('leaveUpToDate')) + '</td></tr></table>' +
+    $('leaveSheet').innerHTML = '<div class="lvs">' + schoolHdrHtml() + '</div><h2>LEAVE ACCOUNT (REGISTER)</h2><table class="lvm"><tr><td><b>Name:</b> ' + esc(V('staffName')) + '</td><td><b>Designation:</b> ' + esc(V('designation')) + '</td><td><b>DOJ:</b> ' + lvFmt(V('doj')) + '</td><td><b>DOR:</b> ' + lvFmt(V('leaveUpToDate')) + '</td></tr></table>' +
         '<table><colgroup>' + $('mainTable').querySelector('colgroup').innerHTML + '</colgroup><thead>' + LV_HEAD + '</thead><tbody>' + lvRows(der, true) + '</tbody><tfoot>' + T.html + '</tfoot></table>';
     printMode('print-leave', '@page{size:A4 landscape;margin:8mm}');
 }
@@ -3284,7 +3326,7 @@ function lvPrint() {
 /* =====================================================================
    PAY SLIP  (layout of the iOSMS pay slip; figures by West Bengal rule of that month)
    ===================================================================== */
-const SLIP_HDR = { name: 'TALDANGRA FULMOTI H S', udise: '19132104401', line2: 'CO-EDUCATIONAL * HIGHER SECONDARY * GOVT SPONSORED SCHOOL', addr: 'PO: TALDANGRA, PS: TALDANGRA, DIST: BANKURA, PIN: 722152' };
+const SLIP_HDR = { get name(){return V('schoolName').toUpperCase();}, get udise(){return V('schoolUdise');}, get line2(){return V('schoolType').toUpperCase();}, get addr(){return V('schoolAddr').toUpperCase();} };
 function slipMsg(t, bad) { const m = $('slipMsg'); if (m) { m.className = bad ? 'err' : 'okbox'; m.textContent = t; } }
 function numWords(n) {
     n = Math.round(Math.abs(n)); if (n === 0) return 'Zero';
@@ -3337,7 +3379,7 @@ function slipHtml(s) {
         b += '<tr><td class="l">' + (e ? esc(e[0]) : '') + '</td><td class="a">' + (e ? e[1] : '') + '</td><td class="l g1">' + (d ? esc(d[0]) : '') + '</td><td class="a">' + (d ? d[1] : '') + '</td>' + (i === 0 ? '<td class="g1" rowspan="' + rows + '"></td><td class="g1" rowspan="' + rows + '"></td>' : '') + '</tr>';
     }
     const ifs = V('slipIfsc').toUpperCase(), ac = V('slipAcNo');
-    return '<div class="slip"><div class="t1">' + esc(SLIP_HDR.name) + '<br>(UDISE CODE:' + SLIP_HDR.udise + ' )</div><div class="t2">' + esc(SLIP_HDR.line2) + '</div><div class="ad">' + esc(SLIP_HDR.addr) + '</div><hr>' +
+    return '<div class="slip"><div class="t1">' + esc(SLIP_HDR.name) + (SLIP_HDR.udise ? '<br>(UDISE CODE:' + esc(SLIP_HDR.udise) + ' )' : '') + '</div>' + (SLIP_HDR.line2 ? '<div class="t2">' + esc(SLIP_HDR.line2) + '</div>' : '') + '<div class="ad">' + esc(SLIP_HDR.addr) + '</div><hr>' +
         '<div class="ti">PAY SLIP FOR THE MONTH OF ' + M + '</div>' +
         '<div class="info"><div><b>EMPLOYEE NAME:</b> ' + esc(V('staffName').toUpperCase()) + '<br><b>EMPLOYEE ID:</b> ' + esc(V('slipEmpId').toUpperCase()) + '<br><b>LEVEL:</b> ' + esc(s.level) + '<br><b>ACCOUNT NO.:</b> ' + esc(ac) + ' , <b>IFS CODE :</b> ' + esc(ifs) + '</div>' +
         '<div><b>DESIGNATION:</b> ' + esc(s.desig) + '<br><b>PAN:</b> ' + esc(V('slipPan').toUpperCase()) + '<br><b>CELL:</b> ' + esc(s.cell) + '</div></div>' +
@@ -3346,7 +3388,7 @@ function slipHtml(s) {
         '<tr class="gpn"><td colspan="6">GROSS PAY: ' + s.gross + '</td></tr><tr class="gpn"><td colspan="6">NET PAY: &nbsp; ' + s.net + ' (Rupees ' + numWords(s.net) + ' only)</td></tr></tbody></table>' +
         '<div class="nt">GP: Grade Pay, DA: Dearness Allowance, HRA: House Rent Allowance, MA: Medical Allowance, CA: Conveyance Allowance,<br>CPF: Contributory Provident Fund, PT: Professional Tax, IT: Income Tax, IR: Interim Relief</div>' +
         '<div class="dis"><b>Disclaimer:</b> This is a computer generated Pay Slip and hence does not require any signature.</div>' +
-        '<div class="ft"><span>Computed by TFHS Staff Pay Table (not an iOSMS download)</span><span>Page-1</span><span>Date of Generation: ' + gen + '</span></div></div>';
+        '<div class="ft"><span>Computed by Staff Pay Table (not an iOSMS download)</span><span>Page-1</span><span>Date of Generation: ' + gen + '</span></div></div>';
 }
 function slipGenerate() {
     if (!V('staffName')) { showErr(['Enter the name of the staff first.']); return; }
@@ -3474,7 +3516,7 @@ function itCalc() {
     const P = { fyLabel, salary, pTax, other, hbl, empName, empPAN, empDOB, empDesig, relief, cg };
     const sN = Object.assign({}, P, { isOld: false, stdDed: stdN, head: headN, gti: gtiN, ti: tiN, full: fullN, reb: rebN, cess: cessN, tot: totN, bal: balN, grand: grandN });
     const sO = Object.assign({}, P, { isOld: true, stdDed: stdO, head: headO, gti: gtiO, ti: tiO, full: fullO, reb: rebO, cess: cessO, tot: totO, bal: balO, grand: grandO, D, c80, via });
-    document.getElementById('itStatements').innerHTML = '<div class="btn-group noprint"><button type="button" class="btn-print" onclick="itPrint(\'N\')">Print New Regime Statement</button><button type="button" class="btn-print" onclick="itPrint(\'O\')">Print Old Regime Statement</button></div>' + itStmt('NEW TAX REGIME', sN, 'ixWrapN') + itStmt('OLD TAX REGIME', sO, 'ixWrapO');
+    document.getElementById('itStatements').innerHTML = '<details class="ix-sub" style="margin-top:8px"><summary>Detailed statements (view / print)</summary><div class="btn-group noprint"><button type="button" class="btn-print" onclick="itPrint(\'N\')">Print New Regime Statement</button><button type="button" class="btn-print" onclick="itPrint(\'O\')">Print Old Regime Statement</button></div>' + itStmt('NEW TAX REGIME', sN, 'ixWrapN') + itStmt('OLD TAX REGIME', sO, 'ixWrapO') + '</details>';
     window.ITX = { fy: fyLabel, salary, other, pTax, newTax: Math.round(grandN), oldTax: Math.round(grandO), better: newBetter ? 'new' : 'old', capGainsTax: Math.round(cg) };
     document.getElementById('itMsg').textContent = '';
 }
@@ -3542,4 +3584,30 @@ const _refreshAllOrig = refreshAll;
 refreshAll = function () { _refreshAllOrig(); try { itInit(); } catch (e) { } };
 </script>
 
+<script>
+/* ===== school details & previous schools ===== */
+let prevSchools = [];
+function addPrev() {
+    const n = V('pvName'); if (!n) { showErr(['Enter the previous school name.']); return; }
+    prevSchools.push({ name: n, addr: V('pvAddr'), from: V('pvFrom'), to: V('pvTo') });
+    ['pvName', 'pvAddr', 'pvFrom', 'pvTo'].forEach(i => $(i).value = ''); renderPrev(); autosave();
+}
+function delPrev(i) { prevSchools.splice(i, 1); renderPrev(); autosave(); }
+function renderPrev() {
+    const b = $('pvList'); if (!b) return;
+    b.innerHTML = prevSchools.length ? prevSchools.map((p, i) => '<span class="chip2">' + esc(p.name) + (p.addr ? ', ' + esc(p.addr) : '') + (p.from || p.to ? ' (' + (p.from ? formatDate(parseISO(p.from)) : '') + ' to ' + (p.to ? formatDate(parseISO(p.to)) : '') + ')' : '') + ' <button type="button" onclick="delPrev(' + i + ')">x</button></span>').join(' ') : 'No previous school added.';
+}
+function schoolHdrHtml() {
+    let h = '<b>' + esc(V('schoolName')) + '</b>';
+    if (V('schoolAddr')) h += '<br>' + esc(V('schoolAddr'));
+    if (V('schoolUdise')) h += ' (UDISE: ' + esc(V('schoolUdise')) + ')';
+    if (prevSchools.length) h += '<br><span style="font-weight:400;font-size:.85em">Previous school(s): ' + prevSchools.map(p => esc(p.name) + (p.addr ? ', ' + esc(p.addr) : '') + (p.from || p.to ? ' [' + (p.from ? formatDate(parseISO(p.from)) : '') + ' to ' + (p.to ? formatDate(parseISO(p.to)) : '') + ']' : '')).join('; ') + '</span>';
+    return h;
+}
+const _applyStateOrig = applyState;
+applyState = function (st) { _applyStateOrig(st); prevSchools = ((st && st.casPriorSchools) || []).filter(x => x && x.name); renderPrev(); };
+const _refreshAllOrig2 = refreshAll;
+refreshAll = function () { _refreshAllOrig2(); try { const e = $('sbSchoolExtra'); if (e) e.innerHTML = schoolHdrHtml().replace(/^<b>.*?<\/b>(<br>)?/, ''); } catch (x) { } };
+renderPrev();
+</script>
 </body></html>
