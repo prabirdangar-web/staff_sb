@@ -38,7 +38,12 @@ table.mini td.r,td.r{text-align:right}
 .promo-extra-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin:6px 0;padding:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px}
 #adminArea{display:none}#adminArea.on{display:block}
 #admLoginCard{display:none;border:2px solid var(--pri)}#admLoginCard.on{display:block}
-table.steps td{vertical-align:top;font-size:.84rem}table.steps td.n{width:34px;text-align:center;font-weight:800;color:var(--pri);background:#eef2ff}table.steps td.s{width:34%;font-weight:600}table.steps td.i{color:#334155}table.steps td.i{position:relative}table.steps .bnh{display:inline-block;margin-top:5px;padding:1px 8px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.74rem;font-weight:700;cursor:help}table.steps .bn{display:none;position:absolute;left:8px;right:8px;top:100%;z-index:50;margin-top:2px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2)}table.steps tr:hover .bn,table.steps tr.bnopen .bn{display:block}
+table.steps td{vertical-align:top;font-size:.84rem}table.steps td.n{width:34px;text-align:center;font-weight:800;color:var(--pri);background:#eef2ff}table.steps td.s{width:34%;font-weight:600}table.steps td.i{color:#334155}table.steps td.i{position:relative}table.steps .bnh{display:inline-block;margin-top:5px;padding:1px 8px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.74rem;font-weight:700;cursor:help}table.steps .bn{display:none;position:absolute;left:8px;right:8px;top:100%;z-index:50;margin-top:2px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2)}.gh{position:relative;display:inline-block;margin-left:8px;vertical-align:middle;font-weight:400}
+.gh .bnh{display:inline-block;padding:1px 8px;border-radius:99px;background:#dcfce7;color:#14532d;font-size:.74rem;font-weight:700;cursor:help}
+.gh .bn{display:none;position:absolute;left:0;top:100%;z-index:60;width:min(520px,86vw);margin-top:3px;padding:8px 10px;background:#f0fdf4;border:1px solid #15803d;border-left:4px solid #15803d;border-radius:6px;color:#14532d;font-size:.84rem;font-weight:400;line-height:1.7;box-shadow:0 6px 18px rgba(0,0,0,.2);text-align:left}
+.gh:hover .bn,.gh.bnopen .bn{display:block}
+@media print{.gh{display:none!important}}
+table.steps tr:hover .bn,table.steps tr.bnopen .bn{display:block}
 textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 .printonly{display:none}
 @media print{
@@ -112,13 +117,13 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 <header class="top"><h1>Pay Table Generator &mdash; Staff Self-Service</h1><p>Taldangra Fulmati High School &middot; Enter your own details, generate your ROPA-90/98/09/19 pay tables, verify them, and submit.</p></header>
 <div class="wrap">
 <div class="card" style="background:#fffbeb">
-<b>How to use:</b> (1) fill your details from your service book &rarr; (2) press <b>Generate Pay Tables</b> &rarr; (3) check your current pay and every row of the tables &rarr; (4) optionally enter your latest pay-slip figures to verify DA / HRA / MA / P.Tax / PF / I-tax &rarr; (5) tick the declaration and <b>Submit</b>. Your entries are kept on this phone/computer, so you can come back and correct them.
+<b>How to use:</b><span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ১) সার্ভিস বুক দেখে নিজের তথ্য ভরুন → ২) 'Generate Pay Tables' চাপুন → ৩) বর্তমান বেতন ও প্রতিটি সারি মিলিয়ে দেখুন → ৪) চাইলে পে-স্লিপের অঙ্ক দিয়ে DA/HRA/MA/PT/PF/আয়কর যাচাই করুন → ৫) ঘোষণায় টিক দিয়ে Submit করুন। আপনার দেওয়া তথ্য এই ফোন/কম্পিউটারে সংরক্ষিত থাকে, তাই পরে এসে সংশোধন করতে পারবেন। প্রতিটি ধাপের পাশে 'ⓘ বাংলা' চিহ্নে মাউস আনলে (ফোনে ট্যাপ করলে) বাংলা নির্দেশনা দেখা যাবে।</div></span>  (1) fill your details from your service book &rarr; (2) press <b>Generate Pay Tables</b> &rarr; (3) check your current pay and every row of the tables &rarr; (4) optionally enter your latest pay-slip figures to verify DA / HRA / MA / P.Tax / PF / I-tax &rarr; (5) tick the declaration and <b>Submit</b>. Your entries are kept on this phone/computer, so you can come back and correct them.
 </div>
 <div class="warn" style="margin:0 0 10px">Online preview: you can try everything here (tables, current pay, salary check). <b>Submit, Download and Print do not work inside this preview</b>; they work when the file is hosted on your own site (e.g. GitHub Pages) or opened from the file.</div><div id="errBox" class="err" style="display:none"></div>
 
 <div id="formArea">
 <div class="card">
-<h2>Step 1 &mdash; Your service details</h2>
+<h2>Step 1 &mdash; Your service details<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সার্ভিস বুক দেখে আপনার নাম, পদবী, জন্মতারিখ এবং প্রথম চাকরিতে যোগদানের তারিখ (Date of Joining) ঠিকভাবে লিখুন। জন্মতারিখ দিলে অবসরের তারিখ (বয়স ৬০) নিজে থেকে বসে যাবে। চাকরিরত অবস্থায় মৃত্যু বা পদত্যাগ হলে নিচের লাল ঘরে সেই ধরন ও তারিখ দিন, নইলে 'N.A.' রাখুন। মোবাইল নম্বর শুধু রেফারেন্সের জন্য।</div></span></h2>
     <h3 id="tab-staff">1. Your Details</h3>
     <div class="grid-inputs">
         <div class="form-group">
@@ -193,7 +198,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 <div id="suggestNote" class="muted"></div>
 </div>
 <div class="card">
-    <h3 id="tab-promotion">2. Promotion / Career Advancement / Higher Scale Movement</h3>
+    <h3 id="tab-promotion">2. Promotion / Career Advancement / Higher Scale Movement<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যদি চাকরিকালে পদোন্নতি (Promotion), উচ্চতর স্কেল, সহকারী প্রধান শিক্ষক (AHM) বা প্রধান শিক্ষক (HM) হয়ে থাকেন তবেই 'Applicable' টিক দিন। ঘটনার ধরন, তারিখ ও নতুন গ্রেড পে বেছে নিন। একাধিক ঘটনা থাকলে তারিখের ক্রমে '+ Add Next Event' চেপে একটির পর একটি যোগ করুন। প্রযোজ্য না হলে টিক দেবেন না।</div></span></h3>
     <div class="grid-inputs">
         <div class="form-group">
             <label>&nbsp;</label>
@@ -253,14 +258,14 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
     <div class="output-box" style="background-color:#eff6ff;border-left-color:#1d4ed8;">
         <strong>Fixation Rule Settings:</strong> Functional post promotions grant an extra increment before matching the target scale. Higher scale movements for qualification/upgradations bypass the promotional increment step. For HM/AHM (Level-16), one increment in the existing level is always added before fitment. If joining as HM/AHM is between 2nd January and 30th June, the option is exercised w.e.f. 1st July of that year; the pay table shows ONE row from 1st July to 30th June of the next year (the 1st July increment is included in that row, not repeated), and the Remarks column states the actual date of appointment; the next increment is 1st July of the following year. If the joining date is outside 2nd January–30th June, no same-year 1st July option row is created and fixation remains on the actual joining date.
     </div>
-<h3>LWP / Extra-ordinary leave that postpones increments (if any)</h3>
+<h3>LWP / Extra-ordinary leave that postpones increments (if any)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যে বিনা বেতনের ছুটি (LWP) বা অসাধারণ ছুটির কারণে বার্ষিক ইনক্রিমেন্ট পিছিয়েছে, শুধু সেটির শুরু ও শেষের তারিখ দিয়ে '+ Add LWP' চাপুন। এমন ছুটি না থাকলে কিছু দেবেন না।</div></span></h3>
 <div class="grid-inputs"><div class="form-group"><label>From</label><input type="date" id="lwpFrom"></div><div class="form-group"><label>To</label><input type="date" id="lwpTo"></div><div class="form-group"><label>&nbsp;</label><button type="button" onclick="addLwp()">+ Add LWP</button></div></div>
 <div id="lwpList" class="muted"></div>
 </div>
 <div class="card">
-<h2>Step 3 &mdash; Pay regimes</h2>
+<h2>Step 3 &mdash; Pay regimes<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার যোগদানের তারিখ থেকে ROPA-90/98/09/19 এর তারিখ ও স্কেল নিজে থেকে প্রস্তাব করা হয়েছে। সার্ভিস বুকের সঙ্গে না মিললে শুধু তখনই বদলান। সব ঠিক থাকলে নিচের 'Generate Pay Tables' বোতাম চাপুন।</div></span></h2>
 <div class="muted">Dates and scales below are suggested from your Date of Joining. Change them only if your service book shows otherwise.</div>
-    <h3 id="tab-ropa90">3a. ROPA-1990 (staff appointed before 01-03-1999)</h3>
+    <h3 id="tab-ropa90">3a. ROPA-1990 (staff appointed before 01-03-1999)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ০১-০৩-১৯৯৯ এর আগে নিয়োগ হলে এবং ROPA-1990 স্কেলে বেতন পেয়ে থাকলে টিক দিন। স্কেল ও অপশন/নিয়োগের তারিখ দিন। পরবর্তী ROPA-1998 এর প্রারম্ভিক বেতন নিয়ম ৭ অনুযায়ী নিজে থেকেই হিসাব হবে, হাতে লিখতে হবে না।</div></span></h3>
     <div class="grid-inputs">
         <div class="form-group">
             <label>&nbsp;</label>
@@ -320,7 +325,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
         Date of Joining is before 01-03-1999: tick "ROPA-1990" above if this staff drew pay in the ROPA-1990 scale before ROPA-1998.
     </div>
 
-    <h3 id="tab-ropa98">3b. ROPA-1998 Fixation (Always Frozen on 31-03-2009)</h3>
+    <h3 id="tab-ropa98">3b. ROPA-1998 Fixation (Always Frozen on 31-03-2009)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ০১-০১-২০০৬ এর আগে চাকরিতে ঢুকলে ROPA-1998 টিক থাকবে। পুরনো স্কেল, অপশনের তারিখ ও প্রারম্ভিক বেসিক পে দিন। এই টেবিল ৩১-০৩-২০০৯ পর্যন্ত চলে।</div></span></h3>
     <div class="grid-inputs">
         <div class="form-group">
             <label>&nbsp;</label>
@@ -352,7 +357,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
         </div>
     </div>
 
-    <h3 id="tab-ropa09">3c. ROPA-2009 Notional Fixation (Always Frozen on 31-12-2019)</h3>
+    <h3 id="tab-ropa09">3c. ROPA-2009 Notional Fixation (Always Frozen on 31-12-2019)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ROPA-2009 (বেতন কাঠামো + গ্রেড পে) এর অপশনের তারিখ দিন। আগে ROPA-1998 টিক থাকলে বেতন সেখান থেকে ১.৮৬ গুণ করে নিজে থেকেই আসবে। ৩১-১২-২০১৯ পর্যন্ত এই টেবিল চলে।</div></span></h3>
     <div class="grid-inputs">
         <div class="form-group">
             <label>&nbsp;</label>
@@ -385,7 +390,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
         </div>
     </div>
 
-    <h3 id="tab-ropa19">3d. ROPA-2019 Matrix Fixation (From Option Date)</h3>
+    <h3 id="tab-ropa19">3d. ROPA-2019 Matrix Fixation (From Option Date)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ROPA-2019 এর অপশনের তারিখ দিন (সাধারণত ০১-০১-২০১৬ বা যোগদানের তারিখ)। পে-ম্যাট্রিক্সে লেভেল ও সেল সেই অনুযায়ী ২.৫৭ গুণ করে নির্ধারিত হবে। 'year-by-year' টিক দিলে প্রতি বছরের সারি দেখাবে।</div></span></h3>
     <div class="grid-inputs">
         <div class="form-group">
             <label>Date of Option (ROPA-2019)</label>
@@ -424,13 +429,13 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 
 <div id="results" style="display:none">
 <div class="card printonly" style="text-align:center"><b id="sbSchoolName"></b><br><b>PAY FIXATION STATEMENT</b><br><span id="sbStaffName"></span>, <span id="sbDesignation"></span><br>DOB: <span id="sbDob"></span> &middot; DOJ: <span id="sbDoj"></span> &middot; DOR: <span id="sbDor"></span></div>
-<div class="card"><h2>Your current pay</h2>
+<div class="card"><h2>Your current pay<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> 'As on date' এ যে তারিখ দেবেন সেই দিনে আপনার বেসিক পে কত, কোন লেভেল/সেল, কবে থেকে ও পরের বেতন বৃদ্ধি কবে — তা এখানে দেখা যাবে। সার্ভিস বুকের বর্তমান বেতনের সঙ্গে মিলিয়ে নিন।</div></span></h2>
 <div class="grid-inputs" style="max-width:260px"><div class="form-group"><label>As on date</label><input type="date" id="asOfDate" form="none"></div></div>
 <div id="currentCard"></div></div>
-<div class="card" id="checksCard"><h2>Automatic checks</h2><div id="checksBox"></div></div>
+<div class="card" id="checksCard"><h2>Automatic checks<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> টেবিলগুলি নিজে থেকেই পরীক্ষা করা হয়েছে। সবুজ ✓ মানে ঠিক আছে, লাল ⚠ মানে কোথাও গরমিল — সার্ভিস বুক দেখে তারিখ বা প্রারম্ভিক বেতন সংশোধন করে আবার Generate করুন।</div></span></h2><div id="checksBox"></div></div>
 
 <div class="card">
-<h2>Your pay tables</h2>
+<h2>Your pay tables<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রতিটি সারি মন দিয়ে সার্ভিস বুকের সঙ্গে মেলান: কার্যকর তারিখ, বেসিক পে ও কারণ (ইনক্রিমেন্ট/পদোন্নতি/১০-১৮-২০ বছর)। ভুল থাকলে উপরে ফিরে সংশোধন করুন। PDF এর জন্য নিচের Print বোতাম ব্যবহার করুন।</div></span></h2>
 <div class="output-box" id="carryForwardOutput98" style="display:none"></div>
 <div class="output-box" id="carryForwardOutput" style="display:none"></div>
 <div id="ropa90Section" style="display:none"><h3>ROPA-1990</h3><div class="table-responsive"><table><thead><tr><th>Effective Date</th><th>Date of Termination</th><th>Scale</th><th>Basic Pay</th><th>Event / Reason</th></tr></thead><tbody id="payTableBody90"></tbody></table></div></div>
@@ -441,7 +446,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 </div>
 
 <div class="card" id="salArea">
-<h2>Verify your salary &mdash; DA, HRA, MA, P.Tax, PF, Income-tax (West Bengal rules)</h2>
+<h2>Verify your salary &mdash; DA, HRA, MA, P.Tax, PF, Income-tax (West Bengal rules)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার সর্বশেষ পে-স্লিপের অঙ্কগুলি (বেসিক, DA, HRA, MA, প্রফেশনাল ট্যাক্স, GPF, আয়কর) এখানে লিখুন। প্রতিটির পাশে পশ্চিমবঙ্গের নিয়মমতো অঙ্কের সঙ্গে তুলনা করে ✓ OK বা ⚠ Check দেখাবে। হার (DA % ইত্যাদি) সরকার বদলালে ঘরে পরিবর্তন করা যায়। এটি ঐচ্ছিক।</div></span></h2>
 <div class="muted">Rule values are pre-filled with the rates last published (ROPA-2019); they are editable. Enter the figures from <b>your latest pay slip</b> and each line is compared with the rule and with your pay table.</div>
 <h3>Rates (edit if government changes them)</h3>
 <div class="grid-inputs">
@@ -485,7 +490,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 </div>
 
 <div class="card" id="slipCard">
-<h2>Pay slip (same layout as the iOSMS pay slip)</h2>
+<h2>Pay slip (same layout as the iOSMS pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাস বেছে 'Generate Pay Slip' চাপলে নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়করসহ পে-স্লিপ তৈরি হবে। Employee ID, PAN, ব্যাংক অ্যাকাউন্ট নম্বর ও IFS কোড আগে লিখে নিন। প্রিন্ট বা PDF করতে নিচের Print বোতাম চাপুন।</div></span></h2>
 <div class="muted">Press <b>Generate Pay Slip</b>. Before the slip is made, the tool puts the <b>basic, DA, HRA, MA, Professional Tax, Income-tax (average monthly TDS) and GPF</b> for the selected month by the West Bengal rule in force in that month (PT slabs change from 01-10-2026; DA/HRA/MA use the rates entered above). Fill Employee ID, PAN, Bank A/c no. and IFS code in the box above. You can edit any figure and press the button again.</div>
 <label class="inline-check" style="margin-top:8px"><input type="checkbox" id="slipKeep"> Use exactly the figures I typed above (do not apply the rule to PT / Income-tax)</label>
 <div class="btn-group"><button type="button" class="big" onclick="slipGenerate()">Generate Pay Slip</button><button type="button" onclick="slipAutoFill(true,true);slipMsg('Figures re-filled by rule for '+V('slipMonth')+'.')">Re-fill all by rule</button><button type="button" class="btn-print" id="slipPrintBtn" onclick="slipPrint()" disabled>Print / Save pay slip as PDF</button></div>
@@ -494,7 +499,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 </div>
 
 <div class="card" id="leaveArea">
-<h2>Leave Account (optional)</h2>
+<h2>Leave Account (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রথমে 'Generate rows up to' তারিখ দিয়ে 'Auto-generate' চাপুন, বদলি হয়ে থাকলে নতুন স্কুলে যোগদানের তারিখ যোগ করুন। তারপর নেওয়া ছুটি (ML, HPL, Commuted, LWP) তারিখ বা দিনসংখ্যা দিয়ে যোগ করুন। হিসাব মিললে 'Print Leave A/c' চাপুন। লাল ব্যালান্স মানে ছুটি পাওনার বেশি নেওয়া হয়েছে। এটি ঐচ্ছিক।</div></span></h2>
 <div class="muted">Uses your name, designation and Date of Joining from the form above. Earned Leave and HPL are credited at 15 days per full year (EL capped at 365 days, HPL credit at 60 days). Add your leave, check the table, then print the Leave A/c on A4 landscape. Leave you enter is also sent to the school office with your submission.</div>
 <h3>1. Period-of-duty rows</h3>
 <div class="grid-inputs">
@@ -528,7 +533,7 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 </div>
 
 <div class="card" id="submitArea">
-<h2>Verify &amp; submit</h2>
+<h2>Verify &amp; submit<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সব তথ্য ও টেবিল সার্ভিস বুকের সঙ্গে মিলিয়ে নিশ্চিত হলে ঘোষণায় টিক দিন, তারপর 'Submit to school' চাপুন। জমা দেওয়ার পর যে রেফারেন্স নম্বর দেখাবে তার স্ক্রিনশট রাখুন। ভুল ধরা পড়লে একই ফোন থেকে সংশোধন করে আবার Submit করলে একই রেকর্ড আপডেট হবে। জমা না হলে 'Download my file' দিয়ে ফাইল অফিসে পাঠান।</div></span></h2>
 <label class="inline-check"><input type="checkbox" id="chkAll"> I have checked all my details and every row of the pay tables above and they are correct as per my service book.</label>
 <div class="btn-group"><button type="button" class="big" id="submitBtn" onclick="submitPay()" disabled>Submit to school</button><button type="button" onclick="downloadMine()">Download my file</button></div>
 <div id="submitStatus" class="muted"></div>
@@ -3311,7 +3316,7 @@ window.addEventListener('DOMContentLoaded', function () {
         else { toggleRopa90Section(); toggleRopa09Section(); togglePromotionSection(); }
     } catch (e) { }
     calculateDOR(); renderLwp(); togglePromotionSection(); lvRefresh(); admShow(admOK);
-    document.addEventListener('click', e => { const r = e.target.closest && e.target.closest('table.steps tr'); document.querySelectorAll('table.steps tr.bnopen').forEach(x => { if (x !== r) x.classList.remove('bnopen'); }); if (r && e.target.closest('.bnh')) r.classList.toggle('bnopen'); });
+    document.addEventListener('click', e => { const gh = e.target.closest && e.target.closest('.gh'); document.querySelectorAll('.gh.bnopen').forEach(x => { if (x !== gh) x.classList.remove('bnopen'); }); if (gh && e.target.closest('.bnh')) gh.classList.toggle('bnopen'); const r = e.target.closest && e.target.closest('table.steps tr'); document.querySelectorAll('table.steps tr.bnopen').forEach(x => { if (x !== r) x.classList.remove('bnopen'); }); if (r && e.target.closest('.bnh')) r.classList.toggle('bnopen'); });
     window.addEventListener('hashchange', () => admShow(admOK));
     document.addEventListener('change', e => {
         const id = e.target && e.target.id;
