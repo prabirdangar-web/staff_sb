@@ -88,6 +88,8 @@ table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
  #itaxSheet .ix-title{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 #slipSheet,#leaveSheet{display:none}
+@media screen{details.ix-opt>summary{cursor:pointer;list-style-position:inside}details.ix-opt>summary h2{display:inline;margin:0}}
+
 @media screen{
 /* ===== COMPACT VIEW ===== */
 body{font-size:13px;line-height:1.35}
@@ -522,8 +524,8 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <div class="btn-group noprint"><button type="button" class="btn-print" onclick="printTables()">Print / Save pay tables as PDF</button></div>
 </div>
 
-<div class="card" id="salArea">
-<h2>Verify your salary &mdash; DA, HRA, MA, P.Tax, PF, Income-tax (West Bengal rules)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার সর্বশেষ পে-স্লিপের অঙ্কগুলি (বেসিক, DA, HRA, MA, প্রফেশনাল ট্যাক্স, GPF, আয়কর) এখানে লিখুন। প্রতিটির পাশে পশ্চিমবঙ্গের নিয়মমতো অঙ্কের সঙ্গে তুলনা করে ✓ OK বা ⚠ Check দেখাবে। হার (DA % ইত্যাদি) সরকার বদলালে ঘরে পরিবর্তন করা যায়। এটি ঐচ্ছিক।</div></span></h2>
+<details class="card ix-opt" id="salArea">
+<summary><h2>Verify your salary (optional) &mdash; DA, HRA, MA, P.Tax, PF, Income-tax (West Bengal rules)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার সর্বশেষ পে-স্লিপের অঙ্কগুলি (বেসিক, DA, HRA, MA, প্রফেশনাল ট্যাক্স, GPF, আয়কর) এখানে লিখুন। প্রতিটির পাশে পশ্চিমবঙ্গের নিয়মমতো অঙ্কের সঙ্গে তুলনা করে ✓ OK বা ⚠ Check দেখাবে। হার (DA % ইত্যাদি) সরকার বদলালে ঘরে পরিবর্তন করা যায়। এটি ঐচ্ছিক।</div></span></h2></summary>
 <div class="muted">Rule values are pre-filled with the rates last published (ROPA-2019); they are editable. Enter the figures from <b>your latest pay slip</b> and each line is compared with the rule and with your pay table.</div>
 <h3>Rates (edit if government changes them)</h3>
 <div class="grid-inputs">
@@ -564,7 +566,7 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <div class="form-group"><label>Old regime: other deductions (Rs./yr)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> শুধু পুরনো ব্যবস্থায় প্রযোজ্য: ৮০সি ছাড়া অন্য ছাড় (যেমন ৮০ডি স্বাস্থ্যবীমা, গৃহঋণের সুদ) বছরে মোট কত।</div></span></label><input type="number" id="dOth" value="0"></div>
 </div>
 <div class="card" id="salResultCard" style="margin:10px 0 0"><div id="salResult"></div></div>
-</div>
+</details>
 
 <details class="card" id="itaxCard">
 <summary><b>Income Tax Statement (optional) &mdash; New &amp; Old regime with Capital Gains</b></summary>
@@ -598,8 +600,8 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <div id="slipPreview"></div>
 </div>
 
-<div class="card" id="leaveArea">
-<h2>Leave Account (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রথমে 'Generate rows up to' তারিখ দিয়ে 'Auto-generate' চাপুন, বদলি হয়ে থাকলে নতুন স্কুলে যোগদানের তারিখ যোগ করুন। তারপর নেওয়া ছুটি (ML, HPL, Commuted, LWP) তারিখ বা দিনসংখ্যা দিয়ে যোগ করুন। হিসাব মিললে 'Print Leave A/c' চাপুন। লাল ব্যালান্স মানে ছুটি পাওনার বেশি নেওয়া হয়েছে। এটি ঐচ্ছিক।</div></span></h2>
+<details class="card ix-opt" id="leaveArea">
+<summary><h2>Leave Account (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রথমে 'Generate rows up to' তারিখ দিয়ে 'Auto-generate' চাপুন, বদলি হয়ে থাকলে নতুন স্কুলে যোগদানের তারিখ যোগ করুন। তারপর নেওয়া ছুটি (ML, HPL, Commuted, LWP) তারিখ বা দিনসংখ্যা দিয়ে যোগ করুন। হিসাব মিললে 'Print Leave A/c' চাপুন। লাল ব্যালান্স মানে ছুটি পাওনার বেশি নেওয়া হয়েছে। এটি ঐচ্ছিক।</div></span></h2></summary>
 <div class="muted">Uses your name, designation and Date of Joining from the form above. Earned Leave and HPL are credited at 15 days per full year (EL capped at 365 days, HPL credit at 60 days). Add your leave, check the table, then print the Leave A/c on A4 landscape. Leave you enter is also sent to the school office with your submission.</div>
 <h3>1. Period-of-duty rows</h3>
 <div class="grid-inputs">
@@ -630,7 +632,7 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <h3>4. Leave taken &mdash; synopsis</h3>
 <div id="synopsisPanel" style="font-size:.82rem"></div>
 <div class="btn-group"><button type="button" class="big" onclick="lvPrint()">Print Leave A/c (A4 Landscape)</button></div>
-</div>
+</details>
 
 <div class="card" id="submitArea">
 <h2>Verify &amp; submit<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সব তথ্য ও টেবিল সার্ভিস বুকের সঙ্গে মিলিয়ে নিশ্চিত হলে ঘোষণায় টিক দিন, তারপর 'Submit to school' চাপুন। জমা দেওয়ার পর যে রেফারেন্স নম্বর দেখাবে তার স্ক্রিনশট রাখুন। ভুল ধরা পড়লে একই ফোন থেকে সংশোধন করে আবার Submit করলে একই রেকর্ড আপডেট হবে। জমা না হলে 'Download my file' দিয়ে ফাইল অফিসে পাঠান।</div></span></h2>
@@ -3609,5 +3611,8 @@ applyState = function (st) { _applyStateOrig(st); prevSchools = ((st && st.casPr
 const _refreshAllOrig2 = refreshAll;
 refreshAll = function () { _refreshAllOrig2(); try { const e = $('sbSchoolExtra'); if (e) e.innerHTML = schoolHdrHtml().replace(/^<b>.*?<\/b>(<br>)?/, ''); } catch (x) { } };
 renderPrev();
+</script>
+<script>
+document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('details>summary .gh')) e.preventDefault(); }, true);
 </script>
 </body></html>
