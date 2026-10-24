@@ -54,6 +54,39 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
  table{font-size:9pt}tr{page-break-inside:avoid}
 }
 /* ===== Pay slip + Leave A/c additions ===== */
+#itaxSheet{display:none}
+#itaxCard{display:block}
+#itaxCard>summary{cursor:pointer;color:var(--pri)}
+.ix-results{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.ix-box{flex:1;min-width:240px;padding:12px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;position:relative}
+.ix-box.rec{border-color:#16a34a;background:#f0fdf4}
+.ix-badge{position:absolute;top:-9px;right:10px;background:#16a34a;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px}
+.ix-bt{font-weight:700;margin-bottom:8px}
+.ix-rr{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px;color:#475569}
+.ix-tot{border-top:1px dashed #cbd5e1;padding-top:6px;margin-top:6px;font-weight:700;color:#0f172a}
+.ix-box.rec .ix-tot span:last-child{color:#15803d}
+.ix-stmt{margin-top:16px;font-size:12px;color:#0f172a}
+.ix-title{background:#1e3a8a;color:#fff;font-weight:700;text-align:center;padding:7px;border-radius:4px 4px 0 0}
+.ix-title.old{background:#475569}
+table.ix-tbl{width:100%;border-collapse:collapse;font-size:12px;border:1px solid #cbd5e1;border-top:0}
+table.ix-tbl td{border:0;border-bottom:1px solid #f1f5f9;padding:4px 8px}
+table.ix-tbl td:first-child{width:24px;color:#64748b;white-space:nowrap}
+table.ix-tbl td:last-child{text-align:right;white-space:nowrap}
+table.ix-tbl tr.s td:nth-child(2){padding-left:18px;color:#64748b}
+table.ix-tbl tr.h td{font-weight:700;background:#f8fafc;color:#1e3a8a}
+table.ix-tbl tr.t td{font-weight:700;border-top:2px solid #e2e8f0}
+table.ix-tbl tr.f td{font-weight:700;color:#b91c1c;font-size:13px}
+.ix-decl{border:1px solid #cbd5e1;border-top:0;padding:10px 12px 14px;line-height:1.6}
+.ix-sigrow{display:flex;justify-content:space-between;margin-top:34px}
+.ix-sig{width:46%;text-align:center}
+.ix-line{border-top:1px solid #475569;padding-top:4px;font-size:10.5px;font-weight:600}
+@media print{
+ #itaxCard{display:none!important}
+ body.print-itax>*:not(#itaxSheet){display:none!important}
+ body.print-itax #itaxSheet{display:block!important}
+ body.print-itax{background:#fff}
+ #itaxSheet .ix-title{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 #slipSheet,#leaveSheet{display:none}
 #slipPreview{overflow-x:auto;background:#e2e8f0;padding:10px;border-radius:8px;margin-top:10px}
 #slipPreview:empty{display:none}
@@ -490,6 +523,31 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 <div class="card" id="salResultCard" style="margin:10px 0 0"><div id="salResult"></div></div>
 </div>
 
+<details class="card" id="itaxCard">
+<summary><b>Income Tax Statement (optional) &mdash; New &amp; Old regime with Capital Gains</b></summary>
+<div class="muted" style="margin-top:6px">Optional. Salary is taken from your generated pay tables (Mar&ndash;Feb salary cycle, same as the school Income Tax calculator) using the DA / HRA / MA rates entered above; you can overwrite any figure. Enter your deductions and capital gains, and the tax under both regimes is compared and a printable statement with declaration is produced.</div>
+<h3>Financial year &amp; income</h3>
+<div class="grid-inputs">
+<div class="form-group"><label>Financial Year</label><select id="itFY" onchange="itFill()"><option value="2026-27">FY 2026-27 (AY 2027-28)</option><option value="2025-26">FY 2025-26 (AY 2026-27)</option></select></div>
+<div class="form-group"><label>Gross Salary / Pension (Rs.) <span class="muted" id="itFillNote"></span></label><input type="number" id="itGross" placeholder="Press 'Fill from pay table'"></div>
+<div class="form-group"><label>Bank / FD interest &amp; other income (Rs.)</label><input type="number" id="itOther" placeholder="Leave blank if nil"></div>
+<div class="form-group"><label>Professional Tax (Rs.)</label><input type="number" id="itPT" readonly><label class="inline-check" style="margin-top:3px"><input type="checkbox" id="itPTAuto" checked onchange="itPTMode()"> Auto (WB slab on monthly gross)</label></div>
+<div class="form-group"><label>PAN (blank = use PAN of pay slip box)</label><input type="text" id="itPan" maxlength="10" style="text-transform:uppercase"></div>
+</div>
+<h3>Chapter VI-A deductions (Old regime only)</h3>
+<div class="grid-inputs" id="itDedGrid"></div>
+<h3>Capital gains &amp; loss adjustment</h3>
+<div class="grid-inputs">
+<div class="form-group"><label>STCG u/s 111A (Rs.)</label><input type="number" id="itSTCG" placeholder="Leave blank if nil"></div>
+<div class="form-group"><label>Short-term loss STCL (Rs.)</label><input type="number" id="itSTCL" placeholder="Leave blank if nil"></div>
+<div class="form-group"><label>LTCG u/s 112A (Rs.)</label><input type="number" id="itLTCG" placeholder="Leave blank if nil"></div>
+</div>
+<div class="btn-group"><button type="button" class="btn-print" onclick="itFill()">Fill salary from pay table</button><button type="button" class="big" onclick="itCalc()">Calculate Income Tax</button></div>
+<div id="itMsg" class="muted"></div>
+<div class="ix-results" id="itResults"></div>
+<div id="itStatements"></div>
+</details>
+
 <div class="card" id="slipCard">
 <h2>Pay slip (same layout as the iOSMS pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাস বেছে 'Generate Pay Slip' চাপলে নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়করসহ পে-স্লিপ তৈরি হবে। Employee ID, PAN, ব্যাংক অ্যাকাউন্ট নম্বর ও IFS কোড আগে লিখে নিন। প্রিন্ট বা PDF করতে নিচের Print বোতাম চাপুন।</div></span></h2>
 <div class="muted">Press <b>Generate Pay Slip</b>. Before the slip is made, the tool puts the <b>basic, DA, HRA, MA, Professional Tax, Income-tax (average monthly TDS) and GPF</b> for the selected month by the West Bengal rule in force in that month (PT slabs change from 01-10-2026; DA/HRA/MA use the rates entered above). Fill Employee ID, PAN, Bank A/c no. and IFS code in the box above. You can edit any figure and press the button again.</div>
@@ -577,7 +635,7 @@ function doGet(e){
 </div>
 <div style="display:none"><table><tbody id="sbPrintTableBody90"></tbody><tbody id="sbPrintTableBody98"></tbody><tbody id="sbPrintTableBody09"></tbody><tbody id="sbPrintTableBody19"></tbody></table><div id="sbRopa90Block"></div><div id="sbRopa98Block"></div><div id="sbRopa09Block"></div></div>
 
-<div id="slipSheet"></div><div id="leaveSheet"></div>
+<div id="slipSheet"></div><div id="leaveSheet"></div><div id="itaxSheet"></div>
 <script>
     const matrixData19 = {
     // ROPA-2019 matrix cells are 1-based for display. Example:
@@ -2758,7 +2816,7 @@ function renderLwp() {
 /* ---------- save / restore form ---------- */
 function collectState() {
     const fields = {};
-    document.querySelectorAll('#formArea input[id], #formArea select[id], #formArea textarea[id], #salArea input[id], #salArea select[id], #leaveArea input[id], #leaveArea select[id]').forEach(el => { fields[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
+    document.querySelectorAll('#formArea input[id], #formArea select[id], #formArea textarea[id], #itaxCard input[id], #itaxCard select[id], #salArea input[id], #salArea select[id], #leaveArea input[id], #leaveArea select[id]').forEach(el => { fields[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
     const promoEvents = Array.from(document.querySelectorAll('#promoExtraRows .promo-extra-row')).map(r => ({ kind: r.querySelector('.pe-type').value, date: r.querySelector('.pe-date').value, gp: r.querySelector('.pe-gp').value, desig: r.querySelector('.pe-desig').value }));
     return { version: 5, savedAt: new Date().toISOString(), staffName: V('staffName'), fields: fields, promoEvents: promoEvents, periods: JSON.parse(JSON.stringify(lvPeriods)), masterMlEntries: JSON.parse(JSON.stringify(masterMlEntries)), transferEvents: JSON.parse(JSON.stringify(lvTransfers)), casPriorSchools: [] };
 }
@@ -2951,7 +3009,7 @@ function buildPayload() {
         staff: { name: V('staffName'), designation: V('designation'), school: V('schoolName'), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', status: V('empStatus') },
         current: c,
         pension: { name: V('staffName'), designation: V('designation'), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', lastBasicPay: c.basic || 0, da: window.SAL ? window.SAL.rule.da : 0, daPercent: window.SAL ? window.SAL.rule.pct : 0, hra: window.SAL ? window.SAL.rule.hra : 0, medicalAllowance: window.SAL ? window.SAL.rule.ma : 0 },
-        salaryCheck: window.SAL || null,
+        salaryCheck: window.SAL || null, itax: window.ITX || null,
         slip: { month: V('slipMonth'), basic: N('slipBasic'), da: N('slipDA'), hra: N('slipHRA'), ma: N('slipMA'), other: N('slipOther'), gpf: N('slipGPF'), ptax: N('slipPT'), itax: N('slipIT'), otherDed: N('slipOD'), pfLoan: N('slipPFL'), overDrawn: N('slipOVD'), empId: V('slipEmpId'), pan: V('slipPan'), acNo: V('slipAcNo'), ifsc: V('slipIfsc') },
         verified: { declaration: $('chkAll').checked, at: new Date().toISOString() },
         dashboard: collectState(),
@@ -3331,6 +3389,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (e.target && e.target.closest && e.target.closest('#leaveArea') && id === 'leaveUpToDate') { e.target.dataset.userSet = '1'; }
         if (id === 'asOfDate' && window.CUR) refreshAll();
         if (e.target && e.target.closest && e.target.closest('#formArea')) autosave();
+        if (e.target && e.target.closest && e.target.closest('#itaxCard')) autosave();
     });
     document.addEventListener('input', e => { if (e.target && e.target.closest && e.target.closest('#salArea')) verifySalary(); });
     $('chkAll').addEventListener('change', updateSubmitBtn);
@@ -3338,4 +3397,149 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
+<script>
+/* ===== Optional Income Tax statement (ported from the school Income Tax calculator) ===== */
+const IT_DED = [
+ ['dGPF','GPF'],['dGIS','GIS'],['dLIC','LIC / Insurance'],['dHBLPrincipal','HBL Principal'],['dNSCNew','NSC (New)'],['dNSCInterest','NSC (Interest)'],
+ ['dPPF','PPF / PLI'],['dTuition','Tuition Fees (2 children)'],['dSukanya','Sukanya Samriddhi'],['d80CCD1','80CCD(1) NPS'],['d80CCD1B','80CCD(1B) NPS (max 50,000)'],
+ ['d80D','80D Mediclaim (max 25,000)'],['d80G','80G Donation'],['d80DD','80DD Dependent PH (max 75,000)'],['d80U','80U PH Employee (max 75,000)'],
+ ['d80DDB','80DDB Medical (max 40,000)'],['dHBLInterest','HBL Interest 24(B) (max 2 Lakh)'],['dRelief89','Tax Relief u/s 89(1)'],['dOther','Other Deduction (manual)']
+];
+(function(){ const g = document.getElementById('itDedGrid'); if (g) g.innerHTML = IT_DED.map(d => '<div class="form-group"><label>' + d[1] + ' (Rs.)</label><input type="number" id="it_' + d[0] + '" value="0"></div>').join(''); })();
+const itn = id => { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; };
+const itR = v => 'Rs.' + Math.round(v).toLocaleString('en-IN');
+function itFYStart() { return parseInt(document.getElementById('itFY').value.slice(0, 4), 10); }
+function itMonths() { const a = itFYStart(); const out = []; for (let m = 0; m < 12; m++) out.push(new Date(a, 2 + m, 1)); return out; }   /* Mar a ... Feb a+1 */
+function itPTAnnual(gross) { const mg = gross / 12; return itMonths().reduce((s, d) => s + ptFor(mg, d), 0); }
+function itPTMode() { document.getElementById('itPT').readOnly = document.getElementById('itPTAuto').checked; itCalc(); }
+function itFill() {
+    const note = document.getElementById('itFillNote');
+    if (!window.CUR) { note.textContent = '(generate pay tables first)'; document.getElementById('itMsg').textContent = 'Generate the pay tables first, then press Fill salary from pay table.'; return; }
+    const dor = getDOR(); let g = 0, n = 0;
+    itMonths().forEach(d => { if (dor && d > dor) return; const mp = monthPay(d); if (mp.basic) { g += mp.gross; n++; } });
+    if (!n) { note.textContent = '(no pay rows in this FY)'; return; }
+    document.getElementById('itGross').value = Math.round(g);
+    note.textContent = '(' + n + ' months, Mar-' + itFYStart() + ' to Feb-' + (itFYStart() + 1) + ')';
+    itCalc();
+}
+function itSlabNew(t) {
+    let x = 0;
+    if (t > 400000) {
+        x += Math.min(t, 800000) - 400000 > 0 ? (Math.min(t, 800000) - 400000) * 0.05 : 0;
+        if (t > 800000) x += (Math.min(t, 1200000) - 800000) * 0.10;
+        if (t > 1200000) x += (Math.min(t, 1600000) - 1200000) * 0.15;
+        if (t > 1600000) x += (Math.min(t, 2000000) - 1600000) * 0.20;
+        if (t > 2000000) x += (Math.min(t, 2400000) - 2000000) * 0.25;
+        if (t > 2400000) x += (t - 2400000) * 0.30;
+    }
+    return x;
+}
+function itSlabOld(t) {
+    let x = 0;
+    if (t > 250000) { x += (Math.min(t, 500000) - 250000) * 0.05; if (t > 500000) x += (Math.min(t, 1000000) - 500000) * 0.20; if (t > 1000000) x += (t - 1000000) * 0.30; }
+    return x;
+}
+function itCalc() {
+    const salary = itn('itGross'), other = itn('itOther');
+    if (document.getElementById('itPTAuto').checked) document.getElementById('itPT').value = itPTAnnual(salary);
+    const pTax = itn('itPT'), hbl = Math.min(itn('it_dHBLInterest'), 200000), relief = itn('it_dRelief89');
+    const D = {}; IT_DED.forEach(d => D[d[0]] = itn('it_' + d[0]));
+    const sum80C = D.dGPF + D.dGIS + D.dLIC + D.dHBLPrincipal + D.dNSCNew + D.dNSCInterest + D.dPPF + D.dTuition + D.dSukanya + D.d80CCD1;
+    const c80 = Math.min(150000, sum80C);
+    const otherVIA = Math.min(D.d80D, 25000) + D.d80G + Math.min(D.d80DD, 75000) + Math.min(D.d80U, 75000) + Math.min(D.d80DDB, 40000) + Math.min(D.d80CCD1B, 50000) + D.dOther;
+    const via = c80 + otherVIA;
+    /* capital gains with STCL set-off */
+    const rawS = itn('itSTCG'), loss = itn('itSTCL'), rawL = itn('itLTCG');
+    let rem = loss, netS = rawS, netL = rawL;
+    if (rem > 0) { if (rawS >= rem) { netS = rawS - rem; rem = 0; } else { netS = 0; rem -= rawS; } }
+    if (rem > 0) { if (rawL >= rem) { netL = rawL - rem; rem = 0; } else { netL = 0; rem -= rawL; } }
+    const taxS = netS * 0.20, taxL = Math.max(0, netL - 125000) * 0.125, cg = taxS + taxL;
+    /* New regime */
+    const stdN = salary > 0 ? 75000 : 0, headN = Math.max(0, salary - stdN), gtiN = Math.max(0, headN + other - hbl), tiN = gtiN;
+    const fullN = itSlabNew(tiN); let finN = fullN;
+    if (tiN <= 1200000) finN = 0; else if (tiN < 1275000) { const ex = tiN - 1200000; if (fullN > ex) finN = ex; }
+    const rebN = fullN - finN, cessN = finN * 0.04, totN = finN + cessN, balN = Math.max(0, totN - relief), grandN = Math.max(0, (finN + cg) * 1.04 - relief);
+    /* Old regime */
+    const stdO = salary > 0 ? 50000 : 0, headO = Math.max(0, salary - pTax - stdO), gtiO = Math.max(0, headO + other - hbl), tiO = Math.max(0, gtiO - via);
+    const fullO = itSlabOld(tiO); let finO = fullO; if (tiO <= 500000) finO = 0;
+    const rebO = fullO - finO, cessO = finO * 0.04, totO = finO + cessO, balO = Math.max(0, totO - relief), grandO = Math.max(0, (finO + cg) * 1.04 - relief);
+    const newBetter = grandN <= grandO;
+    const box = (title, rec, ti, slab, grand) => '<div class="ix-box' + (rec ? ' rec' : '') + '">' + (rec ? '<span class="ix-badge">Tax Saver</span>' : '') + '<div class="ix-bt">' + title + '</div>' +
+        '<div class="ix-rr"><span>Taxable income:</span><span>' + itR(ti) + '</span></div><div class="ix-rr"><span>Slab tax (after rebate):</span><span>' + itR(slab) + '</span></div>' +
+        '<div class="ix-rr"><span>STCG (20%):</span><span>' + itR(taxS) + '</span></div><div class="ix-rr"><span>LTCG (12.5%):</span><span>' + itR(taxL) + '</span></div>' +
+        '<div class="ix-rr ix-tot"><span>Total tax:</span><span>' + itR(grand) + '</span></div></div>';
+    document.getElementById('itResults').innerHTML = box('New Tax Regime', newBetter, tiN, finN, grandN) + box('Old Tax Regime', !newBetter, tiO, finO, grandO);
+    const empName = V('staffName'), empPAN = (V('itPan') || V('slipPan')).toUpperCase(), empDOB = V('dob') ? formatDate(parseISO(V('dob'))) : '', empDesig = V('designation');
+    const fyLabel = document.getElementById('itFY').value;
+    const P = { fyLabel, salary, pTax, other, hbl, empName, empPAN, empDOB, empDesig, relief, cg };
+    const sN = Object.assign({}, P, { isOld: false, stdDed: stdN, head: headN, gti: gtiN, ti: tiN, full: fullN, reb: rebN, cess: cessN, tot: totN, bal: balN, grand: grandN });
+    const sO = Object.assign({}, P, { isOld: true, stdDed: stdO, head: headO, gti: gtiO, ti: tiO, full: fullO, reb: rebO, cess: cessO, tot: totO, bal: balO, grand: grandO, D, c80, via });
+    document.getElementById('itStatements').innerHTML = '<div class="btn-group noprint"><button type="button" class="btn-print" onclick="itPrint(\'N\')">Print New Regime Statement</button><button type="button" class="btn-print" onclick="itPrint(\'O\')">Print Old Regime Statement</button></div>' + itStmt('NEW TAX REGIME', sN, 'ixWrapN') + itStmt('OLD TAX REGIME', sO, 'ixWrapO');
+    window.ITX = { fy: fyLabel, salary, other, pTax, newTax: Math.round(grandN), oldTax: Math.round(grandO), better: newBetter ? 'new' : 'old', capGainsTax: Math.round(cg) };
+    document.getElementById('itMsg').textContent = '';
+}
+function itRow(sl, label, val, cls) { return '<tr class="' + (cls || '') + '"><td>' + (sl || '') + '</td><td>' + label + '</td><td>' + ((val === null || val === undefined) ? '' : itR(val)) + '</td></tr>'; }
+function itStmt(regime, p, id) {
+    let r = '';
+    r += itRow('', 'PARTICULARS FOR COMPUTATION OF INCOME TAX FY ' + p.fyLabel + ' [' + regime + ']', null, 'h');
+    r += itRow(1, 'a) Income from Salaries (Current Employer)', p.salary);
+    r += itRow('', 'b) Income from Salaries (Previous Employer)', 0, 's');
+    r += itRow(2, 'House Rent Allowance (Exempt)', 0);
+    r += itRow(3, 'Gross Salary [1(a+b)-2]', p.salary);
+    r += itRow(4, 'Less: a) Entertainment/Dress Allowance', 0, 's');
+    r += itRow('', 'c) Professional Tax u/s 16(iii)' + (p.isOld ? '' : ' (Not allowed under New Regime)'), p.isOld ? p.pTax : 0, 's');
+    r += itRow(5, 'Standard Deduction u/s 16(ia) (Rs.' + p.stdDed.toLocaleString('en-IN') + ')', p.stdDed);
+    r += itRow(6, 'Income from Head Salaries (3-4-5)', p.head);
+    r += itRow(7, 'Income from Other Sources (Bank/FD Interest)', p.other);
+    r += itRow(8, 'Less: Interest payable on H.B. Loan u/s 24(B) (Max 2 Lakh)', p.hbl);
+    r += itRow(9, 'Gross Total Income (6+7-8)', p.gti, 't');
+    if (p.isOld) {
+        const D = p.D;
+        r += itRow(10, 'Deduction under VIA u/s 80C:', null);
+        [['a) GPF', 'dGPF'], ['b) GIS', 'dGIS'], ['c) LIC / Insurance', 'dLIC'], ['d) HBL Loan (Principal)', 'dHBLPrincipal'], ['e) NSC (New)', 'dNSCNew'], ['f) NSC (Interest)', 'dNSCInterest'], ['g) PPF / PLI', 'dPPF'], ['h) Tuition Fees for two children', 'dTuition'], ['i) Sukanya Samriddhi Yojana', 'dSukanya'], ['j) 80CCD(1)', 'd80CCD1']].forEach(x => r += itRow('', x[0], D[x[1]], 's'));
+        r += itRow(11, 'Total Deduction u/s 80C,80CCC&80CCD(1) (Max Rs.1.5 Lakh)', p.c80);
+        r += itRow(12, 'Other Deduction Chapter VIA:', null);
+        r += itRow('', 'a) 80CCD(1B) - NPS (Max 50,000)', Math.min(D.d80CCD1B, 50000), 's');
+        r += itRow('', 'b) 80D - Mediclaim (Max 25,000)', Math.min(D.d80D, 25000), 's');
+        r += itRow('', 'c) 80G - Donation to Charitable Org', D.d80G, 's');
+        r += itRow('', 'd) 80DD - Dependent PH (Max 75,000)', Math.min(D.d80DD, 75000), 's');
+        r += itRow('', 'e) 80U - PH Employee (Max 75,000)', Math.min(D.d80U, 75000), 's');
+        r += itRow('', 'f) 80DDB - Medical Treatment (Max 40,000)', Math.min(D.d80DDB, 40000), 's');
+        r += itRow('', 'g) Other Deduction (Manual Entry)', D.dOther, 's');
+        r += itRow(13, 'Total Deduction Chapter VIA (11+12)', p.via, 't');
+    } else {
+        r += itRow(10, 'Deduction under VIA u/s 80C, 80CCC, 80D, 80G etc.', null);
+        r += itRow('', 'Not allowed under New Tax Regime', 0, 's');
+        r += itRow(13, 'Total Deduction Chapter VIA (Not Applicable)', 0, 't');
+    }
+    r += itRow(14, 'Taxable Income (9-13)', p.ti, 't');
+    r += itRow(15, 'Tax Payable (as per slab)', p.full);
+    r += itRow(16, 'Tax Credit / Rebate / Marginal Relief u/s 87A', p.reb);
+    r += itRow(17, 'Edn. Cess + Health Cess @ 4%', p.cess);
+    r += itRow(18, 'Total Amount of Tax Payable (15-16+17)', p.tot, 't');
+    r += itRow(19, 'Tax Relief u/s 89(1)', p.relief);
+    r += itRow(20, 'Balance Tax Payable on Salary Income (18-19)', p.bal, 't');
+    r += itRow('', 'Add: Tax on Capital Gains (STCG @20% + LTCG @12.5%)', p.cg, 's');
+    r += itRow('', 'GRAND TOTAL TAX PAYABLE (incl. Capital Gains)', p.grand, 'f');
+    const nm = esc(p.empName || '');
+    return '<div class="ix-stmt" id="' + id + '"><div class="ix-title' + (p.isOld ? ' old' : '') + '">' + regime + ' - Detailed Statement</div><table class="ix-tbl"><tbody>' + r + '</tbody></table>' +
+        '<div class="ix-decl"><div><b>Name:</b> ' + (nm || '&mdash;') + '</div><div><b>PAN:</b> ' + (esc(p.empPAN) || '&mdash;') + '</div><div><b>D.O.B.:</b> ' + (esc(p.empDOB) || '&mdash;') + '</div><div><b>Designation:</b> ' + (esc(p.empDesig) || '&mdash;') + '</div>' +
+        '<p style="margin:10px 0 18px">I, <b>' + (nm || '________________________') + '</b>, declare that this statement is true to the best of my information and belief.</p><div><b>Date:</b> ______________________</div>' +
+        '<div class="ix-sigrow"><div class="ix-sig"><div class="ix-line">Signature (Employee)</div></div><div class="ix-sig"><div class="ix-line">Checked &amp; Verified by the Head of the Institution</div><div style="font-size:9.5px;color:#64748b">(With Seal &amp; Sign)</div></div></div></div></div>';
+}
+function itPrint(which) {
+    const el = document.getElementById(which === 'N' ? 'ixWrapN' : 'ixWrapO'); if (!el) return;
+    const sh = document.getElementById('itaxSheet'); sh.innerHTML = el.outerHTML.replace(/ id="ixWrap[NO]"/, '');
+    printMode('print-itax', '@page{size:A4 portrait;margin:10mm}');
+}
+function itInit() {
+    const t = new Date(), a = t.getMonth() >= 3 ? t.getFullYear() : t.getFullYear() - 1;
+    const sel = document.getElementById('itFY'); if (sel && !sel.dataset.set) { sel.value = (a + '-' + String(a + 1).slice(2)); if (!sel.value) sel.value = '2026-27'; sel.dataset.set = '1'; }
+    if (!document.getElementById('itGross').value) itFill();
+}
+document.addEventListener('change', e => { if (e.target && e.target.closest && e.target.closest('#itaxCard') && e.target.id !== 'itFY') { try { itCalc(); } catch (x) { } } });
+const _refreshAllOrig = refreshAll;
+refreshAll = function () { _refreshAllOrig(); try { itInit(); } catch (e) { } };
+</script>
+
 </body></html>
