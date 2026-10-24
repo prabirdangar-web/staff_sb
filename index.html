@@ -36,6 +36,9 @@ table.mini td.r,td.r{text-align:right}
 .chip2{display:inline-block;background:#e2e8f0;border-radius:99px;padding:2px 4px 2px 10px;font-size:.8rem;margin:2px}.chip2 button{padding:0 7px;border-radius:99px}
 .note-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:10px;font-size:.84rem}.note-grid>div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px}
 .promo-extra-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin:6px 0;padding:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px}
+#adminArea{display:none}#adminArea.on{display:block}
+#admLoginCard{display:none;border:2px solid var(--pri)}#admLoginCard.on{display:block}
+table.steps td{vertical-align:top;font-size:.84rem}table.steps td.n{width:34px;text-align:center;font-weight:800;color:var(--pri);background:#eef2ff}table.steps td.s{width:34%;font-weight:600}table.steps td.i{color:#334155}table.steps .bn{margin-top:6px;padding:6px 8px;background:#f0fdf4;border-left:3px solid #15803d;color:#14532d;line-height:1.7}
 textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 .printonly{display:none}
 @media print{
@@ -532,11 +535,16 @@ textarea.code{font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;height:220px}
 </div>
 </div>
 
-<details class="card" id="adminArea"><summary><b>Admin (school office only)</b></summary>
+<div class="card" id="admLoginCard"><h2>Admin login (school office)</h2>
+<div class="muted">Log in with the admin key set in your Google Apps Script (same office login as the SB portal). Staff do not see this section.</div>
+<div class="grid-inputs"><div class="form-group"><label>Submission web-app URL (/exec)</label><input type="text" id="admUrlLogin" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="form-group"><label>Admin key</label><input type="password" id="admKeyLogin" autocomplete="off" onkeydown="if(event.key==='Enter')admLogin()"></div><div class="form-group"><label>&nbsp;</label><button type="button" class="big" onclick="admLogin()">Admin login</button></div></div>
+<div id="admLoginMsg" class="muted"></div></div>
+<details class="card" id="adminArea" open><summary><b>Admin (school office only)</b></summary>
+<div class="btn-group"><span class="okt">&#10003; Logged in as Admin</span><button type="button" onclick="admLogout()">Log out</button></div>
 <div class="grid-inputs"><div class="form-group"><label>Submission web-app URL (/exec)</label><input type="text" id="admUrl" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="form-group"><label>Admin key</label><input type="password" id="admKey"></div><div class="form-group"><label>&nbsp;</label><button type="button" onclick="admFetch()">Fetch submissions</button></div></div>
 <div id="admList" class="muted"></div>
 <h3>One-time setup (Google Apps Script)</h3>
-<ol class="muted"><li>Create a Google Sheet &rarr; Extensions &rarr; Apps Script &rarr; paste the code below.</li><li>Project Settings &rarr; Script properties &rarr; add <code>ADMIN_KEY</code> with your secret key.</li><li>Deploy &rarr; New deployment &rarr; Web app &rarr; Execute as <i>Me</i>, access <i>Anyone</i> &rarr; copy the /exec URL.</li><li>Paste the URL above (and into <code>SUBMIT_URL</code> in this file so staff need not enter it), then share this page with staff.</li></ol>
+<table class="steps"><thead><tr><th>#</th><th>Step</th><th>What to do (instruction) / কী করবেন</th></tr></thead><tbody><tr><td class="n">1</td><td class="s">Create a Google Sheet &rarr; Extensions &rarr; Apps Script &rarr; paste the code below.</td><td class="i">Open sheets.google.com with the school's Google account and make a blank sheet (name it e.g. <i>TFHS Pay Submissions</i>). Click <b>Extensions &rarr; Apps Script</b>. Delete any code already in the editor, press <b>Copy code</b> below and paste it, then click the Save (disk) icon.<div class="bn"><b>বাংলা নির্দেশনা:</b> সরকারি/স্কুলের Google অ্যাকাউন্ট দিয়ে sheets.google.com খুলে একটি ফাঁকা Google Sheet তৈরি করুন (নাম দিন যেমন <i>TFHS Pay Submissions</i>)। উপরের মেনু থেকে <b>Extensions &rarr; Apps Script</b> চাপুন। এডিটরে আগে থেকে কোনো কোড থাকলে মুছে দিন, নিচের <b>Copy code</b> বোতাম চেপে কোড কপি করে সেখানে পেস্ট করুন, তারপর Save (ডিস্ক) আইকনে ক্লিক করুন।</div></td></tr><tr><td class="n">2</td><td class="s">Project Settings &rarr; Script properties &rarr; add <code>ADMIN_KEY</code> with your secret key.</td><td class="i">In Apps Script click the gear icon (<b>Project Settings</b>), scroll to <b>Script properties</b> &rarr; <b>Add script property</b>. Property = <code>ADMIN_KEY</code>, Value = a secret password only the office knows. This same key is what you type in <b>Admin login</b> on this page. Click Save.<div class="bn"><b>বাংলা নির্দেশনা:</b> Apps Script-এ বাঁদিকের গিয়ার আইকনে (<b>Project Settings</b>) ক্লিক করুন, নিচে নেমে <b>Script properties</b> &rarr; <b>Add script property</b> চাপুন। Property-র ঘরে লিখুন <code>ADMIN_KEY</code> এবং Value-র ঘরে একটি গোপন পাসওয়ার্ড দিন যা শুধু অফিস জানবে। এই পাসওয়ার্ডটিই এই পেজে <b>Admin login</b>-এ দিতে হবে। তারপর Save করুন।</div></td></tr><tr><td class="n">3</td><td class="s">Deploy &rarr; New deployment &rarr; Web app &rarr; Execute as <i>Me</i>, access <i>Anyone</i> &rarr; copy the /exec URL.</td><td class="i">Click <b>Deploy &rarr; New deployment</b>, choose type <b>Web app</b>. Set <i>Execute as</i> = <b>Me</b> and <i>Who has access</i> = <b>Anyone</b>. Click Deploy, allow the permissions asked, then copy the <b>Web app URL</b> ending in <code>/exec</code>. After any later code change use <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b>.<div class="bn"><b>বাংলা নির্দেশনা:</b> <b>Deploy &rarr; New deployment</b> চাপুন, ধরন বেছে নিন <b>Web app</b>। <i>Execute as</i> = <b>Me</b> এবং <i>Who has access</i> = <b>Anyone</b> দিন। Deploy চাপুন, চাওয়া অনুমতিগুলি (Allow) দিন, তারপর <code>/exec</code> দিয়ে শেষ হওয়া <b>Web app URL</b> কপি করুন। পরে কোড বদলালে <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b> করতে হবে।</div></td></tr><tr><td class="n">4</td><td class="s">Paste the URL above (and into <code>SUBMIT_URL</code> in this file so staff need not enter it), then share this page with staff.</td><td class="i">Paste the /exec URL in the URL box above. Also paste it into <code>const SUBMIT_URL = '...'</code> in this HTML file (search for SUBMIT_URL) and re-upload the file to your site, so staff never need to type it. Then share the page link with staff. Staff submissions will appear in the Google Sheet and here after <b>Fetch submissions</b>.<div class="bn"><b>বাংলা নির্দেশনা:</b> কপি করা /exec URL উপরের URL-এর ঘরে পেস্ট করুন। এছাড়া এই HTML ফাইলের মধ্যে <code>const SUBMIT_URL = '...'</code> লাইনটি (SUBMIT_URL লিখে সার্চ করুন) খুঁজে সেখানেও URL বসান এবং ফাইলটি আপনার সাইটে আবার আপলোড করুন, যাতে শিক্ষক-কর্মীদের URL লিখতে না হয়। তারপর পেজের লিংক সবাইকে পাঠান। জমা দেওয়া তথ্য Google Sheet-এ এবং এখানে <b>Fetch submissions</b> চাপলে দেখা যাবে।</div></td></tr><tr><td class="n">5</td><td class="s">Review submissions (daily use)</td><td class="i">Log in as Admin &rarr; press <b>Fetch submissions</b> &rarr; use <b>Load &amp; review</b> to open a staff member's data and tables, <b>JSON</b> to download it, and <b>Mark imported</b> once it is entered in the main dashboard / service book.<div class="bn"><b>বাংলা নির্দেশনা:</b> Admin হিসেবে লগইন করুন &rarr; <b>Fetch submissions</b> চাপুন &rarr; কারও তথ্য ও টেবিল দেখতে <b>Load &amp; review</b>, ডাউনলোড করতে <b>JSON</b>, এবং মূল ড্যাশবোর্ড/সার্ভিস বুকে এন্ট্রি হয়ে গেলে <b>Mark imported</b> চাপুন।</div></td></tr></tbody></table>
 <textarea class="code" id="gasCode" readonly onclick="this.select()">var SHEET='Submissions';
 function sh_(){var ss=SpreadsheetApp.getActiveSpreadsheet(),s=ss.getSheetByName(SHEET);if(!s){s=ss.insertSheet(SHEET);s.appendRow(['Ref','Name','Designation','Submitted','Status','Basic','Payload']);}return s;}
 function out_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);}
@@ -2966,10 +2974,28 @@ async function submitPay() {
 
 /* ---------- admin: fetch submissions ---------- */
 let admRows = [];
+let admOK = false;
+function admShow(on) { admOK = !!on; $('adminArea').classList.toggle('on', admOK); $('admLoginCard').classList.toggle('on', !admOK && /admin/i.test(location.hash)); }
+async function admLogin() {
+    const url = V('admUrlLogin') || SUBMIT_URL, key = V('admKeyLogin'), m = $('admLoginMsg');
+    if (!url || !key) { m.className = 'err'; m.textContent = 'Enter the web-app URL and the admin key.'; return; }
+    m.className = 'muted'; m.textContent = 'Checking...';
+    try {
+        const r = await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=list&key=' + encodeURIComponent(key)), j = await r.json();
+        if (j.error) { m.className = 'err'; m.textContent = 'Login failed: ' + j.error; return; }
+        try { sessionStorage.setItem('TFHS_ADM_URL', url); sessionStorage.setItem('TFHS_ADM_KEY', key); } catch (e) { }
+        $('admUrl').value = url; $('admKey').value = key; $('admKeyLogin').value = '';
+        m.textContent = ''; admShow(true); admFetch(); $('adminArea').scrollIntoView({ behavior: 'smooth' });
+    } catch (e) { m.className = 'err'; m.textContent = 'Could not reach the server: ' + e.message; }
+}
+function admLogout() {
+    try { sessionStorage.removeItem('TFHS_ADM_URL'); sessionStorage.removeItem('TFHS_ADM_KEY'); } catch (e) { }
+    $('admKey').value = ''; $('admList').innerHTML = ''; admRows = []; admShow(false); location.hash = '';
+}
 async function admFetch() {
+    if (!admOK) return;
     const url = V('admUrl'), key = V('admKey'), box = $('admList');
     if (!url || !key) { box.innerHTML = '<div class="err">Enter the web-app URL and admin key.</div>'; return; }
-    try { localStorage.setItem('TFHS_PAY_SUBMIT_URL', url); localStorage.setItem('TFHS_PAY_ADMKEY', key); } catch (e) { }
     box.textContent = 'Fetching...';
     try {
         const r = await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=list&key=' + encodeURIComponent(key)), j = await r.json();
@@ -2978,10 +3004,10 @@ async function admFetch() {
         box.innerHTML = admRows.length ? '<table class="mini"><thead><tr><th>Ref</th><th>Name</th><th>Basic</th><th>Status</th><th></th></tr></thead><tbody>' + admRows.map((x, i) => '<tr><td>' + esc(x.ref) + '</td><td>' + esc(x.name) + '</td><td class="r">' + esc((x.payload && x.payload.current && x.payload.current.basic) || '') + '</td><td>' + esc(x.status) + '</td><td><button type="button" onclick="admLoad(' + i + ')">Load &amp; review</button> <button type="button" onclick="admDl(' + i + ')">JSON</button> <button type="button" onclick="admMark(' + i + ')">Mark imported</button></td></tr>').join('') + '</tbody></table><button type="button" style="margin-top:6px" onclick="admDlAll()">Download all (JSON)</button>' : '<div class="muted">No submissions yet.</div>';
     } catch (e) { box.innerHTML = '<div class="err">Fetch failed: ' + esc(e.message) + '</div>'; }
 }
-function admLoad(i) { const p = admRows[i] && admRows[i].payload; if (!p) return; applyState(p.dashboard); genTables(); $('results').scrollIntoView({ behavior: 'smooth' }); }
-function admDl(i) { download('TFHS_PAY_' + admRows[i].ref + '.json', JSON.stringify(admRows[i].payload, null, 2)); }
-function admDlAll() { download('TFHS_PAY_ALL_' + iso(new Date()) + '.json', JSON.stringify(admRows.map(x => x.payload), null, 2)); }
-async function admMark(i) { const url = V('admUrl'), key = V('admKey'); try { await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=mark&ref=' + encodeURIComponent(admRows[i].ref) + '&key=' + encodeURIComponent(key)); admFetch(); } catch (e) { } }
+function admLoad(i) { if (!admOK) return; const p = admRows[i] && admRows[i].payload; if (!p) return; applyState(p.dashboard); genTables(); $('results').scrollIntoView({ behavior: 'smooth' }); }
+function admDl(i) { if (!admOK) return; download('TFHS_PAY_' + admRows[i].ref + '.json', JSON.stringify(admRows[i].payload, null, 2)); }
+function admDlAll() { if (!admOK) return; download('TFHS_PAY_ALL_' + iso(new Date()) + '.json', JSON.stringify(admRows.map(x => x.payload), null, 2)); }
+async function admMark(i) { if (!admOK) return; const url = V('admUrl'), key = V('admKey'); try { await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=mark&ref=' + encodeURIComponent(admRows[i].ref) + '&key=' + encodeURIComponent(key)); admFetch(); } catch (e) { } }
 function copyGas() { const t = $('gasCode'); t.select(); try { document.execCommand('copy'); } catch (e) { } }
 
 /* ---------- print ---------- */
@@ -3277,12 +3303,15 @@ function slipPrint() { if (!$('slipSheet').innerHTML) { slipGenerate(); } printM
 window.addEventListener('DOMContentLoaded', function () {
     try {
         if (!localStorage.getItem('TFHS_PAY_SUBMIT_URL') && SUBMIT_URL) localStorage.setItem('TFHS_PAY_SUBMIT_URL', SUBMIT_URL);
-        $('admUrl').value = localStorage.getItem('TFHS_PAY_SUBMIT_URL') || ''; $('admKey').value = localStorage.getItem('TFHS_PAY_ADMKEY') || '';
+        $('admUrlLogin').value = SUBMIT_URL || ''; try { localStorage.removeItem('TFHS_PAY_ADMKEY'); } catch (e) { }
+        const su = sessionStorage.getItem('TFHS_ADM_URL'), sk = sessionStorage.getItem('TFHS_ADM_KEY');
+        if (su && sk) { $('admUrl').value = su; $('admKey').value = sk; admShow(true); }
         const saved = localStorage.getItem(STATE_KEY);
         if (saved) { applyState(JSON.parse(saved)); $('suggestNote').textContent = 'Your earlier entries on this device were restored.'; }
         else { toggleRopa90Section(); toggleRopa09Section(); togglePromotionSection(); }
     } catch (e) { }
-    calculateDOR(); renderLwp(); togglePromotionSection(); lvRefresh();
+    calculateDOR(); renderLwp(); togglePromotionSection(); lvRefresh(); admShow(admOK);
+    window.addEventListener('hashchange', () => admShow(admOK));
     document.addEventListener('change', e => {
         const id = e.target && e.target.id;
         if (id === 'doj') suggestDefaults();
