@@ -552,7 +552,7 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 
 <details class="card ix-opt" id="salArea" open>
 <summary><h2>Salary &amp; Pay Slip &mdash; as in your pay slip</h2></summary>
-<div class="muted">Choose the month. <b>Basic, DA, HRA, MA, PF (if % given) and P-Tax are filled automatically</b> from your pay table and the West Bengal rates; you may correct any figure. Add <b>Other Allowance only if your pay slip has one</b>, and type your monthly <b>I-Tax</b> if any. <span lang="bn">মাস বাছুন &ndash; বেসিক, DA, HRA, MA ও P-Tax নিজে থেকে বসবে। অন্য ভাতা থাকলে তবেই লিখুন; I-Tax পে-স্লিপ দেখে লিখুন।</span></div>
+<div class="muted">Choose the month. <b>Basic, DA, HRA, MA, PF (if % given), I-Tax and P-Tax are filled automatically</b> from your pay table and the West Bengal rates; you may correct any figure. Add <b>Other Allowance only if your pay slip has one</b>. <b>I-Tax</b> is a simple automatic estimate (new regime, salary only, less Rs.75,000 standard deduction); type your actual monthly amount if your pay slip differs. <span lang="bn">মাস বাছুন &ndash; বেসিক, DA, HRA, MA ও P-Tax নিজে থেকে বসবে। অন্য ভাতা থাকলে তবেই লিখুন; I-Tax পে-স্লিপ দেখে লিখুন।</span></div>
 <div class="grid-inputs">
 <div class="form-group"><label>Pay slip month</label><input type="month" id="slipMonth"></div>
 <div class="form-group"><label>Employee ID</label><input type="text" id="slipEmpId"></div>
@@ -571,7 +571,7 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <h3>Deductions</h3>
 <div class="grid-inputs">
 <div class="form-group"><label>PF (auto if PF % is set below, else type)</label><input type="number" id="slipGPF"></div>
-<div class="form-group"><label>I-Tax (type monthly amount)</label><input type="number" id="slipIT"></div>
+<div class="form-group"><label>I-Tax (auto estimate &ndash; edit if your pay slip differs)</label><input type="number" id="slipIT"></div>
 <div class="form-group"><label>P-Tax (auto by WB slab)</label><input type="number" id="slipPT"></div>
 </div>
 <div id="salResult"></div>
@@ -3371,13 +3371,22 @@ function salAuto() {
     const gross = N('slipBasic') + N('slipDA') + N('slipHRA') + N('slipMA') + N('slipOther');
     if (!$('slipPT').dataset.manual) $('slipPT').value = gross ? ptFor(gross, mDate) : '';
     if (N('gpfPct') > 0 && !$('slipGPF').dataset.manual) $('slipGPF').value = Math.round(N('slipBasic') * N('gpfPct') / 100);
+    if (!$('slipIT').dataset.manual) $('slipIT').value = gross ? itaxMonthly(gross) : '';
+}
+/* simple I-Tax estimate: new regime, salary only, gross x 12 less Rs.75,000 standard deduction, 4% cess, /12 per month */
+function itaxMonthly(monthlyGross) {
+    const t = Math.max(0, monthlyGross * 12 - 75000);
+    let x = 0, prev = 0;
+    for (const sl of [[400000, 0], [800000, .05], [1200000, .10], [1600000, .15], [2000000, .20], [2400000, .25], [Infinity, .30]]) { if (t > prev) x += (Math.min(t, sl[0]) - prev) * sl[1]; prev = sl[0]; if (t <= sl[0]) break; }
+    if (t <= 1200000) x = 0; else x = Math.min(x, t - 1200000);
+    return Math.round(x * 1.04 / 12);
 }
 function slipAutoFill(force, resetManual) {
     if (!window.CUR) { showErr(['Generate the pay tables first (press Generate Pay Tables), then create the salary / pay slip.']); return false; }
     if (!V('slipMonth')) $('slipMonth').value = (V('asOfDate') || iso(new Date())).slice(0, 7);
     const mDate = parseISO(V('slipMonth') + '-01'), rule = monthPay(mDate);
     if (!rule.basic) { showErr(['No pay-table row found on or before ' + V('slipMonth') + '. Check the month.']); return false; }
-    if (resetManual) { $('slipPT').dataset.manual = ''; $('slipGPF').dataset.manual = ''; }
+    if (resetManual) { $('slipPT').dataset.manual = ''; $('slipGPF').dataset.manual = ''; $('slipIT').dataset.manual = ''; }
     const put = (id, v) => { if (force || V(id) === '') $(id).value = v; };
     put('slipBasic', rule.basic); put('slipDA', rule.da); put('slipHRA', rule.hra); put('slipMA', rule.ma);
     salAuto(); verifySalary();
@@ -3424,7 +3433,7 @@ function slipGenerate() {
     if (s.mDate < new Date(2020, 0, 1)) notes.push('Month is before ROPA-2019; the allowance rates used are ROPA-2019 rates.');
     if (!V('slipEmpId') || !V('slipPan') || !V('slipAcNo') || !V('slipIfsc')) notes.push('Employee ID / PAN / Bank A/c / IFS code are blank on the slip - fill them above and press the button again.');
     if (!N('slipGPF')) notes.push('PF is 0 - enter your PF amount (or the PF % in Rates) if you subscribe.');
-    if (!N('slipIT')) notes.push('I-Tax is 0 - enter the monthly income-tax shown in your pay slip, if any.');
+    if (N('slipIT')) notes.push('I-Tax is an automatic estimate - correct it if your pay slip shows a different amount.');
     slipMsg('Pay slip for ' + s.mDate.toLocaleString('en-US', { month: 'long', year: 'numeric' }) + ' generated: Gross ' + s.gross + ', Deductions ' + s.td + ', Net ' + s.net + '. ' + notes.join(' '), false);
     $('slipPreview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     autosave();
@@ -3459,7 +3468,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (id === 'asOfDate' && window.CUR) refreshAll();
         if (e.target && e.target.closest && e.target.closest('#formArea, #salArea, #leaveArea')) autosave();
     });
-    document.addEventListener('input', e => { const t = e.target; if (t && t.closest && t.closest('#salArea')) { if (t.id === 'slipPT' || t.id === 'slipGPF') t.dataset.manual = '1'; salAuto(); verifySalary(); } });
+    document.addEventListener('input', e => { const t = e.target; if (t && t.closest && t.closest('#salArea')) { if (t.id === 'slipPT' || t.id === 'slipGPF' || t.id === 'slipIT') t.dataset.manual = '1'; salAuto(); verifySalary(); } });
     $('chkAll').addEventListener('change', updateSubmitBtn);
     setInterval(updateSubmitBtn, 800);
 });
