@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Staff Pay Table Generator</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="theme-color" content="#1e3a8a"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Staff Pay"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Staff Pay Table Generator</title></head><body>
 <style>
 :root{color-scheme:light;--ink:#0f172a;--mut:#64748b;--bg:#f1f5f9;--card:#fff;--line:#cbd5e1;--pri:#1e3a8a;--acc:#0f766e}
 *{box-sizing:border-box}
@@ -175,14 +174,29 @@ table{font-size:.74rem}th,td{padding:3px 4px}
  body.print-slip .slip{width:100%;padding:6mm 4mm}
  #slipCard,#leaveArea{display:none!important}
 }
+@media(max-width:700px){input,select,textarea{font-size:16px!important}button{min-height:42px}.wrap{padding:8px 8px 60px}table.mini{font-size:.78rem}#mainTable{min-width:900px}}
+#fetchCard h2,#pwaBar{margin-top:0}
 </style>
 
-<header class="top"><h1>Pay Table Generator &mdash; Staff Self-Service</h1><p>Enter your school and service details, generate your ROPA-90/98/09/19 pay tables, verify them, and submit.</p></header>
+<header class="top"><h1>Pay Table &middot; Pay Slip &middot; Leave A/c &mdash; Staff Self-Service</h1><p>Enter your school and service details, generate your ROPA-90/98/09/19 pay tables, make your pay slip and Leave A/c, verify, and submit to your Provider.</p></header>
 <div class="wrap">
+<div id="pwaBar" class="card noprint" hidden style="background:#ecfeff;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span><b>&#128241; Use this as a mobile app</b> &ndash; works offline for the forms.</span><button type="button" class="big" onclick="pwaInstall()">Install App</button></div>
 <div class="card" style="background:#fffbeb">
-<b>How to use:</b><span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ১) সার্ভিস বুক দেখে নিজের তথ্য ভরুন → ২) 'Generate Pay Tables' চাপুন → ৩) বর্তমান বেতন ও প্রতিটি সারি মিলিয়ে দেখুন → ৪) চাইলে পে-স্লিপের অঙ্ক দিয়ে DA/HRA/MA/PT/PF/আয়কর যাচাই করুন → ৫) ঘোষণায় টিক দিয়ে Submit করুন। আপনার দেওয়া তথ্য এই ফোন/কম্পিউটারে সংরক্ষিত থাকে, তাই পরে এসে সংশোধন করতে পারবেন। প্রতিটি ধাপের পাশে 'ⓘ বাংলা' চিহ্নে মাউস আনলে (ফোনে ট্যাপ করলে) বাংলা নির্দেশনা দেখা যাবে।</div></span>  (1) fill your details from your service book &rarr; (2) press <b>Generate Pay Tables</b> &rarr; (3) check your current pay and every row of the tables &rarr; (4) optionally enter your latest pay-slip figures to verify DA / HRA / MA / P.Tax / PF / I-tax &rarr; (5) tick the declaration and <b>Submit</b>. Your entries are kept on this phone/computer, so you can come back and correct them.
+<b>How to use:</b> (1) fill your details from your service book, <b>including your Mobile no. (compulsory)</b> &rarr; (2) <b>check every ROPA Date of Option very carefully</b> &rarr; (3) press <b>Generate Pay Tables</b> &rarr; (4) check your current pay and every row of the tables &rarr; (5) fill <b>Salary &amp; Pay Slip</b> (Basic, DA, HRA, MA, Other allowance if any; PF, I-Tax, P-Tax) and print the pay slip &rarr; (6) fill the <b>Leave A/c</b> following its steps and print &rarr; (7) tick the declaration and <b>Submit to Provider</b>; keep the Reference No. Your entries are kept on this phone, so you can come back and correct them.
+<br><span lang="bn">কীভাবে: নিজের তথ্য ও <b>মোবাইল নম্বর (বাধ্যতামূলক)</b> লিখুন &rarr; <b>ROPA-র Date of Option খুব মন দিয়ে মেলান</b> &rarr; Generate Pay Tables &rarr; পে-টেবিল মেলান &rarr; Salary &amp; Pay Slip &rarr; Leave A/c &rarr; টিক দিয়ে &ldquo;Submit to Provider&rdquo;; Reference No. ও স্ক্রিনশট রাখুন।</span>
 </div>
-<div class="warn" style="margin:0 0 10px">Online preview: you can try everything here (tables, current pay, salary check). <b>Submit, Download and Print do not work inside this preview</b>; they work when the file is hosted on your own site (e.g. GitHub Pages) or opened from the file.</div><div id="errBox" class="err" style="display:none"></div>
+<div id="errBox" class="err" style="display:none"></div>
+<div class="card noprint" id="fetchCard" style="background:#eff6ff;border-color:#93c5fd">
+<h2>Already submitted? Fetch your saved data</h2>
+<div class="muted">Use this if you changed your phone, cleared the browser, or want to correct a submission. Enter your <b>Reference No.</b> (from your screenshot) <u>or</u> your <b>Mobile no. + Date of Birth</b> exactly as you submitted. <span lang="bn">আগে জমা দিয়ে থাকলে Reference No. অথবা মোবাইল নম্বর + জন্মতারিখ দিয়ে তথ্য ফিরিয়ে আনুন।</span></div>
+<div class="grid-inputs">
+<div class="form-group"><label>Reference No.</label><input type="text" id="fxRef" placeholder="PAY-YYMMDD-XXXX" style="text-transform:uppercase"></div>
+<div class="form-group"><label>Mobile no.</label><input type="tel" id="fxMobile" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
+<div class="form-group"><label>Date of Birth</label><input type="date" id="fxDob"></div>
+<div class="form-group"><label>&nbsp;</label><button type="button" class="big" onclick="fetchMine()">Fetch my submission</button></div>
+</div>
+<div id="fxMsg" class="muted"></div>
+</div>
 
 <div id="formArea">
 <div class="card" id="schoolCard">
@@ -273,7 +287,7 @@ table{font-size:.74rem}th,td{padding:3px 4px}
         <strong>Date of Retirement (DOR):</strong> Loading...
     </div>
 
-<div class="grid-inputs"><div class="form-group"><label>Mobile no. (for reference only)</label><input type="tel" id="mobileNo" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div></div>
+<div class="grid-inputs"><div class="form-group"><label>Mobile no. * (compulsory &ndash; needed to fetch your submission later)</label><input type="tel" id="mobileNo" inputmode="numeric" maxlength="10" required placeholder="10-digit mobile" style="border-color:#dc2626"></div></div>
 <div id="suggestNote" class="muted"></div>
 </div>
 <div class="card">
@@ -502,7 +516,19 @@ table{font-size:.74rem}th,td{padding:3px 4px}
     </div>
 
     
-<div class="btn-group"><button type="button" class="big" onclick="genTables()">Generate Pay Tables</button></div>
+<div id="ropaWarn" style="border:3px solid #dc2626;background:#fef2f2;border-radius:10px;padding:12px 14px;margin:14px 0">
+<div style="font-weight:800;color:#b91c1c;font-size:1.02rem">&#9888; VERY IMPORTANT &mdash; check every ROPA Date of Option before you press Generate</div>
+<div style="font-size:.88rem;margin-top:6px">All your pay tables depend on the <b>Date of Option</b> (and Date of Joining) you entered for <b>ROPA-1990 / ROPA-1998 / ROPA-2009 / ROPA-2019</b>. A wrong option date means wrong fixation, wrong increment dates and a wrong current basic pay.
+<ul style="margin:6px 0 6px 18px;padding:0">
+<li>Open your <b>Service Book</b> and compare each option date, the fixation entry and your Date of Joining, one by one.</li>
+<li>Untick a ROPA that did not apply to you; fill dates only for those that did.</li>
+<li>Also check the initial basic / band pay, grade pay and any promotion or higher-scale dates.</li>
+<li>If in doubt, ask your Provider / school office before submitting.</li>
+</ul>
+<span lang="bn"><b>খুব গুরুত্বপূর্ণ:</b> Generate চাপার আগে ROPA-90/98/09/19 প্রতিটির &ldquo;Date of Option&rdquo; সার্ভিস বুকের সঙ্গে খুব ভালোভাবে মিলিয়ে নিন। অপশনের তারিখ ভুল হলে পুরো পে-টেবিল ও বর্তমান বেসিক পে ভুল আসবে।</span></div>
+<label class="inline-check" style="margin-top:8px"><input type="checkbox" class="ropaChk"> <b>I have checked all ROPA Dates of Option against my Service Book.</b></label>
+</div>
+<div class="btn-group"><button type="button" class="big" onclick="genTablesChecked()">Generate Pay Tables</button></div>
 </div>
 </div>
 
@@ -524,85 +550,63 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 <div class="btn-group noprint"><button type="button" class="btn-print" onclick="printTables()">Print / Save pay tables as PDF</button></div>
 </div>
 
-<details class="card ix-opt" id="salArea">
-<summary><h2>Verify your salary (optional) &mdash; DA, HRA, MA, P.Tax, PF, Income-tax (West Bengal rules)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার সর্বশেষ পে-স্লিপের অঙ্কগুলি (বেসিক, DA, HRA, MA, প্রফেশনাল ট্যাক্স, GPF, আয়কর) এখানে লিখুন। প্রতিটির পাশে পশ্চিমবঙ্গের নিয়মমতো অঙ্কের সঙ্গে তুলনা করে ✓ OK বা ⚠ Check দেখাবে। হার (DA % ইত্যাদি) সরকার বদলালে ঘরে পরিবর্তন করা যায়। এটি ঐচ্ছিক।</div></span></h2></summary>
-<div class="muted">Rule values are pre-filled with the rates last published (ROPA-2019); they are editable. Enter the figures from <b>your latest pay slip</b> and each line is compared with the rule and with your pay table.</div>
-<h3>Rates (edit if government changes them)</h3>
+<details class="card ix-opt" id="salArea" open>
+<summary><h2>Salary &amp; Pay Slip &mdash; as in your pay slip</h2></summary>
+<div class="muted">Choose the month. <b>Basic, DA, HRA, MA, PF (if % given) and P-Tax are filled automatically</b> from your pay table and the West Bengal rates; you may correct any figure. Add <b>Other Allowance only if your pay slip has one</b>, and type your monthly <b>I-Tax</b> if any. <span lang="bn">মাস বাছুন &ndash; বেসিক, DA, HRA, MA ও P-Tax নিজে থেকে বসবে। অন্য ভাতা থাকলে তবেই লিখুন; I-Tax পে-স্লিপ দেখে লিখুন।</span></div>
 <div class="grid-inputs">
-<div class="form-group"><label>DA % (before change date)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পরিবর্তনের তারিখের আগে DA কত শতাংশ ছিল (এখন ১৮)। সরকার বদলালে এখানে সংশোধন করুন।</div></span></label><input type="number" id="daOld" value="18" step="0.01"></div>
-<div class="form-group"><label>DA change date<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যে তারিখ থেকে নতুন DA হার চালু হবে।</div></span></label><input type="date" id="daChange" value="2026-10-01"></div>
-<div class="form-group"><label>DA % (from change date)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ঐ তারিখ থেকে DA কত শতাংশ।</div></span></label><input type="number" id="daNew" value="38" step="0.01"></div>
-<div class="form-group"><label>HRA % of basic<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> HRA বেসিকের কত শতাংশ (এখন ১২%)।</div></span></label><input type="number" id="hraPct" value="12" step="0.01"></div>
-<div class="form-group"><label>HRA maximum (Rs.)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> HRA এর সর্বোচ্চ মাসিক সীমা টাকায় (এখন ১২,০০০)।</div></span></label><input type="number" id="hraCap" value="12000"></div>
-<div class="form-group"><label>Medical Allowance (Rs./month)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাসিক চিকিৎসা ভাতা টাকায় (এখন ৫০০)।</div></span></label><input type="number" id="maAmt" value="500"></div>
+<div class="form-group"><label>Pay slip month</label><input type="month" id="slipMonth"></div>
+<div class="form-group"><label>Employee ID</label><input type="text" id="slipEmpId"></div>
+<div class="form-group"><label>PAN</label><input type="text" id="slipPan" maxlength="10" style="text-transform:uppercase"></div>
+<div class="form-group"><label>Bank A/c no.</label><input type="text" id="slipAcNo" inputmode="numeric"></div>
+<div class="form-group"><label>IFS code</label><input type="text" id="slipIfsc" maxlength="11" style="text-transform:uppercase"></div>
+</div>
+<h3>Earnings</h3>
+<div class="grid-inputs">
+<div class="form-group"><label>Basic pay (auto)</label><input type="number" id="slipBasic"></div>
+<div class="form-group"><label>DA (auto)</label><input type="number" id="slipDA"></div>
+<div class="form-group"><label>HRA (auto)</label><input type="number" id="slipHRA"></div>
+<div class="form-group"><label>Medical allowance (auto)</label><input type="number" id="slipMA"></div>
+<div class="form-group"><label>Other allowance (only if any)</label><input type="number" id="slipOther"></div>
+</div>
+<h3>Deductions</h3>
+<div class="grid-inputs">
+<div class="form-group"><label>PF (auto if PF % is set below, else type)</label><input type="number" id="slipGPF"></div>
+<div class="form-group"><label>I-Tax (type monthly amount)</label><input type="number" id="slipIT"></div>
+<div class="form-group"><label>P-Tax (auto by WB slab)</label><input type="number" id="slipPT"></div>
+</div>
+<div id="salResult"></div>
+<details class="ix-sub"><summary><b>Rates used for the auto figures</b> (change only if the government changes them)</summary>
+<div class="grid-inputs">
+<div class="form-group"><label>DA % (before change date)</label><input type="number" id="daOld" value="18" step="0.01"></div>
+<div class="form-group"><label>DA change date</label><input type="date" id="daChange" value="2026-10-01"></div>
+<div class="form-group"><label>DA % (from change date)</label><input type="number" id="daNew" value="38" step="0.01"></div>
+<div class="form-group"><label>HRA % of basic</label><input type="number" id="hraPct" value="12" step="0.01"></div>
+<div class="form-group"><label>HRA maximum (Rs.)</label><input type="number" id="hraCap" value="12000"></div>
+<div class="form-group"><label>Medical Allowance (Rs./month)</label><input type="number" id="maAmt" value="500"></div>
 <div class="form-group"><label>&nbsp;</label><label class="inline-check"><input type="checkbox" id="wbhsOpt"> I am covered by WBHS 2008 (MA not payable)</label></div>
-<div class="form-group"><label>GPF / PF % of basic you opted (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনি বেসিকের যত শতাংশ GPF দিতে বেছেছেন তা লিখলে পে-স্লিপের GPF যাচাই হবে ও নিজে থেকে বসবে। না জানালে ০ রাখুন।</div></span></label><input type="number" id="gpfPct" value="0" step="0.01"></div>
+<div class="form-group"><label>PF % of basic you opted (optional)</label><input type="number" id="gpfPct" value="0" step="0.01"></div>
 </div>
-<div class="muted">Professional Tax (WB, monthly on gross) <b>from 01-10-2026</b> (Notif. 1407-F.T. dt. 18-08-2026): up to 20,000 nil &middot; 20,001-30,000 Rs.100 &middot; 30,001-50,000 Rs.140 &middot; 50,001-1,00,000 Rs.170 &middot; above 1,00,000 Rs.208. Months before Oct-2026 use the old slabs (nil / 110 / 130 / 150 / 200).</div>
-<h3>Your pay slip (one month)</h3>
-<div class="grid-inputs">
-<div class="form-group"><label>Pay slip month<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> যে মাসের পে-স্লিপ বানাবেন সেই মাসটি বেছে নিন। মাস বদলালে ঐ মাসের নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়কর নিজে থেকে বসে যাবে।</div></span></label><input type="month" id="slipMonth"></div>
-<div class="form-group"><label>Basic pay<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ঐ মাসের মূল বেতন (Basic Pay)। পে-টেবিল থেকে নিজে থেকেই আসে; পে-স্লিপের অঙ্কের সঙ্গে না মিললে এখানে নিজে লিখে সংশোধন করুন।</div></span></label><input type="number" id="slipBasic"></div>
-<div class="form-group"><label>DA<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মহার্ঘ ভাতা (Dearness Allowance)। বেসিকের উপর ঐ মাসের DA % অনুযায়ী টাকার অঙ্ক। পে-স্লিপে যা আছে তাই লিখুন।</div></span></label><input type="number" id="slipDA"></div>
-<div class="form-group"><label>HRA<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বাড়ি ভাড়া ভাতা (HRA)। বেসিকের ১২%, সর্বোচ্চ ১২,০০০ টাকা। পে-স্লিপের অঙ্ক লিখুন।</div></span></label><input type="number" id="slipHRA"></div>
-<div class="form-group"><label>Medical allowance<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> চিকিৎসা ভাতা (Medical Allowance), মাসে ৫০০ টাকা। আপনি WBHS 2008 এর আওতায় থাকলে এটি প্রযোজ্য নয়, তখন ০ দিন।</div></span></label><input type="number" id="slipMA"></div>
-<div class="form-group"><label>Other allowance (if any)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> উপরের চারটি ছাড়া অন্য কোনো ভাতা পে-স্লিপে থাকলে (যেমন বকেয়া/বিশেষ ভাতা) তার মাসিক অঙ্ক লিখুন। না থাকলে ফাঁকা রাখুন।</div></span></label><input type="number" id="slipOther"></div>
-<div class="form-group"><label>GPF / PF deduction<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> জিপিএফ/পিএফ বাবদ মাসে যে টাকা কাটা হয়। পে-স্লিপে 'GPF' এর পাশের অঙ্ক লিখুন। না কাটলে ফাঁকা রাখুন।</div></span></label><input type="number" id="slipGPF"></div>
-<div class="form-group"><label>Professional Tax<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পেশা কর (Professional Tax)। মোট বেতন (gross) অনুযায়ী পশ্চিমবঙ্গের স্ল্যাবে কাটা হয়; ০১-১০-২০২৬ থেকে ১,০০,০০০ এর বেশি হলে ২০৮ টাকা। নিজে থেকে বসে, পে-স্লিপে অন্য থাকলে সংশোধন করুন।</div></span></label><input type="number" id="slipPT"></div>
-<div class="form-group"><label>Income-tax (TDS)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাসে যে আয়কর (TDS) কাটা হচ্ছে। সারা বছরের আনুমানিক কর ÷ মাসের সংখ্যা ধরে নিজে থেকে বসে। আপনার DDO/ট্রেজারির অঙ্কই চূড়ান্ত।</div></span></label><input type="number" id="slipIT"></div>
-<div class="form-group"><label>Other deductions<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> অন্য যেকোনো কর্তন (যেমন সমিতি, বীমা, ঋণের কিস্তি) থাকলে মোট অঙ্ক লিখুন। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipOD"></div>
-<div class="form-group"><label>PF loan recovery<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> পিএফ ঋণ বাবদ মাসিক কিস্তি কাটা হলে সেই অঙ্ক। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipPFL"></div>
-<div class="form-group"><label>Over-drawn recovery<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আগে বেশি বেতন পেয়ে থাকলে (Over-drawn) তা আদায়ের জন্য মাসিক কর্তন। না থাকলে ফাঁকা।</div></span></label><input type="number" id="slipOVD"></div>
-<div class="form-group"><label>Employee ID (for pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার কর্মী আইডি (Employee ID), পুরনো পে-স্লিপ বা iOSMS এ যা আছে হুবহু লিখুন। এটি পে-স্লিপের উপরে ছাপা হবে।</div></span></label><input type="text" id="slipEmpId"></div>
-<div class="form-group"><label>PAN<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আপনার ১০ অক্ষরের PAN (যেমন ABCDE1234F), বড় হাতের অক্ষরে। পে-স্লিপে ছাপা হবে।</div></span></label><input type="text" id="slipPan" maxlength="10" style="text-transform:uppercase"></div>
-<div class="form-group"><label>Bank A/c no.<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বেতন যে ব্যাংক অ্যাকাউন্টে ঢোকে তার নম্বর, শুধু সংখ্যা। পাসবই দেখে লিখুন।</div></span></label><input type="text" id="slipAcNo" inputmode="numeric"></div>
-<div class="form-group"><label>IFS code<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> ব্যাংক শাখার ১১ অক্ষরের IFS কোড (পাসবইয়ে/চেকবইয়ে থাকে), যেমন SBIN0001234।</div></span></label><input type="text" id="slipIfsc" maxlength="11" style="text-transform:uppercase"></div>
-</div>
-<h3>Income-tax details</h3>
-<div class="grid-inputs">
-<div class="form-group"><label>Regime<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> আয়কর ব্যবস্থা বাছুন। 'New regime' (নতুন) হলে বেশির ভাগ ছাড় নেই কিন্তু হার কম; 'Old regime' (পুরনো) হলে ৮০সি ইত্যাদি ছাড় পাওয়া যায়। কোনটিতে কর কম তা নিচের ফলে দেখাবে।</div></span></label><select id="taxRegime"><option value="new">New regime</option><option value="old">Old regime</option></select></div>
-<div class="form-group"><label>Other annual income (Rs.)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> বেতন ছাড়া বছরে অন্য আয় (সুদ, ভাড়া, টিউশন ইত্যাদি) থাকলে মোট টাকা লিখুন। না থাকলে ০।</div></span></label><input type="number" id="othInc" value="0"></div>
-<div class="form-group"><label>Old regime: 80C etc. besides GPF (Rs./yr)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> শুধু পুরনো ব্যবস্থায় প্রযোজ্য: GPF ছাড়া বছরে ৮০সি এর বিনিয়োগ (LIC, PPF, NSC, সন্তানের টিউশন ফি ইত্যাদি)। সর্বোচ্চ ১,৫০,০০০ এর মধ্যে ধরা হয়।</div></span></label><input type="number" id="c80" value="0"></div>
-<div class="form-group"><label>Old regime: other deductions (Rs./yr)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> শুধু পুরনো ব্যবস্থায় প্রযোজ্য: ৮০সি ছাড়া অন্য ছাড় (যেমন ৮০ডি স্বাস্থ্যবীমা, গৃহঋণের সুদ) বছরে মোট কত।</div></span></label><input type="number" id="dOth" value="0"></div>
-</div>
-<div class="card" id="salResultCard" style="margin:10px 0 0"><div id="salResult"></div></div>
+<div class="muted">Professional Tax (WB, monthly on gross) <b>from 01-10-2026</b>: up to 20,000 nil &middot; 20,001-30,000 Rs.100 &middot; 30,001-50,000 Rs.140 &middot; 50,001-1,00,000 Rs.170 &middot; above 1,00,000 Rs.208. Earlier months use the old slabs.</div>
 </details>
-
-<details class="card" id="itaxCard">
-<summary><b>Income Tax Statement (optional) &mdash; New &amp; Old regime with Capital Gains</b></summary>
-<div class="muted">Optional. Salary comes from your pay table (Mar&ndash;Feb). Edit any figure, then press Calculate.</div>
-<div class="grid-inputs">
-<div class="form-group"><label>Financial Year</label><select id="itFY" onchange="itFill()"><option value="2026-27">FY 2026-27 (AY 2027-28)</option><option value="2025-26">FY 2025-26 (AY 2026-27)</option></select></div>
-<div class="form-group"><label>Gross Salary / Pension (Rs.) <span class="muted" id="itFillNote"></span></label><input type="number" id="itGross" placeholder="Press 'Fill from pay table'"></div>
-<div class="form-group"><label>Bank / FD interest &amp; other income (Rs.)</label><input type="number" id="itOther" placeholder="Leave blank if nil"></div>
-<div class="form-group"><label>Professional Tax (Rs.)</label><input type="number" id="itPT" readonly><label class="inline-check" style="margin-top:3px"><input type="checkbox" id="itPTAuto" checked onchange="itPTMode()"> Auto (WB slab on monthly gross)</label></div>
-<div class="form-group"><label>PAN (blank = use PAN of pay slip box)</label><input type="text" id="itPan" maxlength="10" style="text-transform:uppercase"></div>
-</div>
-<details class="ix-sub"><summary>Chapter VI-A deductions (Old regime only)</summary><div class="grid-inputs" id="itDedGrid"></div></details>
-<h3>Capital gains</h3>
-<div class="grid-inputs">
-<div class="form-group"><label>STCG u/s 111A (Rs.)</label><input type="number" id="itSTCG" placeholder="Leave blank if nil"></div>
-<div class="form-group"><label>Short-term loss STCL (Rs.)</label><input type="number" id="itSTCL" placeholder="Leave blank if nil"></div>
-<div class="form-group"><label>LTCG u/s 112A (Rs.)</label><input type="number" id="itLTCG" placeholder="Leave blank if nil"></div>
-</div>
-<div class="btn-group"><button type="button" class="btn-print" onclick="itFill()">Fill salary from pay table</button><button type="button" class="big" onclick="itCalc()">Calculate Income Tax</button></div>
-<div id="itMsg" class="muted"></div>
-<div class="ix-results" id="itResults"></div>
-<div id="itStatements"></div>
-</details>
-
-<details class="card ix-opt" id="slipCard">
-<summary><h2>Pay slip (optional) (same layout as the iOSMS pay slip)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> মাস বেছে 'Generate Pay Slip' চাপলে নিয়ম অনুযায়ী বেসিক, DA, HRA, MA, PT ও আয়করসহ পে-স্লিপ তৈরি হবে। Employee ID, PAN, ব্যাংক অ্যাকাউন্ট নম্বর ও IFS কোড আগে লিখে নিন। প্রিন্ট বা PDF করতে নিচের Print বোতাম চাপুন।</div></span></h2></summary>
-<div class="muted">Press <b>Generate Pay Slip</b>. Before the slip is made, the tool puts the <b>basic, DA, HRA, MA, Professional Tax, Income-tax (average monthly TDS) and GPF</b> for the selected month by the West Bengal rule in force in that month (PT slabs change from 01-10-2026; DA/HRA/MA use the rates entered above). Fill Employee ID, PAN, Bank A/c no. and IFS code in the box above. You can edit any figure and press the button again.</div>
-<label class="inline-check" style="margin-top:8px"><input type="checkbox" id="slipKeep"> Use exactly the figures I typed above (do not apply the rule to PT / Income-tax)</label>
-<div class="btn-group"><button type="button" class="big" onclick="slipGenerate()">Generate Pay Slip</button><button type="button" onclick="slipAutoFill(true,true);slipMsg('Figures re-filled by rule for '+V('slipMonth')+'.')">Re-fill all by rule</button><button type="button" class="btn-print" id="slipPrintBtn" onclick="slipPrint()" disabled>Print / Save pay slip as PDF</button></div>
+<div class="btn-group"><button type="button" class="big" onclick="slipGenerate()">Generate Pay Slip</button><button type="button" onclick="slipAutoFill(true,true);slipMsg('Figures re-filled automatically for '+V('slipMonth')+'.')">Re-fill auto figures</button><button type="button" class="btn-print" id="slipPrintBtn" onclick="slipPrint()" disabled>Print / Save pay slip as PDF</button></div>
 <div id="slipMsg" class="muted"></div>
 <div id="slipPreview"></div>
 </details>
 
 <details class="card ix-opt" id="leaveArea">
-<summary><h2>Leave Account (optional)<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> প্রথমে 'Generate rows up to' তারিখ দিয়ে 'Auto-generate' চাপুন, বদলি হয়ে থাকলে নতুন স্কুলে যোগদানের তারিখ যোগ করুন। তারপর নেওয়া ছুটি (ML, HPL, Commuted, LWP) তারিখ বা দিনসংখ্যা দিয়ে যোগ করুন। হিসাব মিললে 'Print Leave A/c' চাপুন। লাল ব্যালান্স মানে ছুটি পাওনার বেশি নেওয়া হয়েছে। এটি ঐচ্ছিক।</div></span></h2></summary>
-<div class="muted">Uses your name, designation and Date of Joining from the form above. Earned Leave and HPL are credited at 15 days per full year (EL capped at 365 days, HPL credit at 60 days). Add your leave, check the table, then print the Leave A/c on A4 landscape. Leave you enter is also sent to the school office with your submission.</div>
+<summary><h2>Leave Account (optional)</h2></summary>
+<div class="output-box" style="border-left-color:#0f766e;background:#f0fdfa">
+<b>How to fill the Leave A/c &mdash; follow these steps in order</b>
+<ol style="margin:6px 0 4px 18px;padding:0">
+<li><b>Step 1 &ndash; Period rows:</b> in box 1 set <i>Generate rows up to</i> (your retirement date, or today). If you were <u>transferred</u>, choose <i>Yes</i> and add the joining date of each new school. Then press <b>Auto-generate period-of-duty rows</b>.</li>
+<li><b>Step 2 &ndash; Opening balance:</b> fill it only if your service book shows a balance at joining; otherwise keep <b>0</b>.</li>
+<li><b>Step 3 &ndash; Add every leave you took</b> (box 2): pick the <i>Leave type</i> &rarr; pick <i>Entry mode</i> (A: from&ndash;to dates, B: list of dates, C: only number of days) &rarr; fill the dates &rarr; press <b>+ Add leave entry</b>. Repeat for each leave. A wrong entry can be deleted from the list just below the button.</li>
+<li><b>Step 4 &ndash; Check</b> the Leave Account table (box 3) and the synopsis (box 4). A red / negative balance means a leave is wrongly entered or exceeds the balance &ndash; recheck it.</li>
+<li><b>Step 5 &ndash; Print</b> with <i>Print Leave A/c</i> (choose <b>A4 Landscape</b>; &ldquo;Save as PDF&rdquo; keeps a copy on your phone). The leave you entered also goes to the Provider with your submission.</li>
+</ol>
+<span lang="bn"><b>বাংলায়:</b> ধাপ ১ &ndash; তারিখ বসিয়ে &ldquo;Auto-generate&rdquo; চাপুন (বদলি হলে নতুন স্কুলের যোগদানের তারিখ যোগ করুন)। ধাপ ২ &ndash; ওপেনিং ব্যালান্স সার্ভিস বুকে থাকলে তবেই লিখুন, নইলে ০। ধাপ ৩ &ndash; ছুটির ধরন বেছে, তারিখ/দিন লিখে &ldquo;+ Add leave entry&rdquo; চাপুন, প্রতিটি ছুটির জন্য একই কাজ। ধাপ ৪ &ndash; টেবিল ও ব্যালান্স মিলিয়ে দেখুন। ধাপ ৫ &ndash; A4 Landscape-এ প্রিন্ট/PDF করুন।</span>
+</div>
+<div class="muted">Uses your name, designation and Date of Joining from the form above. Earned Leave and HPL are credited at 15 days per full year (EL capped at 365 days, HPL credit at 60 days).</div>
 <h3>1. Period-of-duty rows</h3>
 <div class="grid-inputs">
 <div class="form-group"><label>Generate rows up to</label><input type="date" id="leaveUpToDate"></div>
@@ -635,42 +639,62 @@ table{font-size:.74rem}th,td{padding:3px 4px}
 </details>
 
 <div class="card" id="submitArea">
-<h2>Verify &amp; submit<span class="gh noprint"><span class="bnh">ⓘ বাংলা</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সব তথ্য ও টেবিল সার্ভিস বুকের সঙ্গে মিলিয়ে নিশ্চিত হলে ঘোষণায় টিক দিন, তারপর 'Submit to school' চাপুন। জমা দেওয়ার পর যে রেফারেন্স নম্বর দেখাবে তার স্ক্রিনশট রাখুন। ভুল ধরা পড়লে একই ফোন থেকে সংশোধন করে আবার Submit করলে একই রেকর্ড আপডেট হবে। জমা না হলে 'Download my file' দিয়ে ফাইল অফিসে পাঠান।</div></span></h2>
+<h2>Verify &amp; submit to Provider</h2>
+<div class="muted">Mobile no. is compulsory. After submitting you get a <b>Reference No.</b> &ndash; take a screenshot. You can fetch your submission again later using the Reference No., or your Mobile no. + Date of Birth (see the blue box at the top of this page). To correct a mistake: fetch it, correct it, and press Submit again &ndash; the same record is updated.<br>
+<span lang="bn">জমা দিলে একটি Reference No. আসবে &ndash; স্ক্রিনশট রাখুন। পরে Reference No. অথবা মোবাইল নম্বর + জন্মতারিখ দিয়ে পাতার উপরের নীল বক্স থেকে নিজের জমা দেওয়া তথ্য আবার আনতে (Fetch) পারবেন।</span></div>
 <label class="inline-check"><input type="checkbox" id="chkAll"> I have checked all my details and every row of the pay tables above and they are correct as per my service book.</label>
-<div class="btn-group"><button type="button" class="big" id="submitBtn" onclick="submitPay()" disabled>Submit to school</button><button type="button" onclick="downloadMine()">Download my file</button></div>
+<div class="btn-group"><button type="button" class="big" id="submitBtn" onclick="submitPay()" disabled>Submit to Provider</button><button type="button" onclick="downloadMine()">Download my file</button></div>
 <div id="submitStatus" class="muted"></div>
 </div>
 </div>
 
-<div class="card" id="admLoginCard"><h2>Admin login (school office)</h2>
-<div class="muted">Log in with the admin key set in your Google Apps Script (same office login as the SB portal). Staff do not see this section.</div>
+<div class="card" id="admLoginCard"><h2>Provider login</h2>
+<div class="muted">Log in with the admin key set in your Google Apps Script (same office login as the SB portal). Staff do not see this section. (Open this page with <b>#admin</b> at the end of the address.)</div>
 <div class="grid-inputs"><div class="form-group"><label>Submission web-app URL (/exec)</label><input type="text" id="admUrlLogin" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="form-group"><label>Admin key</label><input type="password" id="admKeyLogin" autocomplete="off" onkeydown="if(event.key==='Enter')admLogin()"></div><div class="form-group"><label>&nbsp;</label><button type="button" class="big" onclick="admLogin()">Admin login</button></div></div>
 <div id="admLoginMsg" class="muted"></div></div>
-<details class="card" id="adminArea" open><summary><b>Admin (school office only)</b></summary>
+<details class="card" id="adminArea" open><summary><b>Provider (admin) only</b></summary>
 <div class="btn-group"><span class="okt">&#10003; Logged in as Admin</span><button type="button" onclick="admLogout()">Log out</button></div>
 <div class="grid-inputs"><div class="form-group"><label>Submission web-app URL (/exec)</label><input type="text" id="admUrl" placeholder="https://script.google.com/macros/s/.../exec"></div><div class="form-group"><label>Admin key</label><input type="password" id="admKey"></div><div class="form-group"><label>&nbsp;</label><button type="button" onclick="admFetch()">Fetch submissions</button></div></div>
 <div id="admList" class="muted"></div>
 <h3>One-time setup (Google Apps Script)</h3>
 <table class="steps"><thead><tr><th>#</th><th>Step</th><th>What to do (instruction) / কী করবেন</th></tr></thead><tbody><tr><td class="n">1</td><td class="s">Create a Google Sheet &rarr; Extensions &rarr; Apps Script &rarr; paste the code below.</td><td class="i">Open sheets.google.com with the school's Google account and make a blank sheet (name it e.g. <i>Staff Pay Submissions</i>). Click <b>Extensions &rarr; Apps Script</b>. Delete any code already in the editor, press <b>Copy code</b> below and paste it, then click the Save (disk) icon.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> সরকারি/স্কুলের Google অ্যাকাউন্ট দিয়ে sheets.google.com খুলে একটি ফাঁকা Google Sheet তৈরি করুন (নাম দিন যেমন <i>Staff Pay Submissions</i>)। উপরের মেনু থেকে <b>Extensions &rarr; Apps Script</b> চাপুন। এডিটরে আগে থেকে কোনো কোড থাকলে মুছে দিন, নিচের <b>Copy code</b> বোতাম চেপে কোড কপি করে সেখানে পেস্ট করুন, তারপর Save (ডিস্ক) আইকনে ক্লিক করুন।</div></td></tr><tr><td class="n">2</td><td class="s">Project Settings &rarr; Script properties &rarr; add <code>ADMIN_KEY</code> with your secret key.</td><td class="i">In Apps Script click the gear icon (<b>Project Settings</b>), scroll to <b>Script properties</b> &rarr; <b>Add script property</b>. Property = <code>ADMIN_KEY</code>, Value = a secret password only the office knows. This same key is what you type in <b>Admin login</b> on this page. Click Save.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Apps Script-এ বাঁদিকের গিয়ার আইকনে (<b>Project Settings</b>) ক্লিক করুন, নিচে নেমে <b>Script properties</b> &rarr; <b>Add script property</b> চাপুন। Property-র ঘরে লিখুন <code>ADMIN_KEY</code> এবং Value-র ঘরে একটি গোপন পাসওয়ার্ড দিন যা শুধু অফিস জানবে। এই পাসওয়ার্ডটিই এই পেজে <b>Admin login</b>-এ দিতে হবে। তারপর Save করুন।</div></td></tr><tr><td class="n">3</td><td class="s">Deploy &rarr; New deployment &rarr; Web app &rarr; Execute as <i>Me</i>, access <i>Anyone</i> &rarr; copy the /exec URL.</td><td class="i">Click <b>Deploy &rarr; New deployment</b>, choose type <b>Web app</b>. Set <i>Execute as</i> = <b>Me</b> and <i>Who has access</i> = <b>Anyone</b>. Click Deploy, allow the permissions asked, then copy the <b>Web app URL</b> ending in <code>/exec</code>. After any later code change use <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> <b>Deploy &rarr; New deployment</b> চাপুন, ধরন বেছে নিন <b>Web app</b>। <i>Execute as</i> = <b>Me</b> এবং <i>Who has access</i> = <b>Anyone</b> দিন। Deploy চাপুন, চাওয়া অনুমতিগুলি (Allow) দিন, তারপর <code>/exec</code> দিয়ে শেষ হওয়া <b>Web app URL</b> কপি করুন। পরে কোড বদলালে <b>Deploy &rarr; Manage deployments &rarr; Edit &rarr; New version</b> করতে হবে।</div></td></tr><tr><td class="n">4</td><td class="s">Paste the URL above (and into <code>SUBMIT_URL</code> in this file so staff need not enter it), then share this page with staff.</td><td class="i">Paste the /exec URL in the URL box above. Also paste it into <code>const SUBMIT_URL = '...'</code> in this HTML file (search for SUBMIT_URL) and re-upload the file to your site, so staff never need to type it. Then share the page link with staff. Staff submissions will appear in the Google Sheet and here after <b>Fetch submissions</b>.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> কপি করা /exec URL উপরের URL-এর ঘরে পেস্ট করুন। এছাড়া এই HTML ফাইলের মধ্যে <code>const SUBMIT_URL = '...'</code> লাইনটি (SUBMIT_URL লিখে সার্চ করুন) খুঁজে সেখানেও URL বসান এবং ফাইলটি আপনার সাইটে আবার আপলোড করুন, যাতে শিক্ষক-কর্মীদের URL লিখতে না হয়। তারপর পেজের লিংক সবাইকে পাঠান। জমা দেওয়া তথ্য Google Sheet-এ এবং এখানে <b>Fetch submissions</b> চাপলে দেখা যাবে।</div></td></tr><tr><td class="n">5</td><td class="s">Review submissions (daily use)</td><td class="i">Log in as Admin &rarr; press <b>Fetch submissions</b> &rarr; use <b>Load &amp; review</b> to open a staff member's data and tables, <b>JSON</b> to download it, and <b>Mark imported</b> once it is entered in the main dashboard / service book.<span class="bnh">ⓘ বাংলা নির্দেশনা (মাউস আনুন / ট্যাপ করুন)</span><div class="bn"><b>বাংলা নির্দেশনা:</b> Admin হিসেবে লগইন করুন &rarr; <b>Fetch submissions</b> চাপুন &rarr; কারও তথ্য ও টেবিল দেখতে <b>Load &amp; review</b>, ডাউনলোড করতে <b>JSON</b>, এবং মূল ড্যাশবোর্ড/সার্ভিস বুকে এন্ট্রি হয়ে গেলে <b>Mark imported</b> চাপুন।</div></td></tr></tbody></table>
+<div class="warn">Updated code (adds <b>fetch by Reference No. / Mobile + DOB</b>). If you already deployed the older code: replace it with this, then <b>Deploy &rarr; Manage deployments &rarr; Edit (pencil) &rarr; Version: New version &rarr; Deploy</b>. The /exec address stays the same.</div>
 <textarea class="code" id="gasCode" readonly onclick="this.select()">var SHEET='Submissions';
-function sh_(){var ss=SpreadsheetApp.getActiveSpreadsheet(),s=ss.getSheetByName(SHEET);if(!s){s=ss.insertSheet(SHEET);s.appendRow(['Ref','Name','Designation','Submitted','Status','Basic','Payload']);}return s;}
+function sh_(){var ss=SpreadsheetApp.getActiveSpreadsheet(),s=ss.getSheetByName(SHEET);if(!s){s=ss.insertSheet(SHEET);s.appendRow(['Ref','Name','Designation','Submitted','Status','Basic','Payload','Mobile','DOB']);}return s;}
 function out_(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);}
+function n_(v){return (v instanceof Date)?Utilities.formatDate(v,'Asia/Kolkata','yyyy-MM-dd'):String(v==null?'':v).trim();}
 function doPost(e){
   try{
     var p=JSON.parse(e.postData.contents);if(p.kind!=='TFHS_STAFF_PAY_SUBMISSION')return out_({error:'bad'});
     var s=sh_(),d=s.getDataRange().getValues(),row=-1;
     for(var i=1;i&lt;d.length;i++){if(d[i][0]===p.refNo){row=i+1;break;}}
-    var vals=[p.refNo,p.staff.name,p.staff.designation,p.submittedAt,row>0?'RESUBMIT':'NEW',(p.current&amp;&amp;p.current.basic)||'',JSON.stringify(p).slice(0,49000)];
-    if(row>0)s.getRange(row,1,1,7).setValues([vals]);else s.appendRow(vals);
+    if(row&lt;0)row=s.getLastRow()+1;
+    var isNew=(row>d.length);
+    var vals=[p.refNo,p.staff.name,p.staff.designation,p.submittedAt,isNew?'NEW':'RESUBMIT',(p.current&amp;&amp;p.current.basic)||'',JSON.stringify(p).slice(0,49000),String(p.mobile||''),String(p.staff.dob||'')];
+    s.getRange(row,8,1,2).setNumberFormat('@');
+    s.getRange(row,1,1,9).setValues([vals]);
     return out_({ok:true,ref:p.refNo});
   }catch(err){return out_({error:String(err)});}
 }
 function doGet(e){
+  var a=e.parameter.action;
+  if(a==='mine'){
+    var s0=sh_(),d0=s0.getDataRange().getValues(),ref=String(e.parameter.ref||'').toUpperCase().trim(),mob=String(e.parameter.mobile||'').trim(),dob=String(e.parameter.dob||'').trim(),hit=-1;
+    if(!ref&amp;&amp;!(mob&amp;&amp;dob))return out_({error:'Enter Reference No., or Mobile no. with Date of Birth'});
+    for(var i=d0.length-1;i>=1;i--){
+      if(ref){if(String(d0[i][0]).toUpperCase()===ref){hit=i;break;}}
+      else if(n_(d0[i][7])===mob&amp;&amp;n_(d0[i][8])===dob){hit=i;break;}
+    }
+    if(hit&lt;0)return out_({error:'No submission found. Check the details.'});
+    var pl=null;try{pl=JSON.parse(d0[hit][6]);}catch(x){}
+    if(!pl)return out_({error:'Saved record is too large to fetch. Please submit again.'});
+    return out_({ok:true,ref:d0[hit][0],name:d0[hit][1],payload:pl});
+  }
   var key=PropertiesService.getScriptProperties().getProperty('ADMIN_KEY');
   if(!key||e.parameter.key!==key)return out_({error:'Wrong admin key'});
   var s=sh_(),d=s.getDataRange().getValues();
-  if(e.parameter.action==='mark'){for(var i=1;i&lt;d.length;i++){if(d[i][0]===e.parameter.ref){s.getRange(i+1,5).setValue('IMPORTED');}}return out_({ok:true});}
-  var rows=[];for(var j=1;j&lt;d.length;j++){var pl=null;try{pl=JSON.parse(d[j][6]);}catch(x){}rows.push({ref:d[j][0],name:d[j][1],status:d[j][4],payload:pl});}
+  if(a==='mark'){for(var k=1;k&lt;d.length;k++){if(d[k][0]===e.parameter.ref){s.getRange(k+1,5).setValue('IMPORTED');}}return out_({ok:true});}
+  var rows=[];for(var j=1;j&lt;d.length;j++){var q=null;try{q=JSON.parse(d[j][6]);}catch(x){}rows.push({ref:d[j][0],name:d[j][1],status:d[j][4],mobile:n_(d[j][7]),payload:q});}
   return out_({rows:rows});
 }</textarea>
 <button type="button" onclick="copyGas()">Copy code</button>
@@ -2797,7 +2821,7 @@ function casBuildModeOfFixation19Box(doj) {
    STAFF SELF-SERVICE LAYER  (sits on top of the ROPA engine copied unchanged
    from the main dashboard: ROPA-1990 / 1998 / 2009 / 2019 timelines)
    ===================================================================== */
-const SUBMIT_URL = '';            // <-- paste your Google Apps Script web-app URL (ends /exec) here, or set it in "Admin" at the bottom
+const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzQwOdkuoGhzh2VGyzOBItf1qQQempZ7JBX_ZoxPx5Qv9oftLD3u_Algl3J0jlsesw0DQ/exec';            // <-- paste your Google Apps Script web-app URL (ends /exec) here, or set it in "Admin" at the bottom
 const masterMlEntries = [];       // LWP (with effect) entries - read by the engine through getLwpEffectEntries()
 function daysBetween(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000) + 1; }
 function annotateAllTablesWithLeave() { }
@@ -2878,8 +2902,15 @@ function applyState(st) {
 function autosave() { try { localStorage.setItem(STATE_KEY, JSON.stringify(collectState())); } catch (e) { } }
 
 /* ---------- generate pay tables ---------- */
-function genTables() {
+function genTablesChecked() {
+    const c = document.querySelector('.ropaChk');
+    if (c && !c.checked) { showErr(['Tick the box above the Generate button: check every ROPA Date of Option against your Service Book first.']); const w = $('ropaWarn'); if (w) w.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    genTables();
+}
+const mobOK = () => /^[6-9]\d{9}$/.test(V('mobileNo'));
+function genTables(opts) {
     const err = [];
+    if (!(opts && opts.admin) && !mobOK()) err.push('Mobile no. is compulsory - enter your valid 10-digit mobile number (needed to fetch your submission later).');
     if (!V('schoolName')) err.push('Enter the name of the school (School details, at the top).');
     if (!V('staffName')) err.push('Enter the name of the staff.');
     if (!V('dob')) err.push('Enter Date of Birth.');
@@ -2978,9 +3009,6 @@ function ptFor(g, d) {
     if (d && d < new Date(2026, 9, 1)) return g <= 10000 ? 0 : g <= 15000 ? 110 : g <= 25000 ? 130 : g <= 40000 ? 150 : 200;   /* old slabs, up to 30-09-2026 */
     return g <= 20000 ? 0 : g <= 30000 ? 100 : g <= 50000 ? 140 : g <= 100000 ? 170 : 208;   /* Notif. 1407-F.T. dt 18-08-2026, from 01-10-2026 */
 }
-function slabTax(t, slabs) { let prev = 0, tax = 0; for (const s of slabs) { if (t > prev) tax += (Math.min(t, s[0]) - prev) * s[1]; prev = s[0]; if (t <= s[0]) break; } return tax; }
-function taxNew(t) { let x = slabTax(t, [[400000, 0], [800000, .05], [1200000, .10], [1600000, .15], [2000000, .20], [2400000, .25], [Infinity, .30]]); if (t <= 1200000) x = 0; else x = Math.min(x, t - 1200000); return Math.round(x * 1.04); }
-function taxOld(t) { let x = slabTax(t, [[250000, 0], [500000, .05], [1000000, .20], [Infinity, .30]]); if (t <= 500000) x = 0; return Math.round(x * 1.04); }
 function monthPay(d) {
     const basic = basicOn(d), pct = daPct(d), da = Math.round(basic * pct / 100);
     const hra = Math.min(Math.round(basic * N('hraPct') / 100), N('hraCap'));
@@ -2988,52 +3016,21 @@ function monthPay(d) {
     const gross = basic + da + hra + ma;
     return { basic, pct, da, hra, ma, gross, pt: ptFor(gross, d) };
 }
-function fyTax(fyStart) {
-    const dor = getDOR(); let g = 0, pt = 0, months = 0, rows = [];
-    for (let m = 0; m < 12; m++) {
-        const d = new Date(fyStart, 3 + m, 1);
-        if (dor && d > dor) break;
-        const mp = monthPay(d); if (!mp.basic) continue;
-        g += mp.gross + N('slipOther'); pt += mp.pt; months++; rows.push({ d: d, mp: mp });
-    }
-    const other = N('othInc'), gpf = N('slipGPF') * months;
-    const newT = Math.max(0, g + other - 75000);
-    const oldT = Math.max(0, g + other - 50000 - pt - Math.min(150000, gpf + N('c80')) - N('dOth'));
-    return { gross: g, pt, months, gpf, rows, newT, oldT, newTax: taxNew(newT), oldTax: taxOld(oldT) };
-}
 function verifySalary() {
     const box = $('salResult'); if (!box) return;
-    const c = window.CUR; if (!c) { box.innerHTML = ''; return; }
+    const c = window.CUR; if (!c) { box.innerHTML = ''; window.SAL = null; return; }
     const asOf = parseISO(V('asOfDate') || iso(new Date()));
     const mDate = V('slipMonth') ? parseISO(V('slipMonth') + '-01') : new Date(asOf.getFullYear(), asOf.getMonth(), 1);
-    const rule = monthPay(mDate), fy = mDate.getMonth() >= 3 ? mDate.getFullYear() : mDate.getFullYear() - 1;
-    const T = fyTax(fy), useNew = V('taxRegime') !== 'old', annual = useNew ? T.newTax : T.oldTax, expTds = T.months ? Math.round(annual / T.months) : 0;
-    const has = id => V(id) !== '';
-    const slipGross = N('slipBasic') + N('slipDA') + N('slipHRA') + N('slipMA') + N('slipOther');
-    const lines = [
-        ['Basic pay', N('slipBasic'), rule.basic, 0, has('slipBasic')],
-        ['Dearness Allowance (' + rule.pct + '%)', N('slipDA'), rule.da, 1, has('slipDA')],
-        ['House Rent Allowance (' + N('hraPct') + '%, max ' + inr(N('hraCap')) + ')', N('slipHRA'), rule.hra, 1, has('slipHRA')],
-        ['Medical Allowance' + ($('wbhsOpt').checked ? ' (WBHS opted: nil)' : ''), N('slipMA'), rule.ma, 0, has('slipMA')],
-        ['Gross (pay slip total of the 5 heads above)', slipGross, rule.gross + N('slipOther'), 2, has('slipBasic')],
-        ['Professional Tax (on gross)', N('slipPT'), ptFor(has('slipBasic') ? slipGross : rule.gross, mDate), 0, has('slipPT')],
-        ['Income tax (TDS) - ' + (useNew ? 'new regime' : 'old regime') + ', FY ' + fy + '-' + String(fy + 1).slice(2) + ' / ' + (T.months || 1) + ' months', N('slipIT'), expTds, Math.max(200, expTds * .1), has('slipIT')]
-    ];
-    let h = '<table class="mini"><thead><tr><th>Item</th><th>Your pay slip</th><th>As per WB rule / table</th><th>Difference</th><th>Result</th></tr></thead><tbody>';
-    lines.forEach(l => {
-        const diff = l[1] - l[2], okk = Math.abs(diff) <= l[3];
-        h += '<tr><td>' + esc(l[0]) + '</td><td class="r">' + (l[4] ? inr(l[1]) : '-') + '</td><td class="r">' + inr(l[2]) + '</td><td class="r">' + (l[4] ? (diff > 0 ? '+' : '') + Math.round(diff) : '-') + '</td><td>' + (!l[4] ? '<span class="muted">not entered</span>' : okk ? '<span class="okt">&#10003; OK</span>' : '<span class="badt">&#9888; Check</span>') + '</td></tr>';
-    });
-    const gpfMin = N('slipGPF');
-    h += '<tr><td>GPF / PF subscription</td><td class="r">' + (has('slipGPF') ? inr(gpfMin) : '-') + '</td><td class="r">' + (N('gpfPct') ? inr(Math.round(rule.basic * N('gpfPct') / 100)) : 'staff option') + '</td><td class="r">' + (has('slipGPF') && N('gpfPct') ? Math.round(gpfMin - rule.basic * N('gpfPct') / 100) : '-') + '</td><td>' + (!has('slipGPF') ? '<span class="muted">not entered</span>' : (N('gpfPct') ? (Math.abs(gpfMin - rule.basic * N('gpfPct') / 100) <= 10 ? '<span class="okt">&#10003; OK</span>' : '<span class="badt">&#9888; Check</span>') : '<span class="muted">own option - fill "GPF % you opted" to verify</span>')) + '</td></tr>';
-    const ded = N('slipGPF') + N('slipPT') + N('slipIT') + N('slipOD');
-    h += '<tr style="font-weight:700"><td>Net pay (gross - deductions entered)</td><td class="r">' + inr(slipGross - ded) + '</td><td class="r">' + inr(rule.gross + N('slipOther') - N('slipGPF') - rule.pt - expTds - N('slipOD')) + '</td><td colspan="2"></td></tr></tbody></table>';
-    h += '<div class="note-grid"><div><b>Rule-based salary for ' + mDate.toLocaleString('en-IN', { month: 'long', year: 'numeric' }) + '</b><br>Basic ' + inr(rule.basic) + ' + DA ' + inr(rule.da) + ' + HRA ' + inr(rule.hra) + ' + MA ' + inr(rule.ma) + ' = <b>' + inr(rule.gross) + '</b>; P.Tax ' + inr(rule.pt) + '</div>' +
-        '<div><b>Income-tax projection FY ' + fy + '-' + String(fy + 1).slice(2) + '</b> (' + T.months + ' months)<br>Gross salary ' + inr(T.gross) + '<br>New regime: taxable ' + inr(T.newT) + ' &rarr; tax <b>' + inr(T.newTax) + '</b><br>Old regime: taxable ' + inr(T.oldT) + ' &rarr; tax <b>' + inr(T.oldTax) + '</b><br>' + (T.newTax <= T.oldTax ? 'New regime is cheaper by ' + inr(T.oldTax - T.newTax) : 'Old regime is cheaper by ' + inr(T.newTax - T.oldTax)) + '</div></div>';
-    if (mDate < new Date(2020, 0, 1)) h += '<div class="warn">The allowance rules above are ROPA-2019 rules (pay from 01-01-2020). For an earlier month the comparison is not meaningful.</div>';
-    h += '<div class="muted" style="margin-top:6px">Tax shown is an estimate (no surcharge, no arrears, no other income unless entered). Your DDO / treasury figure prevails.</div>';
+    const rule = monthPay(mDate);
+    const earn = N('slipBasic') + N('slipDA') + N('slipHRA') + N('slipMA') + N('slipOther');
+    const ded = N('slipGPF') + N('slipIT') + N('slipPT');
+    let h = '<table class="mini"><tbody>' +
+        '<tr><td>Gross salary (Basic + DA + HRA + MA' + (N('slipOther') ? ' + Other' : '') + ')</td><td class="r"><b>' + inr(earn) + '</b></td></tr>' +
+        '<tr><td>Total deductions (PF + I-Tax + P-Tax)</td><td class="r"><b>' + inr(ded) + '</b></td></tr>' +
+        '<tr style="font-weight:700;background:#f0fdf4"><td>Net pay</td><td class="r">' + inr(earn - ded) + '</td></tr></tbody></table>';
+    if (rule.basic && N('slipBasic') && N('slipBasic') !== rule.basic) h += '<div class="warn">Basic pay in the box (' + inr(N('slipBasic')) + ') differs from your pay table basic for this month (' + inr(rule.basic) + '). Change it only if your pay slip really shows this figure.</div>';
     box.innerHTML = h;
-    window.SAL = { month: iso(mDate).slice(0, 7), rule: rule, fy: fy, newTax: T.newTax, oldTax: T.oldTax, expectedTds: expTds, regime: useNew ? 'new' : 'old', lines: lines.map(l => ({ item: l[0], slip: l[4] ? l[1] : null, rule: l[2], ok: l[4] ? Math.abs(l[1] - l[2]) <= l[3] : null })) };
+    window.SAL = { month: iso(mDate).slice(0, 7), rule: rule, gross: earn, deductions: ded, net: earn - ded };
     renderChecks();
 }
 
@@ -3053,14 +3050,15 @@ function buildPayload() {
         staff: { name: V('staffName'), designation: V('designation'), school: V('schoolName'), schoolAddr: V('schoolAddr'), udise: V('schoolUdise'), prevSchools: (typeof prevSchools !== 'undefined' ? prevSchools : []), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', status: V('empStatus') },
         current: c,
         pension: { name: V('staffName'), designation: V('designation'), dob: V('dob'), doj: V('doj'), dor: dor ? iso(dor) : '', lastBasicPay: c.basic || 0, da: window.SAL ? window.SAL.rule.da : 0, daPercent: window.SAL ? window.SAL.rule.pct : 0, hra: window.SAL ? window.SAL.rule.hra : 0, medicalAllowance: window.SAL ? window.SAL.rule.ma : 0 },
-        salaryCheck: window.SAL || null, itax: window.ITX || null,
-        slip: { month: V('slipMonth'), basic: N('slipBasic'), da: N('slipDA'), hra: N('slipHRA'), ma: N('slipMA'), other: N('slipOther'), gpf: N('slipGPF'), ptax: N('slipPT'), itax: N('slipIT'), otherDed: N('slipOD'), pfLoan: N('slipPFL'), overDrawn: N('slipOVD'), empId: V('slipEmpId'), pan: V('slipPan'), acNo: V('slipAcNo'), ifsc: V('slipIfsc') },
+        salaryCheck: window.SAL || null,
+        slip: { month: V('slipMonth'), basic: N('slipBasic'), da: N('slipDA'), hra: N('slipHRA'), ma: N('slipMA'), other: N('slipOther'), gpf: N('slipGPF'), ptax: N('slipPT'), itax: N('slipIT'), empId: V('slipEmpId'), pan: V('slipPan'), acNo: V('slipAcNo'), ifsc: V('slipIfsc') },
         verified: { declaration: $('chkAll').checked, at: new Date().toISOString() },
         dashboard: collectState(),
         rows: [].concat(slim('ROPA-1990', window.CAS_ropa90Rows), slim('ROPA-1998', window.CAS_ropa98Rows), slim('ROPA-2009', window.CAS_ropa09Rows), slim('ROPA-2019', window.CAS_ropa19Rows))
     };
     if (JSON.stringify(p).length > 45000) p.rows = [];
     if (JSON.stringify(p).length > 45000) p.salaryCheck = null;
+    if (JSON.stringify(p).length > 45000) p.pension = null;
     return p;
 }
 function download(name, text) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' })); a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
@@ -3069,15 +3067,40 @@ function updateSubmitBtn() { $('submitBtn').disabled = !($('chkAll').checked && 
 async function submitPay() {
     const st = $('submitStatus');
     if (!window.CUR) { st.className = 'err'; st.textContent = 'Generate and verify the pay tables first.'; return; }
+    if (!mobOK()) { st.className = 'err'; st.textContent = 'Mobile no. is compulsory - enter a valid 10-digit mobile number in Your Details.'; return; }
     if (!$('chkAll').checked) { st.className = 'err'; st.textContent = 'Tick the verification declaration first.'; return; }
     const p = buildPayload(), url = getUrl();
     try { localStorage.setItem('TFHS_PAY_LAST_' + p.refNo, JSON.stringify(p)); } catch (e) { }
-    if (!url) { st.className = 'warn'; st.innerHTML = 'No submission address is set on this page yet. Your data was saved on this device with reference <b>' + p.refNo + '</b>. Use "Download my file" and send it to the school office.'; return; }
+    if (!url) { st.className = 'warn'; st.innerHTML = 'No submission address is set on this page yet. Your data was saved on this device with reference <b>' + p.refNo + '</b>. Use "Download my file" and send it to your Provider.'; return; }
     st.className = 'muted'; st.textContent = 'Submitting...';
     try {
         await fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
-        st.className = 'okbox'; st.innerHTML = '&#10003; Submitted. Reference number: <b>' + p.refNo + '</b> - take a screenshot. If you find a mistake later, correct it on this same phone and press Submit again (it updates the same record).';
-    } catch (e) { st.className = 'err'; st.textContent = 'Could not send (' + e.message + '). Check internet and press Submit again, or use Download my file.'; }
+        st.className = 'okbox'; st.innerHTML = '&#10003; Submitted. Reference number: <b>' + p.refNo + '</b> - take a screenshot. Later you can fetch it back with this Reference No., or with your Mobile no. + Date of Birth. To correct a mistake, fetch it, correct it and press Submit again (it updates the same record).';
+    } catch (e) { st.className = 'err'; st.textContent = 'Could not send (' + e.message + '). Check internet and press Submit again, or use Download my file and send it to your Provider.'; }
+}
+
+
+/* ---------- staff: fetch my own submission (Reference No. or Mobile + DOB) ---------- */
+async function fetchMine() {
+    const m = $('fxMsg'), url = getUrl();
+    const ref = V('fxRef').toUpperCase(), mob = V('fxMobile'), dob = V('fxDob');
+    const bad = t => { m.className = 'err'; m.textContent = t; };
+    if (!url) return bad('No submission address is set on this page yet. Ask your Provider.');
+    if (!ref && !(mob && dob)) return bad('Enter your Reference No., or your Mobile no. together with your Date of Birth.');
+    if (!ref && !/^[6-9]\d{9}$/.test(mob)) return bad('Enter a valid 10-digit mobile number.');
+    m.className = 'muted'; m.textContent = 'Fetching...';
+    try {
+        const q = 'action=mine' + (ref ? '&ref=' + encodeURIComponent(ref) : '&mobile=' + encodeURIComponent(mob) + '&dob=' + encodeURIComponent(dob));
+        const r = await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + q), j = await r.json();
+        if (j.error) return bad(j.error);
+        const p = j.payload; if (!p || !p.dashboard) return bad('The saved record has no form data. Please fill the form again and submit.');
+        applyState(p.dashboard);
+        if (p.mobile) $('mobileNo').value = p.mobile;
+        try { localStorage.setItem('TFHS_PAY_REF_' + V('staffName').toUpperCase().replace(/\s+/g, ' '), j.ref); } catch (e) { }
+        try { genTables({ admin: true }); } catch (e) { }
+        autosave();
+        m.className = 'okbox'; m.innerHTML = '&#10003; Your saved data is loaded (Reference No. <b>' + esc(j.ref) + '</b>). Check it, correct if needed, then submit again &ndash; the same record is updated.';
+    } catch (e) { bad('Could not reach the server: ' + e.message + '. Check your internet.'); }
 }
 
 /* ---------- admin: fetch submissions ---------- */
@@ -3109,10 +3132,10 @@ async function admFetch() {
         const r = await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=list&key=' + encodeURIComponent(key)), j = await r.json();
         if (j.error) { box.innerHTML = '<div class="err">' + esc(j.error) + '</div>'; return; }
         admRows = j.rows || [];
-        box.innerHTML = admRows.length ? '<table class="mini"><thead><tr><th>Ref</th><th>Name</th><th>Basic</th><th>Status</th><th></th></tr></thead><tbody>' + admRows.map((x, i) => '<tr><td>' + esc(x.ref) + '</td><td>' + esc(x.name) + '</td><td class="r">' + esc((x.payload && x.payload.current && x.payload.current.basic) || '') + '</td><td>' + esc(x.status) + '</td><td><button type="button" onclick="admLoad(' + i + ')">Load &amp; review</button> <button type="button" onclick="admDl(' + i + ')">JSON</button> <button type="button" onclick="admMark(' + i + ')">Mark imported</button></td></tr>').join('') + '</tbody></table><button type="button" style="margin-top:6px" onclick="admDlAll()">Download all (JSON)</button>' : '<div class="muted">No submissions yet.</div>';
+        box.innerHTML = admRows.length ? '<table class="mini"><thead><tr><th>Ref</th><th>Name</th><th>Mobile</th><th>Basic</th><th>Status</th><th></th></tr></thead><tbody>' + admRows.map((x, i) => '<tr><td>' + esc(x.ref) + '</td><td>' + esc(x.name) + '</td><td>' + esc(x.mobile || (x.payload && x.payload.mobile) || '') + '</td><td class="r">' + esc((x.payload && x.payload.current && x.payload.current.basic) || '') + '</td><td>' + esc(x.status) + '</td><td><button type="button" onclick="admLoad(' + i + ')">Load &amp; review</button> <button type="button" onclick="admDl(' + i + ')">JSON</button> <button type="button" onclick="admMark(' + i + ')">Mark imported</button></td></tr>').join('') + '</tbody></table><button type="button" style="margin-top:6px" onclick="admDlAll()">Download all (JSON)</button>' : '<div class="muted">No submissions yet.</div>';
     } catch (e) { box.innerHTML = '<div class="err">Fetch failed: ' + esc(e.message) + '</div>'; }
 }
-function admLoad(i) { if (!admOK) return; const p = admRows[i] && admRows[i].payload; if (!p) return; applyState(p.dashboard); genTables(); $('results').scrollIntoView({ behavior: 'smooth' }); }
+function admLoad(i) { if (!admOK) return; const p = admRows[i] && admRows[i].payload; if (!p) return; applyState(p.dashboard); genTables({ admin: true }); $('results').scrollIntoView({ behavior: 'smooth' }); }
 function admDl(i) { if (!admOK) return; download('PAY_' + admRows[i].ref + '.json', JSON.stringify(admRows[i].payload, null, 2)); }
 function admDlAll() { if (!admOK) return; download('PAY_ALL_' + iso(new Date()) + '.json', JSON.stringify(admRows.map(x => x.payload), null, 2)); }
 async function admMark(i) { if (!admOK) return; const url = V('admUrl'), key = V('admKey'); try { await fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'action=mark&ref=' + encodeURIComponent(admRows[i].ref) + '&key=' + encodeURIComponent(key)); admFetch(); } catch (e) { } }
@@ -3342,21 +3365,22 @@ function numWords(n) {
     return parts.join(' ');
 }
 function ordinalDay(d) { const s = ['th', 'st', 'nd', 'rd'], v = d % 100; return d + (s[(v - 20) % 10] || s[v] || s[0]); }
-function slipAutoFill(forceHeads, applyRule) {
-    if (!window.CUR) { showErr(['Generate the pay tables first (press Generate Pay Tables), then create the pay slip.']); return false; }
+function salAuto() {
+    if (!V('slipMonth')) return;
+    const mDate = parseISO(V('slipMonth') + '-01');
+    const gross = N('slipBasic') + N('slipDA') + N('slipHRA') + N('slipMA') + N('slipOther');
+    if (!$('slipPT').dataset.manual) $('slipPT').value = gross ? ptFor(gross, mDate) : '';
+    if (N('gpfPct') > 0 && !$('slipGPF').dataset.manual) $('slipGPF').value = Math.round(N('slipBasic') * N('gpfPct') / 100);
+}
+function slipAutoFill(force, resetManual) {
+    if (!window.CUR) { showErr(['Generate the pay tables first (press Generate Pay Tables), then create the salary / pay slip.']); return false; }
     if (!V('slipMonth')) $('slipMonth').value = (V('asOfDate') || iso(new Date())).slice(0, 7);
     const mDate = parseISO(V('slipMonth') + '-01'), rule = monthPay(mDate);
     if (!rule.basic) { showErr(['No pay-table row found on or before ' + V('slipMonth') + '. Check the month.']); return false; }
-    const put = (id, v) => { if (forceHeads || V(id) === '') $(id).value = v; };
+    if (resetManual) { $('slipPT').dataset.manual = ''; $('slipGPF').dataset.manual = ''; }
+    const put = (id, v) => { if (force || V(id) === '') $(id).value = v; };
     put('slipBasic', rule.basic); put('slipDA', rule.da); put('slipHRA', rule.hra); put('slipMA', rule.ma);
-    if (N('gpfPct') > 0) put('slipGPF', Math.round(N('slipBasic') * N('gpfPct') / 100));
-    if (applyRule) {
-        const gross = N('slipBasic') + N('slipDA') + N('slipHRA') + N('slipMA') + N('slipOther');
-        $('slipPT').value = ptFor(gross, mDate);
-        const fy = mDate.getMonth() >= 3 ? mDate.getFullYear() : mDate.getFullYear() - 1, T = fyTax(fy), useNew = V('taxRegime') !== 'old';
-        $('slipIT').value = T.months ? Math.round((useNew ? T.newTax : T.oldTax) / T.months) : 0;
-    }
-    verifySalary();
+    salAuto(); verifySalary();
     return true;
 }
 function slipData() {
@@ -3364,10 +3388,9 @@ function slipData() {
     const lv = r ? /Level-(\d+)/i.exec(r.scaleStr || '') : null;
     const g = id => N(id);
     const desig = /assistant\s*teacher/i.test(V('designation')) ? 'AT' : V('designation');
-    const earn = [['BASIC', g('slipBasic')], ['DA', g('slipDA')], ['HRA', g('slipHRA')], ['MA', g('slipMA')], ['IR', 0], ['CPF', 0], ['TIC ALLOWANCE', 0], ['CA', 0]];
+    const earn = [['BASIC', g('slipBasic')], ['DA', g('slipDA')], ['HRA', g('slipHRA')], ['MA', g('slipMA')]];
     if (g('slipOther')) earn.push(['OTHER ALLOWANCE', g('slipOther')]);
-    const ded = [['PT', g('slipPT')], ['IT', g('slipIT')], ['GPF', g('slipGPF')], ['PF LOAN', g('slipPFL')], ['OVER DRAWN', g('slipOVD')], ['CPF DEDUCT', 0]];
-    if (g('slipOD')) ded.push(['OTHER DEDUCTION', g('slipOD')]);
+    const ded = [['PF', g('slipGPF')], ['I-TAX', g('slipIT')], ['P-TAX', g('slipPT')]];
     const gross = earn.reduce((s, x) => s + x[1], 0), td = ded.reduce((s, x) => s + x[1], 0);
     return { mDate, earn, ded, gross, td, net: gross - td, desig, level: lv ? 'LEVEL-' + lv[1] : (r ? txt(r.scaleStr) : ''), cell: r ? 'CELL-' + (r.trackCol || '') : '' };
 }
@@ -3388,20 +3411,21 @@ function slipHtml(s) {
         '<table><thead><tr><th colspan="2" style="width:30%">EARNING(Rs)</th><th colspan="2" style="width:32%;border-left:1px solid #000">DEDUCTIONS(Rs)</th><th style="width:19%;border-left:1px solid #000">RECOVERIES OF LOAN(Rs)</th><th style="width:19%;border-left:1px solid #000">OUT/ACCT.DED (Rs)</th></tr></thead><tbody>' + b +
         '<tr class="tot"><td class="l">Total:</td><td class="a">' + s.gross + '</td><td class="g1"></td><td class="a">' + s.td + '</td><td class="g1"></td><td class="g1"></td></tr>' +
         '<tr class="gpn"><td colspan="6">GROSS PAY: ' + s.gross + '</td></tr><tr class="gpn"><td colspan="6">NET PAY: &nbsp; ' + s.net + ' (Rupees ' + numWords(s.net) + ' only)</td></tr></tbody></table>' +
-        '<div class="nt">GP: Grade Pay, DA: Dearness Allowance, HRA: House Rent Allowance, MA: Medical Allowance, CA: Conveyance Allowance,<br>CPF: Contributory Provident Fund, PT: Professional Tax, IT: Income Tax, IR: Interim Relief</div>' +
+        '<div class="nt">DA: Dearness Allowance, HRA: House Rent Allowance, MA: Medical Allowance, PF: Provident Fund, I-TAX: Income Tax, P-TAX: Professional Tax</div>' +
         '<div class="dis"><b>Disclaimer:</b> This is a computer generated Pay Slip and hence does not require any signature.</div>' +
         '<div class="ft"><span>Computed by Staff Pay Table (not an iOSMS download)</span><span>Page-1</span><span>Date of Generation: ' + gen + '</span></div></div>';
 }
 function slipGenerate() {
     if (!V('staffName')) { showErr(['Enter the name of the staff first.']); return; }
-    if (!slipAutoFill(false, !$('slipKeep').checked)) return;
+    if (!slipAutoFill(false, false)) return;
     const s = slipData(), html = slipHtml(s);
     $('slipPreview').innerHTML = html; $('slipSheet').innerHTML = html; $('slipPrintBtn').disabled = false;
     const notes = [];
-    if (s.mDate < new Date(2020, 0, 1)) notes.push('Month is before ROPA-2019; the allowance rules used are ROPA-2019 rules.');
+    if (s.mDate < new Date(2020, 0, 1)) notes.push('Month is before ROPA-2019; the allowance rates used are ROPA-2019 rates.');
     if (!V('slipEmpId') || !V('slipPan') || !V('slipAcNo') || !V('slipIfsc')) notes.push('Employee ID / PAN / Bank A/c / IFS code are blank on the slip - fill them above and press the button again.');
-    if (!N('slipGPF')) notes.push('GPF is 0 - enter your GPF amount (or "GPF % you opted" in the rates) if you subscribe to GPF.');
-    slipMsg('Pay slip for ' + s.mDate.toLocaleString('en-US', { month: 'long', year: 'numeric' }) + ' generated: Gross ' + s.gross + ', Deductions ' + s.td + ', Net ' + s.net + '. PT and Income-tax (average monthly TDS = annual tax / months) are by the rule of that month. ' + notes.join(' '), false);
+    if (!N('slipGPF')) notes.push('PF is 0 - enter your PF amount (or the PF % in Rates) if you subscribe.');
+    if (!N('slipIT')) notes.push('I-Tax is 0 - enter the monthly income-tax shown in your pay slip, if any.');
+    slipMsg('Pay slip for ' + s.mDate.toLocaleString('en-US', { month: 'long', year: 'numeric' }) + ' generated: Gross ' + s.gross + ', Deductions ' + s.td + ', Net ' + s.net + '. ' + notes.join(' '), false);
     $('slipPreview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     autosave();
 }
@@ -3428,162 +3452,18 @@ window.addEventListener('DOMContentLoaded', function () {
         else if (id === 'ropa98Scale') setMin98();
         else if (id === 'ropa09GradePay') setMin09();
         else if (id === 'ropa19GradePayManual') setMin19();
-        if (id === 'slipMonth' && window.CUR && !$('slipKeep').checked) { slipAutoFill(true, true); }
+        if (id === 'slipMonth' && window.CUR) { slipAutoFill(true, true); }
+        if (['daOld', 'daChange', 'daNew', 'hraPct', 'hraCap', 'maAmt', 'wbhsOpt', 'gpfPct'].indexOf(id) > -1 && window.CUR) { slipAutoFill(true, false); }
         if (e.target && e.target.closest && e.target.closest('#salArea')) { verifySalary(); }
         if (e.target && e.target.closest && e.target.closest('#leaveArea') && id === 'leaveUpToDate') { e.target.dataset.userSet = '1'; }
         if (id === 'asOfDate' && window.CUR) refreshAll();
-        if (e.target && e.target.closest && e.target.closest('#formArea')) autosave();
-        if (e.target && e.target.closest && e.target.closest('#itaxCard')) autosave();
+        if (e.target && e.target.closest && e.target.closest('#formArea, #salArea, #leaveArea')) autosave();
     });
-    document.addEventListener('input', e => { if (e.target && e.target.closest && e.target.closest('#salArea')) verifySalary(); });
+    document.addEventListener('input', e => { const t = e.target; if (t && t.closest && t.closest('#salArea')) { if (t.id === 'slipPT' || t.id === 'slipGPF') t.dataset.manual = '1'; salAuto(); verifySalary(); } });
     $('chkAll').addEventListener('change', updateSubmitBtn);
     setInterval(updateSubmitBtn, 800);
 });
 
-</script>
-<script>
-/* ===== Optional Income Tax statement (ported from the school Income Tax calculator) ===== */
-const IT_DED = [
- ['dGPF','GPF'],['dGIS','GIS'],['dLIC','LIC / Insurance'],['dHBLPrincipal','HBL Principal'],['dNSCNew','NSC (New)'],['dNSCInterest','NSC (Interest)'],
- ['dPPF','PPF / PLI'],['dTuition','Tuition Fees (2 children)'],['dSukanya','Sukanya Samriddhi'],['d80CCD1','80CCD(1) NPS'],['d80CCD1B','80CCD(1B) NPS (max 50,000)'],
- ['d80D','80D Mediclaim (max 25,000)'],['d80G','80G Donation'],['d80DD','80DD Dependent PH (max 75,000)'],['d80U','80U PH Employee (max 75,000)'],
- ['d80DDB','80DDB Medical (max 40,000)'],['dHBLInterest','HBL Interest 24(B) (max 2 Lakh)'],['dRelief89','Tax Relief u/s 89(1)'],['dOther','Other Deduction (manual)']
-];
-(function(){ const g = document.getElementById('itDedGrid'); if (g) g.innerHTML = IT_DED.map(d => '<div class="form-group"><label>' + d[1] + ' (Rs.)</label><input type="number" id="it_' + d[0] + '" value="0"></div>').join(''); })();
-const itn = id => { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; };
-const itR = v => 'Rs.' + Math.round(v).toLocaleString('en-IN');
-function itFYStart() { return parseInt(document.getElementById('itFY').value.slice(0, 4), 10); }
-function itMonths() { const a = itFYStart(); const out = []; for (let m = 0; m < 12; m++) out.push(new Date(a, 2 + m, 1)); return out; }   /* Mar a ... Feb a+1 */
-function itPTAnnual(gross) { const mg = gross / 12; return itMonths().reduce((s, d) => s + ptFor(mg, d), 0); }
-function itPTMode() { document.getElementById('itPT').readOnly = document.getElementById('itPTAuto').checked; itCalc(); }
-function itFill() {
-    const note = document.getElementById('itFillNote');
-    if (!window.CUR) { note.textContent = '(generate pay tables first)'; document.getElementById('itMsg').textContent = 'Generate the pay tables first, then press Fill salary from pay table.'; return; }
-    const dor = getDOR(); let g = 0, n = 0;
-    itMonths().forEach(d => { if (dor && d > dor) return; const mp = monthPay(d); if (mp.basic) { g += mp.gross; n++; } });
-    if (!n) { note.textContent = '(no pay rows in this FY)'; return; }
-    document.getElementById('itGross').value = Math.round(g);
-    note.textContent = '(' + n + ' months, Mar-' + itFYStart() + ' to Feb-' + (itFYStart() + 1) + ')';
-    itCalc();
-}
-function itSlabNew(t) {
-    let x = 0;
-    if (t > 400000) {
-        x += Math.min(t, 800000) - 400000 > 0 ? (Math.min(t, 800000) - 400000) * 0.05 : 0;
-        if (t > 800000) x += (Math.min(t, 1200000) - 800000) * 0.10;
-        if (t > 1200000) x += (Math.min(t, 1600000) - 1200000) * 0.15;
-        if (t > 1600000) x += (Math.min(t, 2000000) - 1600000) * 0.20;
-        if (t > 2000000) x += (Math.min(t, 2400000) - 2000000) * 0.25;
-        if (t > 2400000) x += (t - 2400000) * 0.30;
-    }
-    return x;
-}
-function itSlabOld(t) {
-    let x = 0;
-    if (t > 250000) { x += (Math.min(t, 500000) - 250000) * 0.05; if (t > 500000) x += (Math.min(t, 1000000) - 500000) * 0.20; if (t > 1000000) x += (t - 1000000) * 0.30; }
-    return x;
-}
-function itCalc() {
-    const salary = itn('itGross'), other = itn('itOther');
-    if (document.getElementById('itPTAuto').checked) document.getElementById('itPT').value = itPTAnnual(salary);
-    const pTax = itn('itPT'), hbl = Math.min(itn('it_dHBLInterest'), 200000), relief = itn('it_dRelief89');
-    const D = {}; IT_DED.forEach(d => D[d[0]] = itn('it_' + d[0]));
-    const sum80C = D.dGPF + D.dGIS + D.dLIC + D.dHBLPrincipal + D.dNSCNew + D.dNSCInterest + D.dPPF + D.dTuition + D.dSukanya + D.d80CCD1;
-    const c80 = Math.min(150000, sum80C);
-    const otherVIA = Math.min(D.d80D, 25000) + D.d80G + Math.min(D.d80DD, 75000) + Math.min(D.d80U, 75000) + Math.min(D.d80DDB, 40000) + Math.min(D.d80CCD1B, 50000) + D.dOther;
-    const via = c80 + otherVIA;
-    /* capital gains with STCL set-off */
-    const rawS = itn('itSTCG'), loss = itn('itSTCL'), rawL = itn('itLTCG');
-    let rem = loss, netS = rawS, netL = rawL;
-    if (rem > 0) { if (rawS >= rem) { netS = rawS - rem; rem = 0; } else { netS = 0; rem -= rawS; } }
-    if (rem > 0) { if (rawL >= rem) { netL = rawL - rem; rem = 0; } else { netL = 0; rem -= rawL; } }
-    const taxS = netS * 0.20, taxL = Math.max(0, netL - 125000) * 0.125, cg = taxS + taxL;
-    /* New regime */
-    const stdN = salary > 0 ? 75000 : 0, headN = Math.max(0, salary - stdN), gtiN = Math.max(0, headN + other - hbl), tiN = gtiN;
-    const fullN = itSlabNew(tiN); let finN = fullN;
-    if (tiN <= 1200000) finN = 0; else if (tiN < 1275000) { const ex = tiN - 1200000; if (fullN > ex) finN = ex; }
-    const rebN = fullN - finN, cessN = finN * 0.04, totN = finN + cessN, balN = Math.max(0, totN - relief), grandN = Math.max(0, (finN + cg) * 1.04 - relief);
-    /* Old regime */
-    const stdO = salary > 0 ? 50000 : 0, headO = Math.max(0, salary - pTax - stdO), gtiO = Math.max(0, headO + other - hbl), tiO = Math.max(0, gtiO - via);
-    const fullO = itSlabOld(tiO); let finO = fullO; if (tiO <= 500000) finO = 0;
-    const rebO = fullO - finO, cessO = finO * 0.04, totO = finO + cessO, balO = Math.max(0, totO - relief), grandO = Math.max(0, (finO + cg) * 1.04 - relief);
-    const newBetter = grandN <= grandO;
-    const box = (title, rec, ti, slab, grand) => '<div class="ix-box' + (rec ? ' rec' : '') + '">' + (rec ? '<span class="ix-badge">Tax Saver</span>' : '') + '<div class="ix-bt">' + title + '</div>' +
-        '<div class="ix-rr"><span>Taxable income:</span><span>' + itR(ti) + '</span></div><div class="ix-rr"><span>Slab tax (after rebate):</span><span>' + itR(slab) + '</span></div>' +
-        '<div class="ix-rr"><span>STCG (20%):</span><span>' + itR(taxS) + '</span></div><div class="ix-rr"><span>LTCG (12.5%):</span><span>' + itR(taxL) + '</span></div>' +
-        '<div class="ix-rr ix-tot"><span>Total tax:</span><span>' + itR(grand) + '</span></div></div>';
-    document.getElementById('itResults').innerHTML = box('New Tax Regime', newBetter, tiN, finN, grandN) + box('Old Tax Regime', !newBetter, tiO, finO, grandO);
-    const empName = V('staffName'), empPAN = (V('itPan') || V('slipPan')).toUpperCase(), empDOB = V('dob') ? formatDate(parseISO(V('dob'))) : '', empDesig = V('designation');
-    const fyLabel = document.getElementById('itFY').value;
-    const P = { fyLabel, salary, pTax, other, hbl, empName, empPAN, empDOB, empDesig, relief, cg };
-    const sN = Object.assign({}, P, { isOld: false, stdDed: stdN, head: headN, gti: gtiN, ti: tiN, full: fullN, reb: rebN, cess: cessN, tot: totN, bal: balN, grand: grandN });
-    const sO = Object.assign({}, P, { isOld: true, stdDed: stdO, head: headO, gti: gtiO, ti: tiO, full: fullO, reb: rebO, cess: cessO, tot: totO, bal: balO, grand: grandO, D, c80, via });
-    document.getElementById('itStatements').innerHTML = '<details class="ix-sub" style="margin-top:8px"><summary>Detailed statements (view / print)</summary><div class="btn-group noprint"><button type="button" class="btn-print" onclick="itPrint(\'N\')">Print New Regime Statement</button><button type="button" class="btn-print" onclick="itPrint(\'O\')">Print Old Regime Statement</button></div>' + itStmt('NEW TAX REGIME', sN, 'ixWrapN') + itStmt('OLD TAX REGIME', sO, 'ixWrapO') + '</details>';
-    window.ITX = { fy: fyLabel, salary, other, pTax, newTax: Math.round(grandN), oldTax: Math.round(grandO), better: newBetter ? 'new' : 'old', capGainsTax: Math.round(cg) };
-    document.getElementById('itMsg').textContent = '';
-}
-function itRow(sl, label, val, cls) { return '<tr class="' + (cls || '') + '"><td>' + (sl || '') + '</td><td>' + label + '</td><td>' + ((val === null || val === undefined) ? '' : itR(val)) + '</td></tr>'; }
-function itStmt(regime, p, id) {
-    let r = '';
-    r += itRow('', 'PARTICULARS FOR COMPUTATION OF INCOME TAX FY ' + p.fyLabel + ' [' + regime + ']', null, 'h');
-    r += itRow(1, 'a) Income from Salaries (Current Employer)', p.salary);
-    r += itRow('', 'b) Income from Salaries (Previous Employer)', 0, 's');
-    r += itRow(2, 'House Rent Allowance (Exempt)', 0);
-    r += itRow(3, 'Gross Salary [1(a+b)-2]', p.salary);
-    r += itRow(4, 'Less: a) Entertainment/Dress Allowance', 0, 's');
-    r += itRow('', 'c) Professional Tax u/s 16(iii)' + (p.isOld ? '' : ' (Not allowed under New Regime)'), p.isOld ? p.pTax : 0, 's');
-    r += itRow(5, 'Standard Deduction u/s 16(ia) (Rs.' + p.stdDed.toLocaleString('en-IN') + ')', p.stdDed);
-    r += itRow(6, 'Income from Head Salaries (3-4-5)', p.head);
-    r += itRow(7, 'Income from Other Sources (Bank/FD Interest)', p.other);
-    r += itRow(8, 'Less: Interest payable on H.B. Loan u/s 24(B) (Max 2 Lakh)', p.hbl);
-    r += itRow(9, 'Gross Total Income (6+7-8)', p.gti, 't');
-    if (p.isOld) {
-        const D = p.D;
-        r += itRow(10, 'Deduction under VIA u/s 80C:', null);
-        [['a) GPF', 'dGPF'], ['b) GIS', 'dGIS'], ['c) LIC / Insurance', 'dLIC'], ['d) HBL Loan (Principal)', 'dHBLPrincipal'], ['e) NSC (New)', 'dNSCNew'], ['f) NSC (Interest)', 'dNSCInterest'], ['g) PPF / PLI', 'dPPF'], ['h) Tuition Fees for two children', 'dTuition'], ['i) Sukanya Samriddhi Yojana', 'dSukanya'], ['j) 80CCD(1)', 'd80CCD1']].forEach(x => r += itRow('', x[0], D[x[1]], 's'));
-        r += itRow(11, 'Total Deduction u/s 80C,80CCC&80CCD(1) (Max Rs.1.5 Lakh)', p.c80);
-        r += itRow(12, 'Other Deduction Chapter VIA:', null);
-        r += itRow('', 'a) 80CCD(1B) - NPS (Max 50,000)', Math.min(D.d80CCD1B, 50000), 's');
-        r += itRow('', 'b) 80D - Mediclaim (Max 25,000)', Math.min(D.d80D, 25000), 's');
-        r += itRow('', 'c) 80G - Donation to Charitable Org', D.d80G, 's');
-        r += itRow('', 'd) 80DD - Dependent PH (Max 75,000)', Math.min(D.d80DD, 75000), 's');
-        r += itRow('', 'e) 80U - PH Employee (Max 75,000)', Math.min(D.d80U, 75000), 's');
-        r += itRow('', 'f) 80DDB - Medical Treatment (Max 40,000)', Math.min(D.d80DDB, 40000), 's');
-        r += itRow('', 'g) Other Deduction (Manual Entry)', D.dOther, 's');
-        r += itRow(13, 'Total Deduction Chapter VIA (11+12)', p.via, 't');
-    } else {
-        r += itRow(10, 'Deduction under VIA u/s 80C, 80CCC, 80D, 80G etc.', null);
-        r += itRow('', 'Not allowed under New Tax Regime', 0, 's');
-        r += itRow(13, 'Total Deduction Chapter VIA (Not Applicable)', 0, 't');
-    }
-    r += itRow(14, 'Taxable Income (9-13)', p.ti, 't');
-    r += itRow(15, 'Tax Payable (as per slab)', p.full);
-    r += itRow(16, 'Tax Credit / Rebate / Marginal Relief u/s 87A', p.reb);
-    r += itRow(17, 'Edn. Cess + Health Cess @ 4%', p.cess);
-    r += itRow(18, 'Total Amount of Tax Payable (15-16+17)', p.tot, 't');
-    r += itRow(19, 'Tax Relief u/s 89(1)', p.relief);
-    r += itRow(20, 'Balance Tax Payable on Salary Income (18-19)', p.bal, 't');
-    r += itRow('', 'Add: Tax on Capital Gains (STCG @20% + LTCG @12.5%)', p.cg, 's');
-    r += itRow('', 'GRAND TOTAL TAX PAYABLE (incl. Capital Gains)', p.grand, 'f');
-    const nm = esc(p.empName || '');
-    return '<div class="ix-stmt" id="' + id + '"><div class="ix-title' + (p.isOld ? ' old' : '') + '">' + regime + ' - Detailed Statement</div><table class="ix-tbl"><tbody>' + r + '</tbody></table>' +
-        '<div class="ix-decl"><div><b>Name:</b> ' + (nm || '&mdash;') + '</div><div><b>PAN:</b> ' + (esc(p.empPAN) || '&mdash;') + '</div><div><b>D.O.B.:</b> ' + (esc(p.empDOB) || '&mdash;') + '</div><div><b>Designation:</b> ' + (esc(p.empDesig) || '&mdash;') + '</div>' +
-        '<p style="margin:10px 0 18px">I, <b>' + (nm || '________________________') + '</b>, declare that this statement is true to the best of my information and belief.</p><div><b>Date:</b> ______________________</div>' +
-        '<div class="ix-sigrow"><div class="ix-sig"><div class="ix-line">Signature (Employee)</div></div><div class="ix-sig"><div class="ix-line">Checked &amp; Verified by the Head of the Institution</div><div style="font-size:9.5px;color:#64748b">(With Seal &amp; Sign)</div></div></div></div></div>';
-}
-function itPrint(which) {
-    const el = document.getElementById(which === 'N' ? 'ixWrapN' : 'ixWrapO'); if (!el) return;
-    const sh = document.getElementById('itaxSheet'); sh.innerHTML = el.outerHTML.replace(/ id="ixWrap[NO]"/, '');
-    printMode('print-itax', '@page{size:A4 portrait;margin:10mm}');
-}
-function itInit() {
-    const t = new Date(), a = t.getMonth() >= 3 ? t.getFullYear() : t.getFullYear() - 1;
-    const sel = document.getElementById('itFY'); if (sel && !sel.dataset.set) { sel.value = (a + '-' + String(a + 1).slice(2)); if (!sel.value) sel.value = '2026-27'; sel.dataset.set = '1'; }
-    if (!document.getElementById('itGross').value) itFill();
-}
-document.addEventListener('change', e => { if (e.target && e.target.closest && e.target.closest('#itaxCard') && e.target.id !== 'itFY') { try { itCalc(); } catch (x) { } } });
-const _refreshAllOrig = refreshAll;
-refreshAll = function () { _refreshAllOrig(); try { itInit(); } catch (e) { } };
 </script>
 
 <script>
@@ -3614,5 +3494,16 @@ renderPrev();
 </script>
 <script>
 document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('details>summary .gh')) e.preventDefault(); }, true);
+</script>
+<script>
+(function(){
+  if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){ window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+  var dp=null, bar=document.getElementById('pwaBar');
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone;
+  window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); dp=e; if(bar&&!standalone) bar.hidden=false; });
+  window.addEventListener('appinstalled',function(){ if(bar) bar.hidden=true; });
+  window.pwaInstall=function(){ if(dp){ dp.prompt(); dp.userChoice.then(function(){ dp=null; if(bar) bar.hidden=true; }); } };
+  if(/iphone|ipad|ipod/i.test(navigator.userAgent) && !standalone && bar){ bar.hidden=false; var b=bar.querySelector('button'); if(b) b.style.display='none'; var sp=bar.querySelector('span'); if(sp) sp.innerHTML='<b>&#128241; Install as app:</b> tap <b>Share</b> &rarr; <b>Add to Home Screen</b>.'; }
+})();
 </script>
 </body></html>
